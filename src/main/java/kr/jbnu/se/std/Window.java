@@ -5,7 +5,7 @@ import javax.swing.SwingUtilities;
 
 /**
  * Creates frame and set its properties.
- * 
+ *
  * @author www.gametutorial.net
  */
 
@@ -17,7 +17,7 @@ public class Window extends JFrame{
         this.setTitle("Shoot the duck");
 
         // Sets size of the frame.
-        if(false) // Full screen mode
+        if(true) // Full screen mode
         {
             // Disables decorations for this frame.
             this.setUndecorated(true);
@@ -26,7 +26,6 @@ public class Window extends JFrame{
         }
         else // kr.jbnu.se.std.Window mode
         {
-            this.setTitle("Shoot the duck");
             // Size of the frame.
             this.setSize(800, 600);
             // Puts frame to center of the screen.
@@ -37,20 +36,20 @@ public class Window extends JFrame{
 
         // Exit the application when user close frame.
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
         this.setContentPane(new Framework());
+
         this.setVisible(true);
     }
 
     public static void main(String[] args)
     {
         // Use the event dispatch thread to build the UI for thread-safety.
-        SwingUtilities.invokeLater(() -> {
-            try {
-                FirebaseInitializer.initialize(); // Firebase 초기화
-            } catch (Exception e) {
-                e.printStackTrace();
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                new Window();
             }
-            new LoginUI().setVisible(true);   // 로그인 UI 표시
         });
     }
 }
