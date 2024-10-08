@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.Timer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
@@ -251,6 +252,11 @@ public class Game {
         // When 200 ducks runaway, the game ends.
         if(runawayDucks >= 200)
             Framework.gameState = Framework.GameState.GAMEOVER;
+//
+//        if(killedDucks != 0 && killedDucks % 10 == 0) {
+//            Duck.timeBetweenDucks -= 1000000000*60;
+//
+//        }
     }
     
     /**
