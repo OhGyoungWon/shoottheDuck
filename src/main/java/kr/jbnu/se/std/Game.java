@@ -11,7 +11,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Random;
-import java.util.Timer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
@@ -66,6 +65,9 @@ public class Game {
      * 레벨 검증 변수, 레벨 업데이트 조건 만족 시 코드 중복실행 방지용
      */
     private int killedDucksCheck;
+    // 시간 관련 변수 추가
+    private long levelUpTime;
+    private boolean isLevelUp;
     
     /**
      * Last time of the shoot.
@@ -141,6 +143,8 @@ public class Game {
         shoots = 0;
         level = 1;
         killedDucksCheck = 0;
+        levelUpTime = 0;
+        isLevelUp = false;
         
         lastTimeShoot = 0;
         timeBetweenShots = Framework.secInNanosec / 3;
@@ -190,6 +194,8 @@ public class Game {
         shoots = 0;
         level = 1;
         killedDucksCheck = 0;
+        levelUpTime = 0;
+        isLevelUp = false;
         
         lastTimeShoot = 0;
     }
@@ -270,12 +276,19 @@ public class Game {
             Duck.timeBetweenDucks += 1000000L*600000; //오리 생성 텀 600초 더 증가 (사실상 생성 멈춤)
             level++;
             killedDucksCheck = killedDucks;
-            new Timer().schedule(new java.util.TimerTask() {
-                @Override
-                public void run() {
-                    Duck.timeBetweenDucks -= 1000000L*600010; //오리 생성 텀 60초 + 10밀리초 감소 (레벨 상승시 오리 생성 빨라짐)
-                }
-            }, 10000); //10초 후 원래대로 돌아감
+
+            levelUpTime = System.nanoTime();
+            isLevelUp = true;
+//            new Timer().schedule(new java.util.TimerTask() {
+//                @Override
+//                public void run() {
+//                    Duck.timeBetweenDucks -= 1000000L*600010; //오리 생성 텀 60초 + 10밀리초 감소 (레벨 상승시 오리 생성 빨라짐)
+//                }
+//            }, 10000); //10초 후 원래대로 돌아감
+        }
+        if (isLevelUp && System.nanoTime() - levelUpTime >= 10_000_000_000L) { // 10초(10000밀리초) 경과 시
+            Duck.timeBetweenDucks -= 1000000L * 600010; // 오리 생성 텀 60초 + 10밀리초 감소
+            isLevelUp = false; // 다시 레벨업 상태 해제
         }
     }
     
