@@ -57,6 +57,17 @@ public class Game {
      * How many times a player is shot?
      */
     private int shoots;
+    /**
+     * 레벨 정수형으로 선언
+      */
+    private int level;
+    /**
+     * 레벨 검증 변수, 레벨 업데이트 조건 만족 시 코드 중복실행 방지용
+     */
+    private int killedDucksCheck;
+    // 시간 관련 변수 추가
+    private long levelUpTime;
+    private boolean isLevelUp;
     
     /**
      * Last time of the shoot.
@@ -130,6 +141,10 @@ public class Game {
         killedDucks = 0;
         score = 0;
         shoots = 0;
+        level = 1;
+        killedDucksCheck = 0;
+        levelUpTime = 0;
+        isLevelUp = false;
         
         lastTimeShoot = 0;
         timeBetweenShots = Framework.secInNanosec / 3;
@@ -177,6 +192,10 @@ public class Game {
         killedDucks = 0;
         score = 0;
         shoots = 0;
+        level = 1;
+        killedDucksCheck = 0;
+        levelUpTime = 0;
+        isLevelUp = false;
         
         lastTimeShoot = 0;
     }
@@ -251,6 +270,26 @@ public class Game {
         // When 200 ducks runaway, the game ends.
         if(runawayDucks >= 200)
             Framework.gameState = Framework.GameState.GAMEOVER;
+
+        //레벨업 조건: 오리 20마리 잡기
+        if(killedDucks != 0 && killedDucks % 20 == 0 && killedDucks != killedDucksCheck){
+            Duck.timeBetweenDucks += 1000000L*600000; //오리 생성 텀 600초 더 증가 (사실상 생성 멈춤)
+            level++;
+            killedDucksCheck = killedDucks;
+
+            levelUpTime = System.nanoTime();
+            isLevelUp = true;
+//            new Timer().schedule(new java.util.TimerTask() {
+//                @Override
+//                public void run() {
+//                    Duck.timeBetweenDucks -= 1000000L*600010; //오리 생성 텀 60초 + 10밀리초 감소 (레벨 상승시 오리 생성 빨라짐)
+//                }
+//            }, 10000); //10초 후 원래대로 돌아감
+        }
+        if (isLevelUp && System.nanoTime() - levelUpTime >= 10_000_000_000L) { // 10초(10000밀리초) 경과 시
+            Duck.timeBetweenDucks -= 1000000L * 600010; // 오리 생성 텀 60초 + 10밀리초 감소
+            isLevelUp = false; // 다시 레벨업 상태 해제
+        }
     }
     
     /**
@@ -280,6 +319,7 @@ public class Game {
         g2d.drawString("KILLS: " + killedDucks, 160, 21);
         g2d.drawString("SHOOTS: " + shoots, 299, 21);
         g2d.drawString("SCORE: " + score, 440, 21);
+        g2d.drawString("LEVEL: " + level, 580, 21);
     }
     
     
