@@ -14,7 +14,7 @@ public class Duck {
     /**
      * How much time must pass in order to create a new duck?
      */
-    public static long timeBetweenDucks = Framework.secInNanosec / 2;
+    public static long timeBetweenDucks = Framework.secInNanosec; // 오리 생성 빈도 1나노초 (원본은 1/2나노초)
     /**
      * Last time when the duck was created.
      */
