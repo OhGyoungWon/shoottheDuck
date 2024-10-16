@@ -4,19 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="48ad350a-5667-49e2-9228-2f0cfb0d2e7c" name="변경" comment="레벨 증가 로직 변경&#10;Timer 버리고 System.nano 어쩌구 기반으로 바꿈">
-      <change afterPath="$PROJECT_DIR$/src/main/java/kr/jbnu/se/std/Pistol.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/kr/jbnu/se/std/SoundPlayer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/images/pistol.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/images/single-gunshot-54-40780.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/24__10__8___1_32__________.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/24__10__8__오후_1_32,_업데이트_전에_커밋되지_않은_변경_내용_[변경]/Game.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/24__10__8__오후_1_32,_업데이트_전에_커밋되지_않은_변경_내용_[변경]/Window.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/24__10__8__오후_1_32,_업데이트_전에_커밋되지_않은_변경_내용_[변경]/shelved.patch" beforeDir="false" />
+    <list default="true" id="48ad350a-5667-49e2-9228-2f0cfb0d2e7c" name="변경" comment="권총 애니메이션 추가">
+      <change afterPath="$PROJECT_DIR$/src/main/resources/sounds/single-gunshot.wav" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/kr/jbnu/se/std/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kr/jbnu/se/std/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/kr/jbnu/se/std/SoundPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kr/jbnu/se/std/SoundPlayer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/images/single-gunshot-54-40780.mp3" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/kr/jbnu/se/std/Game$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kr/jbnu/se/std/Game$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/kr/jbnu/se/std/Game$2.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/kr/jbnu/se/std/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kr/jbnu/se/std/Game.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -83,6 +77,7 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\pcy79\OneDrive - 전북대학교\shoottheDuck\src\main\resources\sounds" />
       <recent name="C:\Users\pcy79\OneDrive - 전북대학교\shoottheDuck\src\main\resources\images" />
     </key>
   </component>
@@ -110,7 +105,7 @@
       <workItem from="1728361820048" duration="5752000" />
       <workItem from="1728367810041" duration="641000" />
       <workItem from="1728369028408" duration="988000" />
-      <workItem from="1729040626316" duration="10118000" />
+      <workItem from="1729040626316" duration="13103000" />
     </task>
     <task id="LOCAL-00001" summary="테스트">
       <option name="closed" value="true" />
@@ -136,7 +131,23 @@
       <option name="project" value="LOCAL" />
       <updated>1728370004396</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="권총 애니메이션 추가">
+      <option name="closed" value="true" />
+      <created>1729062210391</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1729062210391</updated>
+    </task>
+    <task id="LOCAL-00005" summary="권총 애니메이션 추가">
+      <option name="closed" value="true" />
+      <created>1729062228731</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1729062228731</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -153,7 +164,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="origin/master" />
+                        <option value="origin/feature/levels" />
                       </list>
                     </value>
                   </entry>
@@ -169,6 +180,7 @@
     <MESSAGE value="테스트" />
     <MESSAGE value="초기 오리 생성 텀 1/2나노초 -&gt; 1나노초&#10;레벨 추가 및 화면에 표시&#10;레벨 증가 조건: 오리 20*n마리 잡기" />
     <MESSAGE value="레벨 증가 로직 변경&#10;Timer 버리고 System.nano 어쩌구 기반으로 바꿈" />
-    <option name="LAST_COMMIT_MESSAGE" value="레벨 증가 로직 변경&#10;Timer 버리고 System.nano 어쩌구 기반으로 바꿈" />
+    <MESSAGE value="권총 애니메이션 추가" />
+    <option name="LAST_COMMIT_MESSAGE" value="권총 애니메이션 추가" />
   </component>
 </project>

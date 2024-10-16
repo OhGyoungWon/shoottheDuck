@@ -72,9 +72,6 @@ public class Game {
     // 권총 클래스 추가
     private Pistol pistol;
 
-    // 권총 사운드 추가
-//    private SoundPlayer gunshotSound;
-    
     /**
      * Last time of the shoot.
      */
@@ -112,11 +109,13 @@ public class Game {
      * Middle height of the sight image.
      */
     private int sightImgMiddleHeight;
-    
+
+    // 사운드 플레이어 추가
+    private SoundPlayer soundPlayer;
+
 
     public Game()
     {
-//        gunshotSound = new SoundPlayer("single-gunshot.wav");
         Framework.gameState = Framework.GameState.GAME_CONTENT_LOADING;
         
         Thread threadForInitGame = new Thread() {
@@ -139,6 +138,8 @@ public class Game {
      */
     private void Initialize()
     {
+        soundPlayer = new SoundPlayer(); // 사운드 플레이어 생성
+
         random = new Random();        
         font = new Font("monospaced", Font.BOLD, 18);
         
@@ -173,14 +174,17 @@ public class Game {
             URL duckImgUrl = this.getClass().getResource("/images/duck.png");
             duckImg = ImageIO.read(duckImgUrl);
             
-            URL sightImgUrl = this.getClass().getResource("/images/sight.png");
+            URL sightImgUrl = this.getClass().getResource("/images/sight2.png");
             sightImg = ImageIO.read(sightImgUrl);
             sightImgMiddleWidth = sightImg.getWidth() / 2;
             sightImgMiddleHeight = sightImg.getHeight() / 2;
 
             URL pistolImgUrl = this.getClass().getResource("/images/pistol.png");
             BufferedImage pistolImg = ImageIO.read(pistolImgUrl);
-            pistol = new Pistol(pistolImg, 11, 10_000_000L);  // 11프레임, 프레임당 30ms
+            pistol = new Pistol(pistolImg, 11, 10_000_000L);  // 11프레임, 프레임당 100ms
+
+            URL gunshotSoundUrl = this.getClass().getResource("/sounds/single-gunshot.wav");
+            soundPlayer.loadSound("gunshot", gunshotSoundUrl);
         }
         catch (IOException ex) {
             Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
@@ -255,6 +259,10 @@ public class Game {
             if(System.nanoTime() - lastTimeShoot >= timeBetweenShots)
             {
                 shoots++;
+                // 총 사운드 재생
+                soundPlayer.play("gunshot");
+
+                // 총 모션 재생
                 if (!pistol.isShooting()) {
                     pistol.startShooting();
                 }
