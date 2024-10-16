@@ -68,6 +68,12 @@ public class Game {
     // 시간 관련 변수 추가
     private long levelUpTime;
     private boolean isLevelUp;
+
+    // 권총 클래스 추가
+    private Pistol pistol;
+
+    // 권총 사운드 추가
+//    private SoundPlayer gunshotSound;
     
     /**
      * Last time of the shoot.
@@ -110,6 +116,7 @@ public class Game {
 
     public Game()
     {
+//        gunshotSound = new SoundPlayer("single-gunshot.wav");
         Framework.gameState = Framework.GameState.GAME_CONTENT_LOADING;
         
         Thread threadForInitGame = new Thread() {
@@ -147,7 +154,7 @@ public class Game {
         isLevelUp = false;
         
         lastTimeShoot = 0;
-        timeBetweenShots = Framework.secInNanosec / 3;
+        timeBetweenShots = Framework.secInNanosec;
     }
     
     /**
@@ -170,6 +177,10 @@ public class Game {
             sightImg = ImageIO.read(sightImgUrl);
             sightImgMiddleWidth = sightImg.getWidth() / 2;
             sightImgMiddleHeight = sightImg.getHeight() / 2;
+
+            URL pistolImgUrl = this.getClass().getResource("/images/pistol.png");
+            BufferedImage pistolImg = ImageIO.read(pistolImgUrl);
+            pistol = new Pistol(pistolImg, 11, 10_000_000L);  // 11프레임, 프레임당 30ms
         }
         catch (IOException ex) {
             Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
@@ -244,6 +255,9 @@ public class Game {
             if(System.nanoTime() - lastTimeShoot >= timeBetweenShots)
             {
                 shoots++;
+                if (!pistol.isShooting()) {
+                    pistol.startShooting();
+                }
                 
                 // We go over all the ducks and we look if any of them was shoot.
                 for(int i = 0; i < ducks.size(); i++)
@@ -266,6 +280,7 @@ public class Game {
                 lastTimeShoot = System.nanoTime();
             }
         }
+        pistol.update();
         
         // When 200 ducks runaway, the game ends.
         if(runawayDucks >= 200)
@@ -308,13 +323,15 @@ public class Game {
             ducks.get(i).Draw(g2d);
         }
         
-        g2d.drawImage(grassImg, 0, Framework.frameHeight - grassImg.getHeight(), Framework.frameWidth, grassImg.getHeight(), null);
+//        g2d.drawImage(grassImg, 0, Framework.frameHeight - grassImg.getHeight(), Framework.frameWidth, grassImg.getHeight(), null);
         
         g2d.drawImage(sightImg, mousePosition.x - sightImgMiddleWidth, mousePosition.y - sightImgMiddleHeight, null);
-        
+
+        g2d.drawImage(pistol.getCurrentFrame(), 10, 750, 80*4, 50*4, null);
+
         g2d.setFont(font);
         g2d.setColor(Color.darkGray);
-        
+
         g2d.drawString("RUNAWAY: " + runawayDucks, 10, 21);
         g2d.drawString("KILLS: " + killedDucks, 160, 21);
         g2d.drawString("SHOOTS: " + shoots, 299, 21);
