@@ -7,11 +7,13 @@ public abstract class Weapon {
     protected BufferedImage gunImage; // 무기 이미지
     protected int damage; // 피해량
     protected long fireDelay; // 발사 딜레이 (밀리초 단위)
+    protected int ammos;
 
-    public Weapon(BufferedImage gunImage, int damage, long fireDelay) {
+    public Weapon(BufferedImage gunImage, int damage, long fireDelay, int ammos) {
         this.gunImage = gunImage;
         this.damage = damage;
         this.fireDelay = fireDelay;
+        this.ammos = ammos;
     }
 
     public int getDamage() {
@@ -32,9 +34,9 @@ public abstract class Weapon {
         g2d.drawImage(gunImage, imageX, imageY, 40, 40, null); // 높이 40으로 줄여서 출력
     }
 
-    public static class Revolver extends Weapon {
+    public static class Revolver extends Weapon {//기본 무기
         public Revolver(BufferedImage gunImage) {
-            super(gunImage, 2, 1_000_000_000); // 피해량 10, 발사 딜레이 1second
+            super(gunImage, 2, 1_000_000_000, 6); // 피해량 2, 발사 딜레이 1second
         }
 
         @Override
@@ -45,7 +47,7 @@ public abstract class Weapon {
 
     public class SMG extends Weapon {
         public SMG(BufferedImage gunImage) {
-            super(gunImage, 1, 100_000_000); // 피해량 5, 발사 딜레이 0.1초
+            super(gunImage, 1, 100_000_000, 20); // 피해량 1, 발사 딜레이 0.1초
         }
 
         @Override
@@ -56,7 +58,7 @@ public abstract class Weapon {
 
     public class Rifle extends Weapon {
         public Rifle(BufferedImage gunImage) {
-            super(gunImage, 3, 200_000_000); // 피해량 15, 발사 딜레이 0.2초
+            super(gunImage, 3, 200_000_000, 25); // 피해량 35, 발사 딜레이 0.2초
         }
 
         @Override
@@ -67,7 +69,7 @@ public abstract class Weapon {
 
     public class Odin extends Weapon {
         public Odin(BufferedImage gunImage) {
-            super(gunImage, 5, 200_000_000); // 피해량 20, 발사 딜레이 0.2초
+            super(gunImage, 5, 200_000_000, 70); // 피해량 5, 발사 딜레이 0.2초
         }
 
         @Override
