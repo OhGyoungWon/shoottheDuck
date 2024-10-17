@@ -45,7 +45,7 @@ public abstract class Weapon {
         }
     }
 
-    public class SMG extends Weapon {
+    public static class SMG extends Weapon {
         public SMG(BufferedImage gunImage) {
             super(gunImage, 1, 100_000_000, 20); // 피해량 1, 발사 딜레이 0.1초
         }
@@ -56,7 +56,7 @@ public abstract class Weapon {
         }
     }
 
-    public class Rifle extends Weapon {
+    public static class Rifle extends Weapon {
         public Rifle(BufferedImage gunImage) {
             super(gunImage, 3, 200_000_000, 25); // 피해량 35, 발사 딜레이 0.2초
         }
@@ -67,7 +67,7 @@ public abstract class Weapon {
         }
     }
 
-    public class Odin extends Weapon {
+    public static class Odin extends Weapon {
         public Odin(BufferedImage gunImage) {
             super(gunImage, 5, 200_000_000, 70); // 피해량 5, 발사 딜레이 0.2초
         }
