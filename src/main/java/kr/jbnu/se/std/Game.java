@@ -249,7 +249,7 @@ public class Game {
         }
         
         // When 200 ducks runaway, the game ends.
-        if(runawayDucks >= 200)
+        if(runawayDucks >= 10)
             Framework.gameState = Framework.GameState.GAMEOVER;
     }
     
@@ -292,13 +292,17 @@ public class Game {
     public void DrawGameOver(Graphics2D g2d, Point mousePosition)
     {
         Draw(g2d, mousePosition);
-        
+
         // The first text is used for shade.
         g2d.setColor(Color.black);
-        g2d.drawString("kr.jbnu.se.std.Game Over", Framework.frameWidth / 2 - 39, (int)(Framework.frameHeight * 0.65) + 1);
+        g2d.drawString("Your score is " + score + ".", Framework.frameWidth / 2 - 39, (int)(Framework.frameHeight * 0.65) + 1);
         g2d.drawString("Press space or enter to restart.", Framework.frameWidth / 2 - 149, (int)(Framework.frameHeight * 0.70) + 1);
         g2d.setColor(Color.red);
         g2d.drawString("kr.jbnu.se.std.Game Over", Framework.frameWidth / 2 - 40, (int)(Framework.frameHeight * 0.65));
         g2d.drawString("Press space or enter to restart.", Framework.frameWidth / 2 - 150, (int)(Framework.frameHeight * 0.70));
+    }
+
+    public int getScore(){
+        return score;
     }
 }
