@@ -15,7 +15,6 @@ import javax.swing.JPanel;
 
 /**
  * Create a JPanel on which we draw and listen for keyboard and mouse events.
- * JPanel을 생성하고 키보드와 마우스 이벤트 처리
  * 
  * @author www.gametutorial.net
  */
@@ -23,11 +22,9 @@ import javax.swing.JPanel;
 public abstract class Canvas extends JPanel implements KeyListener, MouseListener {
     
     // Keyboard states - Here are stored states for keyboard keys - is it down or not.
-    // 키보드 키의 상태 저장(누른지 아닌지)
     private static boolean[] keyboardState = new boolean[525];
     
     // Mouse states - Here are stored states for mouse keys - is it down or not.
-    // 마우스 클릭 상태 저장(누른지 아닌지)
     private static boolean[] mouseState = new boolean[3];
         
     
@@ -73,8 +70,6 @@ public abstract class Canvas extends JPanel implements KeyListener, MouseListene
      * @param key Number of key for which you want to check the state.
      * @return true if the key is down, false if the key is not down.
      */
-
-    // 키보드의 키가 눌려있는지 확인하는 함수(그렇다면 true)
     public static boolean keyboardKeyState(int key)
     {
         return keyboardState[key];
