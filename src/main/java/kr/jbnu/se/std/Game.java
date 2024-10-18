@@ -55,7 +55,7 @@ public class Game {
      */
     private int score;
     private int money;
-    private int GameLevel;
+    private static int GameLevel;
     
    /**
      * How many times a player is shot?
