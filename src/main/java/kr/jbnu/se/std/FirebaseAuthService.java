@@ -13,6 +13,13 @@ import java.util.concurrent.ExecutionException;
 
 public class FirebaseAuthService {
 
+    private final DatabaseReference usersRef;
+
+    public FirebaseAuthService() {
+        FirebaseDatabase db = FirebaseDatabase.getInstance();
+        this.usersRef = db.getReference("Users");
+    }
+
     // Firebase에 사용자를 등록하는 메소드
     public static void registerUser(String username, String password) {
         CreateRequest request = new CreateRequest();

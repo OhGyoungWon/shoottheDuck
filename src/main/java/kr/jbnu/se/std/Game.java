@@ -95,11 +95,16 @@ public class Game {
      * Middle height of the sight image.
      */
     private int sightImgMiddleHeight;
-    
+    /**
+     * 리더보드 출력
+     */
+    private Leaderboard leaderboard;
+
 
     public Game()
     {
         Framework.gameState = Framework.GameState.GAME_CONTENT_LOADING;
+        leaderboard = new Leaderboard();
         
         Thread threadForInitGame = new Thread() {
             @Override
@@ -160,14 +165,17 @@ public class Game {
             Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    
+
+
     /**
      * Restart game - reset some variables.
      */
-    public void RestartGame()
+    public void RestartGame(String email)
     {
         // Removes all of the ducks from this list.
+
+        leaderboard.saveScore(email, score);
+
         ducks.clear();
         
         // We set last duckt time to zero.
@@ -300,9 +308,6 @@ public class Game {
         g2d.setColor(Color.red);
         g2d.drawString("kr.jbnu.se.std.Game Over", Framework.frameWidth / 2 - 40, (int)(Framework.frameHeight * 0.65));
         g2d.drawString("Press space or enter to restart.", Framework.frameWidth / 2 - 150, (int)(Framework.frameHeight * 0.70));
-    }
-
-    public int getScore(){
-        return score;
+        leaderboard.renderLeaderboard(g2d, Framework.frameWidth, Framework.frameHeight);
     }
 }
