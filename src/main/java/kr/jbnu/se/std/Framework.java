@@ -256,9 +256,8 @@ public class Framework extends Canvas {
         // We set gameTime to zero and lastTime to current time for later calculations.
         gameTime = 0;
         lastTime = System.nanoTime();
-        String email = LoginUI.getuserEmail();
         
-        game.RestartGame(email);
+        game.RestartGame();
         
         // We change game status so that the game can start.
         gameState = GameState.PLAYING;

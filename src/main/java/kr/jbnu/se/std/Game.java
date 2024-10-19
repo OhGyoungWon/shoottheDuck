@@ -98,7 +98,10 @@ public class Game {
     /**
      * 리더보드 출력
      */
-    private Leaderboard leaderboard;
+    private final Leaderboard leaderboard;
+
+    private BufferedImage leaderboardImg;
+    private BufferedImage savedscoreImg;
 
 
     public Game()
@@ -158,6 +161,12 @@ public class Game {
             
             URL sightImgUrl = this.getClass().getResource("/images/sight.png");
             sightImg = ImageIO.read(sightImgUrl);
+
+            URL LeaderBoardImgUrl = this.getClass().getResource("/images/LeaderBoard.png");
+            leaderboardImg = ImageIO.read(LeaderBoardImgUrl);
+
+            URL savedscoreImgUrl = this.getClass().getResource("/images/savedscore.png");
+            savedscoreImg = ImageIO.read(savedscoreImgUrl);
             sightImgMiddleWidth = sightImg.getWidth() / 2;
             sightImgMiddleHeight = sightImg.getHeight() / 2;
         }
@@ -170,11 +179,9 @@ public class Game {
     /**
      * Restart game - reset some variables.
      */
-    public void RestartGame(String email)
+    public void RestartGame()
     {
         // Removes all of the ducks from this list.
-
-        leaderboard.saveScore(email, score);
 
         ducks.clear();
         
@@ -198,6 +205,8 @@ public class Game {
      */
     public void UpdateGame(long gameTime, Point mousePosition)
     {
+        String email = LoginUI.getuserEmail();
+
         // Creates a new duck, if it's the time, and add it to the array list.
         if(System.nanoTime() - Duck.lastDuckTime >= Duck.timeBetweenDucks)
         {
@@ -219,7 +228,7 @@ public class Game {
             ducks.get(i).Update();
             
             // Checks if the duck leaves the screen and remove it if it does.
-            if(ducks.get(i).x < 0 - duckImg.getWidth())
+            if(ducks.get(i).x < -duckImg.getWidth())
             {
                 ducks.remove(i);
                 runawayDucks++;
@@ -243,6 +252,7 @@ public class Game {
                     {
                         killedDucks++;
                         score += ducks.get(i).score;
+                        leaderboard.saveScore(email, score);
                         
                         // Remove the duck from the array list.
                         ducks.remove(i);
@@ -272,9 +282,8 @@ public class Game {
         g2d.drawImage(backgroundImg, 0, 0, Framework.frameWidth, Framework.frameHeight, null);
         
         // Here we draw all the ducks.
-        for(int i = 0; i < ducks.size(); i++)
-        {
-            ducks.get(i).Draw(g2d);
+        for (Duck duck : ducks) {
+            duck.Draw(g2d);
         }
         
         g2d.drawImage(grassImg, 0, Framework.frameHeight - grassImg.getHeight(), Framework.frameWidth, grassImg.getHeight(), null);
@@ -309,5 +318,6 @@ public class Game {
         g2d.drawString("kr.jbnu.se.std.Game Over", Framework.frameWidth / 2 - 40, (int)(Framework.frameHeight * 0.65));
         g2d.drawString("Press space or enter to restart.", Framework.frameWidth / 2 - 150, (int)(Framework.frameHeight * 0.70));
         leaderboard.renderLeaderboard(g2d, Framework.frameWidth, Framework.frameHeight);
+        leaderboard.renderSavedScore(g2d, Framework.frameWidth, Framework.frameHeight, score);
     }
 }

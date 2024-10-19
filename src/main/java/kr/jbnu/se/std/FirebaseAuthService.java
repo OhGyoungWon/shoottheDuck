@@ -13,11 +13,9 @@ import java.util.concurrent.ExecutionException;
 
 public class FirebaseAuthService {
 
-    private final DatabaseReference usersRef;
-
     public FirebaseAuthService() {
         FirebaseDatabase db = FirebaseDatabase.getInstance();
-        this.usersRef = db.getReference("Users");
+        DatabaseReference usersRef = db.getReference("Users");
     }
 
     // Firebase에 사용자를 등록하는 메소드
@@ -35,14 +33,14 @@ public class FirebaseAuthService {
     }
 
     public static void setUser(String email, String password) {
-        // Firebase Realtime Database 참조 가져오기
+        // Firebase Realtime Database 참조 가져오기(User라는 큰 데이터 틀 형성)
         DatabaseReference databaseRef = FirebaseDatabase.getInstance().getReference("users");
 
         // 이메일을 키로 사용하기 위해 특수문자 "."를 ","로 변환
         String sanitizedEmail = email.replace(".", ",");
 
         // 이메일 아래에 비밀번호 저장
-        databaseRef.child(sanitizedEmail).child("password").setValue(password, (databaseError, databaseReference) -> {
+        databaseRef.child(sanitizedEmail).setValue(new User(password, 0, 0), (databaseError, databaseReference) -> {
             if (databaseError != null) {
                 System.out.println("Error saving user: " + databaseError.getMessage());
             } else {

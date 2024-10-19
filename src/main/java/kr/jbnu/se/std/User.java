@@ -1,0 +1,20 @@
+package kr.jbnu.se.std;
+
+/**
+ * Realtime Database에 들어갈 유저 정보를 관리하는 클래스
+ * 관리하고 싶은 변수 설정 후 생성자 매개변수에 추가
+ * this 포인터 써서 안하면 안 만들어진다
+ */
+
+public class User{
+    public String password;
+    public int currentScore;
+    public int topScore;
+
+    public User(String password, int currentScore, int topScore) {
+        this.password = password;
+        this.currentScore = currentScore;
+        this.topScore = topScore;
+        //...
+    }
+}

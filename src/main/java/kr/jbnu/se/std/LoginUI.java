@@ -93,7 +93,6 @@ public class LoginUI extends JPanel {
         String username = usernameField.getText();
         userEmail = username;
 
-        System.out.println("Current user Email: " + username);
 
         return userEmail;
     }
