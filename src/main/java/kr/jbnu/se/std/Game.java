@@ -72,6 +72,8 @@ public class Game {
     // 권총 클래스 추가
     private Pistol pistol;
 
+    private Shop shop;
+
     /**
      * Last time of the shoot.
      */
@@ -142,6 +144,7 @@ public class Game {
 
         random = new Random();        
         font = new Font("monospaced", Font.BOLD, 18);
+        shop = new Shop();
         
         ducks = new ArrayList<Duck>();
         
@@ -289,16 +292,18 @@ public class Game {
             }
         }
         pistol.update();
-        
+
         // When 200 ducks runaway, the game ends.
-        if(runawayDucks >= 200)
+        if(runawayDucks >= 200) {
             Framework.gameState = Framework.GameState.GAMEOVER;
+        }
 
         //레벨업 조건: 오리 20마리 잡기
-        if(killedDucks != 0 && killedDucks % 20 == 0 && killedDucks != killedDucksCheck){
+        if(killedDucks != 0 && killedDucks % 10 == 0 && killedDucks != killedDucksCheck){
             Duck.timeBetweenDucks += 1000000L*600000; //오리 생성 텀 600초 더 증가 (사실상 생성 멈춤)
             level++;
             killedDucksCheck = killedDucks;
+            shop.openShop();
 
             levelUpTime = System.nanoTime();
             isLevelUp = true;
@@ -309,6 +314,15 @@ public class Game {
 //                }
 //            }, 10000); //10초 후 원래대로 돌아감
         }
+
+        // 상점이 열려있을 때는 게임 업데이트 중단
+        if (shop.isShopOpen()) {
+            if (Canvas.mouseButtonState(MouseEvent.BUTTON1)) {
+                shop.handleClick(mousePosition);  // 상점 클릭 처리
+            }
+            return;
+        }
+
         if (isLevelUp && System.nanoTime() - levelUpTime >= 10_000_000_000L) { // 10초(10000밀리초) 경과 시
             Duck.timeBetweenDucks -= 1000000L * 600010; // 오리 생성 텀 60초 + 10밀리초 감소
             isLevelUp = false; // 다시 레벨업 상태 해제
@@ -329,6 +343,10 @@ public class Game {
         for(int i = 0; i < ducks.size(); i++)
         {
             ducks.get(i).Draw(g2d);
+        }
+
+        if (shop.isShopOpen()) {
+            shop.drawShop(g2d);
         }
         
         g2d.drawImage(grassImg, 0, Framework.frameHeight - grassImg.getHeight(), Framework.frameWidth, grassImg.getHeight(), null);
