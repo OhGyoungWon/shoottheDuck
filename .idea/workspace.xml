@@ -4,24 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="48ad350a-5667-49e2-9228-2f0cfb0d2e7c" name="변경" comment="권총 애니메이션 추가">
+    <list default="true" id="48ad350a-5667-49e2-9228-2f0cfb0d2e7c" name="변경" comment="상점 기능, 아이템 추가 아직 효과는 없음">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kr/jbnu/se/std/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kr/jbnu/se/std/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kr/jbnu/se/std/Window.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kr/jbnu/se/std/Window.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/images/background.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/images/background.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/images/duck.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/images/duck.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/images/grass.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/images/grass.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/images/menu.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/images/menu.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/images/sight.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/images/sight2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sounds/single-gunshot.wav" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/sounds/single-gunshot.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/images/background.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/images/background.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/images/duck.png" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/images/duck.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/images/grass.png" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/images/grass.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/images/menu.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/images/menu.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/images/sight.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/kr/jbnu/se/std/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kr/jbnu/se/std/Game.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/sounds/single-gunshot.wav" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/sounds/single-gunshot.wav" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/kr/jbnu/se/std/Shop.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kr/jbnu/se/std/Shop.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,13 +21,19 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="PREVIOUS_COMMIT_AUTHORS">
+      <list>
+        <option value="pcy79 &lt;pcy7952@daum.net&gt;" />
+        <option value="pcy04 &lt;pcy7952@daum.net&gt;" />
+      </list>
+    </option>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="main" />
+        <entry key="$PROJECT_DIR$" value="feature/levels" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-    <option name="UPDATE_TYPE" value="REBASE" />
+    <option name="RESET_MODE" value="HARD" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
   &quot;lastFilter&quot;: {
@@ -68,23 +59,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;feature/levels에 #1개&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/pcy79/OneDrive - 전북대학교/shoottheDuck&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;org.jetbrains.plugins.github.ui.GithubSettingsConfigurable&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;,
-    &quot;애플리케이션.Window.executor&quot;: &quot;Run&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "feature/levels에 #1개",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/pcy79/OneDrive - 전북대학교/shoottheDuck",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "vcs.Git",
+    "vue.rearranger.settings.migration": "true",
+    "애플리케이션.Window.executor": "Run"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\pcy79\OneDrive - 전북대학교\shoottheDuck\src\main\resources\sounds" />
@@ -122,6 +113,7 @@
       <workItem from="1729232862560" duration="2631000" />
       <workItem from="1729268872763" duration="604000" />
       <workItem from="1729432062085" duration="3459000" />
+      <workItem from="1729446710534" duration="9938000" />
     </task>
     <task id="LOCAL-00001" summary="테스트">
       <option name="closed" value="true" />
@@ -163,7 +155,23 @@
       <option name="project" value="LOCAL" />
       <updated>1729062228731</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="상점 기능, 아이템 추가 아직 효과는 없음">
+      <option name="closed" value="true" />
+      <created>1729457224056</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1729457224056</updated>
+    </task>
+    <task id="LOCAL-00007" summary="상점 기능, 아이템 추가 아직 효과는 없음">
+      <option name="closed" value="true" />
+      <created>1729457625228</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1729457625228</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -180,7 +188,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="main" />
+                        <option value="feature/levels" />
                       </list>
                     </value>
                   </entry>
@@ -197,6 +205,11 @@
     <MESSAGE value="초기 오리 생성 텀 1/2나노초 -&gt; 1나노초&#10;레벨 추가 및 화면에 표시&#10;레벨 증가 조건: 오리 20*n마리 잡기" />
     <MESSAGE value="레벨 증가 로직 변경&#10;Timer 버리고 System.nano 어쩌구 기반으로 바꿈" />
     <MESSAGE value="권총 애니메이션 추가" />
-    <option name="LAST_COMMIT_MESSAGE" value="권총 애니메이션 추가" />
+    <MESSAGE value="SoundPlayer 클래스 및 권총 소리 추가" />
+    <MESSAGE value="사운드플레이어 클래스 추가&#10;권총 소리 추가&#10;권총 크기 결정 로직을 화면비율 기반으로 바꿈&#10;그래픽 변경 (초안)&#10;작은화면 사이즈 1280x720 비율로 변경" />
+    <MESSAGE value="권총 크기 결정 로직을 화면비율 기반으로 바꿈&#10;그래픽 변경 (초안)&#10;작은화면 사이즈 1280x720 비율로 변경" />
+    <MESSAGE value="권총 크기 결정 로직을 화면비율 기반으로 바꿈&#10;그래픽 변경 (초안)&#10;작은화면 사이즈 1280x720 비율로 변경" />
+    <MESSAGE value="상점 기능, 아이템 추가 아직 효과는 없음" />
+    <option name="LAST_COMMIT_MESSAGE" value="상점 기능, 아이템 추가 아직 효과는 없음" />
   </component>
 </project>

@@ -66,7 +66,7 @@ public class Item {
     public void drawItem(Graphics2D g2d, int x, int y) {
         g2d.drawImage(image, x, y, null);
         g2d.setColor(Color.WHITE);
-        g2d.drawString(name + ": " + price + " Points", x, y + image.getHeight() + 30);
+        g2d.drawString(name + ": " + price + " Points", x, y + image.getHeight() + 25);
     }
 
     // 아이템 설명을 그리는 함수
