@@ -174,7 +174,7 @@ public class Game {
             URL duckImgUrl = this.getClass().getResource("/images/duck.png");
             duckImg = ImageIO.read(duckImgUrl);
             
-            URL sightImgUrl = this.getClass().getResource("/images/sight2.png");
+            URL sightImgUrl = this.getClass().getResource("/images/pistol_sight.png");
             sightImg = ImageIO.read(sightImgUrl);
             sightImgMiddleWidth = sightImg.getWidth() / 2;
             sightImgMiddleHeight = sightImg.getHeight() / 2;
@@ -271,8 +271,8 @@ public class Game {
                 for(int i = 0; i < ducks.size(); i++)
                 {
                     // We check, if the mouse was over ducks head or body, when player has shot.
-                    if(new Rectangle(ducks.get(i).x + 18, ducks.get(i).y     , 27, 30).contains(mousePosition) ||
-                       new Rectangle(ducks.get(i).x + 30, ducks.get(i).y + 30, 88, 25).contains(mousePosition))
+                    if(new Rectangle(ducks.get(i).x + 11, ducks.get(i).y     , 44, 50).contains(mousePosition) ||
+                       new Rectangle(ducks.get(i).x + 15, ducks.get(i).y + 39, 64, 44).contains(mousePosition))
                     {
                         killedDucks++;
                         score += ducks.get(i).score;
@@ -331,11 +331,11 @@ public class Game {
             ducks.get(i).Draw(g2d);
         }
         
-//        g2d.drawImage(grassImg, 0, Framework.frameHeight - grassImg.getHeight(), Framework.frameWidth, grassImg.getHeight(), null);
+        g2d.drawImage(grassImg, 0, Framework.frameHeight - grassImg.getHeight(), Framework.frameWidth, grassImg.getHeight(), null);
         
         g2d.drawImage(sightImg, mousePosition.x - sightImgMiddleWidth, mousePosition.y - sightImgMiddleHeight, null);
 
-        g2d.drawImage(pistol.getCurrentFrame(), 10, 750, 80*4, 50*4, null);
+        g2d.drawImage(pistol.getCurrentFrame(), 0, Framework.frameHeight - (Framework.frameHeight / 3), (Framework.frameHeight / 10) * 8, (Framework.frameHeight / 10) * 5, null);
 
         g2d.setFont(font);
         g2d.setColor(Color.darkGray);

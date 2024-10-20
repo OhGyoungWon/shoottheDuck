@@ -27,7 +27,7 @@ public class Window extends JFrame{
         else // kr.jbnu.se.std.Window mode
         {
             // Size of the frame.
-            this.setSize(800, 600);
+            this.setSize(1280, 720);
             // Puts frame to center of the screen.
             this.setLocationRelativeTo(null);
             // So that frame cannot be resizable by the user.

@@ -4,25 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="48ad350a-5667-49e2-9228-2f0cfb0d2e7c" name="변경" comment="권총 애니메이션 추가">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kr/jbnu/se/std/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kr/jbnu/se/std/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kr/jbnu/se/std/Window.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kr/jbnu/se/std/Window.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/images/background.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/images/background.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/images/duck.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/images/duck.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/images/grass.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/images/grass.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/images/menu.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/images/menu.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/images/sight.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/images/sight2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sounds/single-gunshot.wav" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/sounds/single-gunshot.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/images/background.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/images/background.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/images/duck.png" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/images/duck.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/images/grass.png" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/images/grass.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/images/menu.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/images/menu.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/images/sight.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/kr/jbnu/se/std/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kr/jbnu/se/std/Game.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/sounds/single-gunshot.wav" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/sounds/single-gunshot.wav" afterDir="false" />
-    </list>
+    <list default="true" id="48ad350a-5667-49e2-9228-2f0cfb0d2e7c" name="변경" comment="권총 소리 추가" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -53,7 +35,7 @@
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/OhGyoungWon/shoottheDuck.git&quot;,
-    &quot;accountId&quot;: &quot;d15f9784-c259-4270-874a-3845965f77d9&quot;
+    &quot;accountId&quot;: &quot;65d9cfd6-6f46-4f4c-b37a-a466e4009839&quot;
   }
 }</component>
   <component name="ProblemsViewState">
@@ -68,23 +50,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;feature/levels에 #1개&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/pcy79/OneDrive - 전북대학교/shoottheDuck&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;org.jetbrains.plugins.github.ui.GithubSettingsConfigurable&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;,
-    &quot;애플리케이션.Window.executor&quot;: &quot;Run&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "feature/levels에 #1개",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/pcy79/OneDrive - 전북대학교/shoottheDuck",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "editing.templates",
+    "vue.rearranger.settings.migration": "true",
+    "애플리케이션.Window.executor": "Run"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\pcy79\OneDrive - 전북대학교\shoottheDuck\src\main\resources\sounds" />
@@ -115,13 +97,7 @@
       <workItem from="1728361820048" duration="5752000" />
       <workItem from="1728367810041" duration="641000" />
       <workItem from="1728369028408" duration="988000" />
-      <workItem from="1729040626316" duration="13103000" />
-      <workItem from="1729068773397" duration="916000" />
-      <workItem from="1729175583919" duration="1004000" />
-      <workItem from="1729229790083" duration="668000" />
-      <workItem from="1729232862560" duration="2631000" />
-      <workItem from="1729268872763" duration="604000" />
-      <workItem from="1729432062085" duration="3459000" />
+      <workItem from="1729040626316" duration="13366000" />
     </task>
     <task id="LOCAL-00001" summary="테스트">
       <option name="closed" value="true" />
@@ -163,7 +139,15 @@
       <option name="project" value="LOCAL" />
       <updated>1729062228731</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="권총 소리 추가">
+      <option name="closed" value="true" />
+      <created>1729065380666</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1729065380666</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -180,7 +164,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="main" />
+                        <option value="origin/feature/levels" />
                       </list>
                     </value>
                   </entry>
@@ -197,6 +181,7 @@
     <MESSAGE value="초기 오리 생성 텀 1/2나노초 -&gt; 1나노초&#10;레벨 추가 및 화면에 표시&#10;레벨 증가 조건: 오리 20*n마리 잡기" />
     <MESSAGE value="레벨 증가 로직 변경&#10;Timer 버리고 System.nano 어쩌구 기반으로 바꿈" />
     <MESSAGE value="권총 애니메이션 추가" />
-    <option name="LAST_COMMIT_MESSAGE" value="권총 애니메이션 추가" />
+    <MESSAGE value="권총 소리 추가" />
+    <option name="LAST_COMMIT_MESSAGE" value="권총 소리 추가" />
   </component>
 </project>
