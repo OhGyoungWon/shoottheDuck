@@ -110,6 +110,9 @@ public class Game {
 
     public static ArrayList<Weapon> weapons = new ArrayList<>();
 
+    public static Levels getlvdata(){
+        return lvdatas;
+    }
 
     public Game()
     {
@@ -148,7 +151,7 @@ public class Game {
         money = 0;
         shoots = 0;
         GameLevel = 1;
-        lvdatas = new Levels.lev1();
+        lvdatas = changelevel(GameLevel);
 
         lastTimeShoot = 0;
         timeBetweenShots = currentweapon.fireDelay;
@@ -217,6 +220,7 @@ public class Game {
         money = 0;
         shoots = 0;
         GameLevel = 1;
+        lvdatas = changelevel(GameLevel);
 
         lastTimeShoot = 0;
         timeBetweenShots = currentweapon.fireDelay;
@@ -232,10 +236,11 @@ public class Game {
     public void UpdateGame(long gameTime, Point mousePosition)
     {
         // Creates a new duck, if it's the time, and add it to the array list.
-        if(System.nanoTime() - Duck.lastDuckTime >= Duck.timeBetweenDucks && superducks.isEmpty())
+        if(System.nanoTime() - Duck.lastDuckTime >= lvdatas.sumdly && superducks.isEmpty())
         {
             // Here we create new duck and add it to the array list.
-            ducks.add(new Duck(Duck.duckLines[Duck.nextDuckLines][0] + random.nextInt(200), Duck.duckLines[Duck.nextDuckLines][1], Duck.duckLines[Duck.nextDuckLines][2], Duck.duckLines[Duck.nextDuckLines][3], duckImg));
+            ducks.add(new Duck(Duck.duckLines[Duck.nextDuckLines][0] + random.nextInt(200), Duck.duckLines[Duck.nextDuckLines][1],
+                    lvdatas.speed, lvdatas.ducksc, duckImg));
             
             // Here we increase nextDuckLines so that next duck will be created in next line.
             Duck.nextDuckLines++;
@@ -246,9 +251,9 @@ public class Game {
         }
         if(killedDucks % 20 == 0 && killedDucks != 0 && superducks.isEmpty()) {
             superducks.add(new Superduck(Superduck.duckLines[Duck.nextDuckLines][0] + random.nextInt(200),
-                    Superduck.duckLines[Duck.nextDuckLines][1],
-                    Superduck.duckLines[Duck.nextDuckLines][2],
-                    Superduck.duckLines[Duck.nextDuckLines][3],
+                    (int) (Framework.frameHeight*0.6),
+                    lvdatas.speed/3,
+                    lvdatas.bosssc,
                     superduckImg));
             Superduck.hp = 10*GameLevel;
 
@@ -335,7 +340,7 @@ public class Game {
         }
 
         // When 200 ducks runaway, the game ends.
-        if(runawayDucks >= 10)
+        if(runawayDucks >= 100)
             Framework.gameState = Framework.GameState.GAMEOVER;
     }
     
@@ -396,7 +401,18 @@ public class Game {
         g2d.drawString("Press space or enter to restart.", Framework.frameWidth / 2 - 150, (int)(Framework.frameHeight * 0.70));
     }
 
-    public int getScore(){
-        return score;
+    public Levels changelevel(int gameLevel){
+        if(gameLevel == 1){
+            return new Levels.lev1();
+        }
+        else if(gameLevel == 2){
+            return new Levels.lev2();
+        }
+        else if(gameLevel == 3){
+            return new Levels.lev3();
+        }
+        else {
+            return new Levels.lev4();
+        }
     }
 }

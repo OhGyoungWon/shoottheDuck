@@ -18,7 +18,7 @@ public class Window extends JFrame{
         this.setTitle("Shoot the duck");
 
         // Sets size of the frame.
-        if(false) // Full screen mode
+        if(true) // Full screen mode
         {
             // Disables decorations for this frame.
             this.setUndecorated(true);

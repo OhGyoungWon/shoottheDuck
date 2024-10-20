@@ -43,9 +43,9 @@ public class Superduck {
     public Superduck(int x, int y, int speed, int score, BufferedImage superduckImg) {
         this.x = x;
         this.y = y;
-        hp = 10;
-        this.speed = speed/3;
-        this.score = score+100;
+        hp = Game.getlvdata().bosshp;
+        this.speed = Game.getlvdata().speed/3;
+        this.score = Game.getlvdata().bosssc;
         this.superduckImg = superduckImg;
     }
     public void Update()

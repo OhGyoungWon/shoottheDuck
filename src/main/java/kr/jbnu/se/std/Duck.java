@@ -27,11 +27,11 @@ public class Duck {
      * How many points is a duck worth?
      */
     public static int[][] duckLines = {
-                                       {Framework.frameWidth, (int)(Framework.frameHeight * 0.60), -2, 20},
-                                       {Framework.frameWidth, (int)(Framework.frameHeight * 0.65), -3, 30},
-                                       {Framework.frameWidth, (int)(Framework.frameHeight * 0.70), -4, 40},
-                                       {Framework.frameWidth, (int)(Framework.frameHeight * 0.78), -5, 50}
-                                      };
+            {Framework.frameWidth, (int)(Framework.frameHeight * 0.60)},
+            {Framework.frameWidth, (int)(Framework.frameHeight * 0.65)},
+            {Framework.frameWidth, (int)(Framework.frameHeight * 0.70)},
+            {Framework.frameWidth, (int)(Framework.frameHeight * 0.78)}
+    };
     /**
      * Indicate which is next duck line.
      */
@@ -80,9 +80,9 @@ public class Duck {
 
         hp = 1;
         
-        this.speed = speed;
+        this.speed = Game.getlvdata().speed;
         
-        this.score = score;
+        this.score = Game.getlvdata().ducksc;
         
         this.duckImg = duckImg;        
     }
