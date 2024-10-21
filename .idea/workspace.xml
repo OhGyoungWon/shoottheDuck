@@ -4,13 +4,23 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e23e4792-88cd-4c5b-8837-984a947fb4ab" name="변경" comment="예시용 smgducks 완성(추가, 무기 바뀜)">
+    <list default="true" id="e23e4792-88cd-4c5b-8837-984a947fb4ab" name="변경" comment="무기들 떨구는 객체들 추가함&#10;사진들 바꿔야됨(smgImg, rifImg 같은것들)">
+      <change afterPath="$PROJECT_DIR$/src/main/java/kr/jbnu/se/std/DamageText.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/kr/jbnu/se/std/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kr/jbnu/se/std/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/kr/jbnu/se/std/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kr/jbnu/se/std/Game.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="TaskManager">
     <task id="LOCAL-00001" summary="예시용 smgducks 완성(추가, 무기 바뀜)">
@@ -21,12 +31,21 @@
       <option name="project" value="LOCAL" />
       <updated>1729525581399</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="무기들 떨구는 객체들 추가함&#10;사진들 바꿔야됨(smgImg, rifImg 같은것들)">
+      <option name="closed" value="true" />
+      <created>1729526761570</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1729526761570</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="커밋스" />
     <MESSAGE value="예시용 smgducks 완성(추가, 무기 바뀜)" />
-    <option name="LAST_COMMIT_MESSAGE" value="예시용 smgducks 완성(추가, 무기 바뀜)" />
+    <MESSAGE value="무기들 떨구는 객체들 추가함&#10;사진들 바꿔야됨(smgImg, rifImg 같은것들)" />
+    <option name="LAST_COMMIT_MESSAGE" value="무기들 떨구는 객체들 추가함&#10;사진들 바꿔야됨(smgImg, rifImg 같은것들)" />
   </component>
 </project>

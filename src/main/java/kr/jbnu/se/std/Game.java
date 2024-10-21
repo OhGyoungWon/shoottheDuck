@@ -137,7 +137,7 @@ public class Game {
     public static int gamelevel;
     public static int money;
 
-
+    private ArrayList<DamageText> damageTexts;
 
     public Game()
     {
@@ -196,6 +196,8 @@ public class Game {
         weapons = new ArrayList<>();
         lastTimeShoot = 0;
         timeBetweenShots = currentweapon.fireDelay;
+        damageTexts = new ArrayList<>();
+
     }
 
     /**
@@ -261,6 +263,7 @@ public class Game {
         smgduck.clear();
         rifduck.clear();
         odinduck.clear();
+        damageTexts.clear();
         
         // We set last duckt time to zero.
         Duck.lastDuckTime = 0;
@@ -407,7 +410,7 @@ public class Game {
                        new Rectangle(ducks.get(i).x + 15, ducks.get(i).y + 39, 64, 44).contains(mousePosition))
                     {
                         ducks.get(i).hp-=currentweapon.getDamage();
-
+                        damageTexts.add(new DamageText(mousePosition.x, mousePosition.y, currentweapon.getDamage()));
                         if(ducks.get(i).hp <= 0){
                             killedDucks++;
                             score += ducks.get(i).score;
@@ -428,7 +431,7 @@ public class Game {
                                 superduckImg.getWidth(), superduckImg.getHeight()).contains(mousePosition))
                         {
                             superducks.get(i).hp-=currentweapon.getDamage();
-
+                            damageTexts.add(new DamageText(mousePosition.x, mousePosition.y, currentweapon.getDamage()));
                             if(superducks.get(i).hp <= 0){
                                 killedDucks++;
                                 score += superducks.get(i).score;
@@ -452,7 +455,7 @@ public class Game {
                                 smgImg.getWidth(), smgImg.getHeight()).contains(mousePosition))
                         {
                             smgduck.get(i).hp-=currentweapon.getDamage();
-
+                            damageTexts.add(new DamageText(mousePosition.x, mousePosition.y, currentweapon.getDamage()));
                             if(smgduck.get(i).hp <= 0){
                                 killedDucks++;
                                 score += smgduck.get(i).score;
@@ -477,7 +480,7 @@ public class Game {
                                 rifImg.getWidth(), rifImg.getHeight()).contains(mousePosition))
                         {
                             rifduck.get(i).hp-=currentweapon.getDamage();
-
+                            damageTexts.add(new DamageText(mousePosition.x, mousePosition.y, currentweapon.getDamage()));
                             if(rifduck.get(i).hp <= 0){
                                 killedDucks++;
                                 score += rifduck.get(i).score;
@@ -502,7 +505,7 @@ public class Game {
                                 odinImg.getWidth(), odinImg.getHeight()).contains(mousePosition))
                         {
                             odinduck.get(i).hp-=currentweapon.getDamage();
-
+                            damageTexts.add(new DamageText(mousePosition.x, mousePosition.y, currentweapon.getDamage()));
                             if(odinduck.get(i).hp <= 0){
                                 killedDucks++;
                                 score += odinduck.get(i).score;
@@ -522,6 +525,12 @@ public class Game {
                 }
 
                 lastTimeShoot = System.nanoTime();
+            }
+        }
+        for (int i = 0; i < damageTexts.size(); i++) {
+            if (!damageTexts.get(i).update()) {
+                damageTexts.remove(i);
+                i--;
             }
         }
         pistol.update();
@@ -569,6 +578,10 @@ public class Game {
 
         if (shop.isShopOpen()) {
             shop.drawShop(g2d);
+        }
+
+        for (DamageText damageText : damageTexts) {
+            damageText.draw(g2d);
         }
 
         g2d.drawImage(grassImg, 0, Framework.frameHeight - grassImg.getHeight(), Framework.frameWidth, grassImg.getHeight(), null);
