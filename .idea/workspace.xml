@@ -4,6 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
+    <list default="true" id="48ad350a-5667-49e2-9228-2f0cfb0d2e7c" name="변경" comment="머지했어요!!!">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/kr/jbnu/se/std/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kr/jbnu/se/std/Game.java" afterDir="false" />
     <list default="true" id="48ad350a-5667-49e2-9228-2f0cfb0d2e7c" name="변경" comment="superduck 스피드 조정(형 변환해서 조정)">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/kr/jbnu/se/std/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kr/jbnu/se/std/Game.java" afterDir="false" />
@@ -200,6 +203,15 @@
       <option name="project" value="LOCAL" />
       <updated>1729495079153</updated>
     </task>
+    <task id="LOCAL-00010" summary="머지했어요!!!">
+      <option name="closed" value="true" />
+      <created>1729516662734</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1729516662734</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <task id="LOCAL-00010" summary="superduck 스피드 조정(형 변환해서 조정)">
       <option name="closed" value="true" />
       <created>1729518655385</created>
@@ -235,7 +247,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="feature/levels" />
+                        <option value="origin/trying-merge" />
                       </list>
                     </value>
                   </entry>
@@ -259,6 +271,9 @@
     <MESSAGE value="상점 기능, 아이템 추가 아직 효과는 없음" />
     <MESSAGE value="Merge remote-tracking branch 'origin/feature/levels' into feature/levels" />
     <MESSAGE value="배경음악 추가, 상점아이템 클래스 리팩터링" />
+    <MESSAGE value="버그수정" />
+    <MESSAGE value="머지했어요!!!" />
+    <option name="LAST_COMMIT_MESSAGE" value="머지했어요!!!" />
     <MESSAGE value="superduck 스피드 조정(형 변환해서 조정)" />
     <option name="LAST_COMMIT_MESSAGE" value="superduck 스피드 조정(형 변환해서 조정)" />
   </component>
