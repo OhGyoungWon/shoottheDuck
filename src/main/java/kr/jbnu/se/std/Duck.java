@@ -14,7 +14,6 @@ public class Duck {
     /**
      * How much time must pass in order to create a new duck?
      */
-    public static long timeBetweenDucks = Framework.secInNanosec; // 오리 생성 빈도 1나노초 (원본은 1/2나노초)
     /**
      * Last time when the duck was created.
      */
@@ -27,11 +26,11 @@ public class Duck {
      * How many points is a duck worth?
      */
     public static int[][] duckLines = {
-                                       {Framework.frameWidth, (int)(Framework.frameHeight * 0.60), -2, 20},
-                                       {Framework.frameWidth, (int)(Framework.frameHeight * 0.65), -3, 30},
-                                       {Framework.frameWidth, (int)(Framework.frameHeight * 0.70), -4, 40},
-                                       {Framework.frameWidth, (int)(Framework.frameHeight * 0.78), -5, 50}
-                                      };
+            {Framework.frameWidth, (int)(Framework.frameHeight * 0.60)},
+            {Framework.frameWidth, (int)(Framework.frameHeight * 0.65)},
+            {Framework.frameWidth, (int)(Framework.frameHeight * 0.70)},
+            {Framework.frameWidth, (int)(Framework.frameHeight * 0.78)}
+    };
     /**
      * Indicate which is next duck line.
      */
@@ -50,13 +49,14 @@ public class Duck {
     /**
      * How fast the duck should move? And to which direction?
      */
-    private int speed;
+    private float speed;
     
     /**
      * How many points this duck is worth?
      */
     public int score;
-    
+    public int hp;
+
     /**
      * kr.jbnu.se.std.Duck image.
      */
@@ -71,15 +71,18 @@ public class Duck {
      * @param speed The speed of this duck.
      * @param score How many points this duck is worth?
      * @param duckImg Image of the duck.
+     * @param hp Duck's hp
      */
-    public Duck(int x, int y, int speed, int score, BufferedImage duckImg)
+    public Duck(int x, int y, float speed, int score, int hp, BufferedImage duckImg)
     {
         this.x = x;
         this.y = y;
+
+        this.hp = Game.getlvdata().duckhp;
+
+        this.speed = Game.getlvdata().speed;
         
-        this.speed = speed;
-        
-        this.score = score;
+        this.score = Game.getlvdata().ducksc;
         
         this.duckImg = duckImg;        
     }

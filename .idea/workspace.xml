@@ -4,19 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="48ad350a-5667-49e2-9228-2f0cfb0d2e7c" name="변경" comment="배경음악 추가, 상점아이템 클래스 리팩터링">
+    <list default="true" id="48ad350a-5667-49e2-9228-2f0cfb0d2e7c" name="변경" comment="머지했어요!!!">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/kr/jbnu/se/std/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kr/jbnu/se/std/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kr/jbnu/se/std/Shop.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kr/jbnu/se/std/Shop.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/images/oldBackground.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/images/oldDuck.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/images/oldGrass.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/images/oldMenu.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/images/oldSight.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sounds/single-gunshot.wav" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/sounds/single-gunshot.wav" afterDir="false" />
+    <list default="true" id="48ad350a-5667-49e2-9228-2f0cfb0d2e7c" name="변경" comment="superduck 스피드 조정(형 변환해서 조정)">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/kr/jbnu/se/std/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kr/jbnu/se/std/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/kr/jbnu/se/std/Game$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kr/jbnu/se/std/Game$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/kr/jbnu/se/std/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kr/jbnu/se/std/Game.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/kr/jbnu/se/std/Shop.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kr/jbnu/se/std/Shop.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/kr/jbnu/se/std/SoundPlayer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kr/jbnu/se/std/SoundPlayer.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,7 +34,7 @@
     </option>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="feature/levels" />
+        <entry key="$PROJECT_DIR$" value="ducks" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -75,6 +70,7 @@
     "Application.Window.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "dev",
+    "git-widget-placeholder": "trying-merge",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/pcy79/OneDrive - 전북대학교/shoottheDuck/src/main/resources/sounds",
@@ -86,7 +82,7 @@
     "project.structure.last.edited": "프로젝트",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "editor.preferences.completion",
+    "settings.editor.selected.configurable": "editor.preferences.tabs",
     "vue.rearranger.settings.migration": "true",
     "애플리케이션.Window.executor": "Run"
   }
@@ -219,14 +215,42 @@
       <updated>1729521782867</updated>
     </task>
     <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00010" summary="머지했어요!!!">
+      <option name="closed" value="true" />
+      <created>1729516662734</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1729516662734</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00010" summary="superduck 스피드 조정(형 변환해서 조정)">
+      <option name="closed" value="true" />
+      <created>1729518655385</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1729518655386</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
+    <option name="OPEN_GENERIC_TABS">
+      <map>
+        <entry key="462e2585-64af-4ab3-9b97-bdbb56e9d153" value="TOOL_WINDOW" />
+      </map>
+    </option>
     <option name="TAB_STATES">
       <map>
+        <entry key="462e2585-64af-4ab3-9b97-bdbb56e9d153">
+          <value>
+            <State />
+          </value>
+        </entry>
         <entry key="MAIN">
           <value>
             <State>
@@ -235,7 +259,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="feature/levels" />
+                        <option value="origin/trying-merge" />
                       </list>
                     </value>
                   </entry>
@@ -259,6 +283,11 @@
     <MESSAGE value="상점 기능, 아이템 추가 아직 효과는 없음" />
     <MESSAGE value="Merge remote-tracking branch 'origin/feature/levels' into feature/levels" />
     <MESSAGE value="배경음악 추가, 상점아이템 클래스 리팩터링" />
+    <MESSAGE value="버그수정" />
+    <MESSAGE value="머지했어요!!!" />
+    <option name="LAST_COMMIT_MESSAGE" value="머지했어요!!!" />
+    <MESSAGE value="superduck 스피드 조정(형 변환해서 조정)" />
+    <option name="LAST_COMMIT_MESSAGE" value="superduck 스피드 조정(형 변환해서 조정)" />
     <MESSAGE value="[리더보드 클래스] 닉네임과 점수가 표시&#10;[회원가입 클래스] 닉네임 설정 가능&#10;[게임 클래스] Leaderboard 객체 생성(이거 없애지 마셈)&#10;[유저 클래스] 닉네임 추가 및 각 변수마다 getter setter 추가&#10;[프레임워크 클래스] drawLeaderboard 매개변수 추가" />
     <option name="LAST_COMMIT_MESSAGE" value="[리더보드 클래스] 닉네임과 점수가 표시&#10;[회원가입 클래스] 닉네임 설정 가능&#10;[게임 클래스] Leaderboard 객체 생성(이거 없애지 마셈)&#10;[유저 클래스] 닉네임 추가 및 각 변수마다 getter setter 추가&#10;[프레임워크 클래스] drawLeaderboard 매개변수 추가" />
   </component>
