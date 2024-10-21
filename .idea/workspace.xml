@@ -4,15 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="48ad350a-5667-49e2-9228-2f0cfb0d2e7c" name="변경" comment="Merge remote-tracking branch 'origin/feature/levels' into feature/levels">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/sounds/Fluffing a Duck.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kr/jbnu/se/std/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kr/jbnu/se/std/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kr/jbnu/se/std/Item.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kr/jbnu/se/std/ItemDraw.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kr/jbnu/se/std/Shop.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kr/jbnu/se/std/Shop.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/kr/jbnu/se/std/Game$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kr/jbnu/se/std/Game$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/kr/jbnu/se/std/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kr/jbnu/se/std/Game.class" afterDir="false" />
-    </list>
+    <list default="true" id="48ad350a-5667-49e2-9228-2f0cfb0d2e7c" name="변경" comment="배경음악 추가, 상점아이템 클래스 리팩터링" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -127,7 +119,7 @@
       <workItem from="1729446710534" duration="9938000" />
       <workItem from="1729457978668" duration="396000" />
       <workItem from="1729488123577" duration="36000" />
-      <workItem from="1729488372929" duration="3127000" />
+      <workItem from="1729488372929" duration="4016000" />
     </task>
     <task id="LOCAL-00001" summary="테스트">
       <option name="closed" value="true" />
@@ -193,7 +185,15 @@
       <option name="project" value="LOCAL" />
       <updated>1729458264004</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="배경음악 추가, 상점아이템 클래스 리팩터링">
+      <option name="closed" value="true" />
+      <created>1729495079152</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1729495079153</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -233,6 +233,7 @@
     <MESSAGE value="권총 크기 결정 로직을 화면비율 기반으로 바꿈&#10;그래픽 변경 (초안)&#10;작은화면 사이즈 1280x720 비율로 변경" />
     <MESSAGE value="상점 기능, 아이템 추가 아직 효과는 없음" />
     <MESSAGE value="Merge remote-tracking branch 'origin/feature/levels' into feature/levels" />
-    <option name="LAST_COMMIT_MESSAGE" value="Merge remote-tracking branch 'origin/feature/levels' into feature/levels" />
+    <MESSAGE value="배경음악 추가, 상점아이템 클래스 리팩터링" />
+    <option name="LAST_COMMIT_MESSAGE" value="배경음악 추가, 상점아이템 클래스 리팩터링" />
   </component>
 </project>
