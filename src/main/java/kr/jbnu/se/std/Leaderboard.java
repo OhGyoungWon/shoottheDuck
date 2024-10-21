@@ -11,10 +11,7 @@ import java.util.ArrayList;
 
 import java.util.List;
 import java.util.Map;
-import java.io.File;
-import java.io.IOException;
 import java.util.HashMap;
-import javax.imageio.ImageIO;
 
 /**
  * 해당 클래스는 리더보드의
