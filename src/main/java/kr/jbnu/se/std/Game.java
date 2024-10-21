@@ -134,7 +134,7 @@ public class Game {
      * 리더보드 출력
      */
 
-    private static Leaderboard leaderboard;
+    private static Leaderboard leaderboard = new Leaderboard();;
     private BufferedImage leaderboardImg;
     private BufferedImage savedscoreImg;
 
@@ -149,7 +149,6 @@ public class Game {
     public Game()
     {
         Framework.gameState = Framework.GameState.GAME_CONTENT_LOADING;
-        leaderboard = new Leaderboard();
 
         Thread threadForInitGame = new Thread() {
             @Override
@@ -420,12 +419,12 @@ public class Game {
                        new Rectangle(ducks.get(i).x + 15, ducks.get(i).y + 39, 64, 44).contains(mousePosition))
                     {
                         ducks.get(i).hp-=currentweapon.getDamage();
-                        leaderboard.saveScore(currentEmail, currentNickname, score);
 
                         if(ducks.get(i).hp <= 0){
                             killedDucks++;
                             score += ducks.get(i).score;
                             money += ducks.get(i).score;
+                            leaderboard.saveScore(currentEmail, currentNickname, score);
 
                             // Remove the duck from the array list.
                             ducks.remove(i);
@@ -568,10 +567,10 @@ public class Game {
         // The first text is used for shade.
         g2d.setColor(Color.black);
         g2d.drawString("Your score is " + score + ".", Framework.frameWidth / 2 - 19, (int)(Framework.frameHeight * 0.65) + 1);
-        g2d.drawString("Press space or enter to restart.", Framework.frameWidth / 2 - 149, (int)(Framework.frameHeight * 0.70) + 1);
+        g2d.drawString("Who are you: " + User.getNickname(), Framework.frameWidth / 2 - 149, (int)(Framework.frameHeight * 0.70) + 1);
         g2d.setColor(Color.red);
         g2d.drawString("Your score is " + score + ".", Framework.frameWidth / 2 - 20, (int)(Framework.frameHeight * 0.65));
-        g2d.drawString("Press space or enter to restart.", Framework.frameWidth / 2 - 150, (int)(Framework.frameHeight * 0.70));
+        g2d.drawString("Who are you: " + User.getNickname(), Framework.frameWidth / 2 - 150, (int)(Framework.frameHeight * 0.70));
     }
 
     public int getScore(){

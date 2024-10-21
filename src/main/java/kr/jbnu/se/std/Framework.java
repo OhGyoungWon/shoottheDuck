@@ -50,7 +50,7 @@ public class Framework extends Canvas {
      * Pause between updates. It is in nanoseconds.
      */
     private final long GAME_UPDATE_PERIOD = secInNanosec / GAME_FPS;
-    
+
     /**
      * Possible states of the game
      */
@@ -75,15 +75,12 @@ public class Framework extends Canvas {
      * Image for menu.
      */
     private BufferedImage shootTheDuckMenuImg;
-
-    private Leaderboard leaderboard;
     
     public Framework ()
     {
         super();
         
         gameState = GameState.VISUALIZING;
-        this.leaderboard = new Leaderboard();
         
         //We start game in new thread.
         Thread gameThread = new Thread() {

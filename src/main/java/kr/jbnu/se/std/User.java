@@ -7,10 +7,10 @@ package kr.jbnu.se.std;
  */
 
 public class User{
-    private String password;
-    private int currentScore;
-    private int topScore;
-    private static String nickname;
+    public String password ;
+    public int currentScore;
+    public int topScore;
+    public static String nickname;
 
     public User(String password, int currentScore, int topScore, String nickname) {
         this.password = password;

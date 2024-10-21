@@ -20,7 +20,7 @@ public class Leaderboard {
     private static DatabaseReference usersRef;
     private static Image leaderboardImage; // 리더보드 배경 이미지
     private static DatabaseReference leaderboardRef;
-    private static List<Map.Entry<String, Integer>> leaderboardList = new ArrayList<>();
+    private static final List<Map.Entry<String, Integer>> leaderboardList = new ArrayList<>();
 
     public Leaderboard() {
         FirebaseDatabase db = FirebaseDatabase.getInstance();
@@ -41,11 +41,11 @@ public class Leaderboard {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot entry : dataSnapshot.getChildren()) {
-                    String nikname = entry.getKey();
+                    String nickname = entry.getKey();
                     Integer score = entry.getValue(Integer.class);
-                    boolean exists = leaderboardList.stream().anyMatch(e -> e.getKey().equals(nikname));
+                    boolean exists = leaderboardList.stream().anyMatch(e -> e.getKey().equals(nickname));
                     if (score != null && !exists) {
-                        leaderboardList.add(Map.entry(nikname, score));
+                        leaderboardList.add(Map.entry(nickname, score));
                     }
                 }
             }
@@ -84,6 +84,8 @@ public class Leaderboard {
 
 
                     usersRef.updateChildrenAsync(userUpdates);
+                    System.out.println("User nickname: " + nickname);
+                    System.out.println("Current score: " + score);
                     System.out.println("Updated topScore to: " + score);
                 } else {
                     // currentScore는 그대로 저장
@@ -91,12 +93,9 @@ public class Leaderboard {
                     userUpdates.put("userInfo/" + sanitizedEmail + "/currentScore", score);
 
                     usersRef.updateChildrenAsync(userUpdates);
+                    System.out.println("User nickname: " + email);
                     System.out.println("Current score saved: " + score);
                 }
-
-                // 로그 출력
-                System.out.println("User email: " + email);
-                System.out.println("Current score: " + score);
             }
 
             @Override

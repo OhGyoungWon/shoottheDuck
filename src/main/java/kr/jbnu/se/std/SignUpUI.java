@@ -9,7 +9,7 @@ public class SignUpUI extends JPanel {
 
     private final JTextField newUsernameField;   // 새로운 사용자 이름 입력 필드
     private final JPasswordField newPasswordField;  // 새로운 비밀번호 입력 필드
-    private final JTextField newNiknameField;
+    private final JTextField newNicknameField;
     private final JLabel messageLabel;   // 회원가입 결과 메시지 레이블
 
     private final Window window;  // Window 참조
@@ -25,17 +25,17 @@ public class SignUpUI extends JPanel {
         gbc.insets = new Insets(10, 10, 10, 10); // 컴포넌트 간의 간격 설정
 
         // 사용자 이름 레이블과 텍스트 필드 생성 및 배치
-        JLabel userNiknameLabel = new JLabel("New Nikname:");
+        JLabel userNicknameLabel = new JLabel("New Nickname:");
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.gridwidth = 1;
-        add(userNiknameLabel, gbc);
+        add(userNicknameLabel, gbc);
 
-        newNiknameField = new JTextField(20);
+        newNicknameField = new JTextField(20);
         gbc.gridx = 1;
         gbc.gridy = 0;
         gbc.gridwidth = 2;
-        add(newNiknameField, gbc);
+        add(newNicknameField, gbc);
 
         JLabel usernameLabel = new JLabel("New Email:");
         gbc.gridx = 0;
@@ -87,13 +87,13 @@ public class SignUpUI extends JPanel {
     private void handleRegistration() {
         String newUsername = newUsernameField.getText();  // 사용자 입력 이름 가져오기
         String newPassword = new String(newPasswordField.getPassword());
-        String newNikname = newNiknameField.getText();
+        String newNickname = newNicknameField.getText();
         String hashedPassword = hashPassword(newPassword);
 
         if (!newUsername.isEmpty() && !newPassword.isEmpty()) {
             messageLabel.setText("회원가입 성공!");  // 성공 메시지 표시
             FirebaseAuthService.registerUser(newUsername, newPassword);
-            FirebaseAuthService.setUser(newUsername, hashedPassword, newNikname);
+            FirebaseAuthService.setUser(newUsername, hashedPassword, newNickname);
 
             // 회원가입 성공 후 LoginUI로 돌아가기
             window.switchToLogin();

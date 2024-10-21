@@ -57,7 +57,7 @@ public class FirebaseAuthService {
         String sanitizedEmail = email.replace(".", ",");
 
         // Firebase Realtime Database 참조 가져오기
-        DatabaseReference databaseRef = FirebaseDatabase.getInstance().getReference("users/userInfo/" + sanitizedEmail + "/password");
+        DatabaseReference databaseRef = FirebaseDatabase.getInstance().getReference("users/userInfo/" + sanitizedEmail);
 
         // 비동기 결과를 동기적으로 처리하기 위해 CompletableFuture 사용
         CompletableFuture<Boolean> future = new CompletableFuture<>();
@@ -66,7 +66,7 @@ public class FirebaseAuthService {
         String hashedPassword = hashPassword(password);
 
         // 데이터베이스에서 비밀번호 가져오기
-        databaseRef.addListenerForSingleValueEvent(new ValueEventListener() {
+        databaseRef.child("/password").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 String storedHashedPassword = dataSnapshot.getValue(String.class);
