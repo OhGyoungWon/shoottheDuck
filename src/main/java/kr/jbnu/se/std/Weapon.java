@@ -47,7 +47,7 @@ public abstract class Weapon {
 
     public static class SMG extends Weapon {
         public SMG(BufferedImage gunImage) {
-            super(gunImage, 1, 100_000_000, 20); // 피해량 1, 발사 딜레이 0.1초
+            super(gunImage, 1, 100_000_000L, 20); // 피해량 1, 발사 딜레이 0.1초
         }
 
         @Override
