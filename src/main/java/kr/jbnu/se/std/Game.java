@@ -317,7 +317,5 @@ public class Game {
         g2d.setColor(Color.red);
         g2d.drawString("Your score is " + score + ".", Framework.frameWidth / 2 - 20, (int)(Framework.frameHeight * 0.65));
         g2d.drawString("Press space or enter to restart.", Framework.frameWidth / 2 - 150, (int)(Framework.frameHeight * 0.70));
-        //leaderboard.renderLeaderboard(g2d, Framework.frameWidth, Framework.frameHeight);
-        //xleaderboard.renderSavedScore(g2d, Framework.frameWidth, Framework.frameHeight, score);
     }
 }

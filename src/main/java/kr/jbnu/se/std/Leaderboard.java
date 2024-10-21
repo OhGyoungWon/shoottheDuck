@@ -21,7 +21,7 @@ public class Leaderboard {
     private static DatabaseReference usersRef;
     private static Image leaderboardImage; // 리더보드 배경 이미지
     private static DatabaseReference leaderboardRef;
-    private static List<Map.Entry<String, Integer>> leaderboardList;
+    private static List<Map.Entry<String, Integer>> leaderboardList = new ArrayList<>();
 
     public Leaderboard() {
         FirebaseDatabase db = FirebaseDatabase.getInstance();
@@ -38,14 +38,14 @@ public class Leaderboard {
 
     // 1. 모든 이메일(key)과 스코어(value)를 리스트에 저장하는 메서드
     private static List<Map.Entry<String, Integer>> getLeaderboardData() {
-        leaderboardList = new ArrayList<>();
         leaderboardRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot entry : dataSnapshot.getChildren()) {
                     String email = entry.getKey().replace(",", ".");
                     Integer score = entry.getValue(Integer.class);
-                    if (score != null) {
+                    boolean exists = leaderboardList.stream().anyMatch(e -> e.getKey().equals(email));
+                    if (score != null && !exists) {
                         leaderboardList.add(Map.entry(email, score));
                     }
                 }
@@ -56,8 +56,6 @@ public class Leaderboard {
                 System.err.println("Failed to load leaderboard data: " + databaseError.getMessage());
             }
         });
-
-        System.out.println("저장된 리스트: " + leaderboardList);
         return leaderboardList;
     }
 
@@ -134,8 +132,6 @@ public class Leaderboard {
     // 3. 리더보드를 화면에 그리는 메서드
     public static void drawLeaderboard(Graphics2D g, int panelWidth) {
         List<Map.Entry<String, Integer>> leaderboardList = getLeaderboardData();
-        System.out.println("Leaderboard Data: " + leaderboardList);
-
         sortLeaderboardData(leaderboardList);
 
         // 폰트 및 색상 설정
@@ -151,11 +147,11 @@ public class Leaderboard {
             String leaderboardEntry = entry.getKey() + " ( " + entry.getValue() + " )";
 
             // 화면 중앙에 맞추기 위한 x 위치 계산
-            int textX = panelWidth / 4;
+            int textX = panelWidth / 3;
             int textY = y;
 
-            g.drawString(leaderboardEntry, textX, textY);
-            y += 40; // 다음 줄로 이동
+            g.drawString(leaderboardEntry, textX+1, textY+35);
+            y += 28; // 다음 줄로 이동
         }
     }
 }
