@@ -1,5 +1,7 @@
 package kr.jbnu.se.std;
 
+import org.checkerframework.checker.units.qual.A;
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
@@ -80,6 +82,8 @@ public class Game {
     private Pistol pistol;
 
     private Shop shop;
+
+    private ArrayList<Weapon> weapons;
 
     /**
      * Last time of the shoot.
@@ -177,7 +181,7 @@ public class Game {
         odinduck = new ArrayList<>();
 
         runawayDucks = 0;
-        killedDucks = 15;
+        killedDucks = 25;
         score = 0;
         money = 0;
         shoots = 0;
@@ -189,7 +193,7 @@ public class Game {
         gamelevel = 1;
         lvdata = getlvdata();
         currentweapon = new Weapon.Revolver(revImg);
-
+        weapons = new ArrayList<>();
         lastTimeShoot = 0;
         timeBetweenShots = currentweapon.fireDelay;
     }
@@ -253,6 +257,10 @@ public class Game {
     {
         // Removes all of the ducks from this list.
         ducks.clear();
+        superducks.clear();
+        smgduck.clear();
+        rifduck.clear();
+        odinduck.clear();
         
         // We set last duckt time to zero.
         Duck.lastDuckTime = 0;
@@ -425,6 +433,36 @@ public class Game {
                             }
                         }
                     }
+                }
+                for(int i = 0; i < smgduck.size(); i++){
+                    if (new Rectangle(smgduck.get(i).x, smgduck.get(i).y,
+                            smgImg.getWidth(), smgImg.getHeight()).contains(mousePosition)){
+                        if(!smgduck.isEmpty() && new Rectangle(smgduck.get(i).x, smgduck.get(i).y,
+                                smgImg.getWidth(), smgImg.getHeight()).contains(mousePosition))
+                        {
+                            smgduck.get(i).hp-=currentweapon.getDamage();
+
+                            if(smgduck.get(i).hp <= 0){
+                                killedDucks++;
+                                score += smgduck.get(i).score;
+                                money += smgduck.get(i).score;
+
+                                // Remove the duck from the array list.
+                                smgduck.remove(i);
+                                currentweapon = new Weapon.SMG(smgImg);
+                                weapons.add(currentweapon);
+
+                                // We found the duck that player shoot so we can leave the for loop.
+                                break;
+                            }
+                        }
+                    }
+                }
+                for(int i = 0; i < rifduck.size(); i++){
+
+                }
+                for(int i = 0; i < odinduck.size(); i++){
+
                 }
 
 
