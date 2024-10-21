@@ -64,7 +64,23 @@ public class Game {
      * How many times a player is shot?
      */
     private int shoots;
-    
+    /**
+     * 레벨 정수형으로 선언
+      */
+    private int level;
+    /**
+     * 레벨 검증 변수, 레벨 업데이트 조건 만족 시 코드 중복실행 방지용
+     */
+    private int killedDucksCheck;
+    // 시간 관련 변수 추가
+    private long levelUpTime;
+    private boolean isLevelUp;
+
+    // 권총 클래스 추가
+    private Pistol pistol;
+
+    private Shop shop;
+
     /**
      * Last time of the shoot.
      */
@@ -89,7 +105,7 @@ public class Game {
      */
     private BufferedImage duckImg;
     private BufferedImage superduckImg;
-    
+
     /**
      * Shotgun sight image.
      */
@@ -108,11 +124,15 @@ public class Game {
      */
     private int sightImgMiddleHeight;
 
+    // 사운드 플레이어 추가
+    private SoundPlayer soundPlayer;
+
     public Weapon currentweapon;
 
     public static Levels lvdata;
     public static int gamelevel;
     public static int money;
+
 
 
     public Game()
@@ -126,7 +146,9 @@ public class Game {
                 Initialize();
                 // Load game files (images, sounds, ...)
                 LoadContent();
-                
+
+                soundPlayer.play("backgroundMusic");
+
                 Framework.gameState = Framework.GameState.PLAYING;
             }
         };
@@ -139,9 +161,12 @@ public class Game {
      */
     private void Initialize()
     {
+        soundPlayer = new SoundPlayer(); // 사운드 플레이어 생성
+
         random = new Random();
         font = new Font("monospaced", Font.BOLD, 18);
-        
+        shop = new Shop();
+
         ducks = new ArrayList<>();
         superducks = new ArrayList<>();
         chickenflies = new ArrayList<>();
@@ -156,6 +181,11 @@ public class Game {
         score = 0;
         money = 0;
         shoots = 0;
+        level = 1;
+        killedDucksCheck = 0;
+        levelUpTime = 0;
+        isLevelUp = false;
+
         gamelevel = 1;
         lvdata = getlvdata();
         currentweapon = new Weapon.Revolver(revImg);
@@ -182,11 +212,21 @@ public class Game {
 
             URL superduckImgUrl = this.getClass().getResource("/images/superduck.png");
             superduckImg = ImageIO.read(superduckImgUrl);
-            
-            URL sightImgUrl = this.getClass().getResource("/images/sight.png");
+
+            URL sightImgUrl = this.getClass().getResource("/images/pistol_sight.png");
             sightImg = ImageIO.read(sightImgUrl);
             sightImgMiddleWidth = sightImg.getWidth() / 2;
             sightImgMiddleHeight = sightImg.getHeight() / 2;
+
+            URL pistolImgUrl = this.getClass().getResource("/images/pistol.png");
+            BufferedImage pistolImg = ImageIO.read(pistolImgUrl);
+            pistol = new Pistol(pistolImg, 11, 10_000_000L);  // 11프레임, 프레임당 100ms
+
+            URL gunshotSoundUrl = this.getClass().getResource("/sounds/single-gunshot.wav");
+            soundPlayer.loadSound("gunshot", gunshotSoundUrl);
+
+            URL backgroundMusicUrl = this.getClass().getResource("/sounds/Fluffing a Duck.wav");
+            soundPlayer.loadSound("backgroundMusic", backgroundMusicUrl);
 
             URL revImgUrl = this.getClass().getResource("/images/revolver.png");
             revImg = ImageIO.read(revImgUrl);
@@ -224,6 +264,11 @@ public class Game {
         shoots = 0;
         gamelevel = 1;
         currentweapon = new Weapon.Revolver(revImg);
+
+        level = 1;
+        killedDucksCheck = 0;
+        levelUpTime = 0;
+        isLevelUp = false;
 
         lastTimeShoot = 0;
     }
@@ -290,13 +335,20 @@ public class Game {
             if(System.nanoTime() - lastTimeShoot >= timeBetweenShots)
             {
                 shoots++;
+// 총 사운드 재생
+                soundPlayer.play("gunshot");
+
+                // 총 모션 재생
+                if (!pistol.isShooting()) {
+                    pistol.startShooting();
+                }
 
                 // We go over all the ducks and we look if any of them was shoot.
                 for(int i = 0; i < ducks.size(); i++)
                 {
                     // We check, if the mouse was over ducks head or body, when player has shot.
-                    if(new Rectangle(ducks.get(i).x + 18, ducks.get(i).y, 27, 30).contains(mousePosition) ||
-                       new Rectangle(ducks.get(i).x + 30, ducks.get(i).y + 30, 88, 25).contains(mousePosition))
+                    if(new Rectangle(ducks.get(i).x + 11, ducks.get(i).y     , 44, 50).contains(mousePosition) ||
+                       new Rectangle(ducks.get(i).x + 15, ducks.get(i).y + 39, 64, 44).contains(mousePosition))
                     {
                         ducks.get(i).hp-=currentweapon.getDamage();
 
@@ -342,10 +394,20 @@ public class Game {
                 lastTimeShoot = System.nanoTime();
             }
         }
+        pistol.update();
 
         // When 200 ducks runaway, the game ends.
-        if(runawayDucks >= 100)
+        if(runawayDucks >= 100) {
+            soundPlayer.stop("backgroundMusic");
             Framework.gameState = Framework.GameState.GAMEOVER;
+        }
+
+        if (shop.isShopOpen()) {
+            if (Canvas.mouseButtonState(MouseEvent.BUTTON1)) {
+                shop.handleClick(mousePosition);  // 상점 클릭 처리
+            }
+            return;
+        }
     }
 
     /**
@@ -369,23 +431,29 @@ public class Game {
             smgduck.get(i).Draw(g2d);
         }
 
+        if (shop.isShopOpen()) {
+            shop.drawShop(g2d);
+        }
 
         g2d.drawImage(grassImg, 0, Framework.frameHeight - grassImg.getHeight(), Framework.frameWidth, grassImg.getHeight(), null);
-
+        
         g2d.drawImage(sightImg, mousePosition.x - sightImgMiddleWidth, mousePosition.y - sightImgMiddleHeight, null);
+
+        g2d.drawImage(pistol.getCurrentFrame(), 0, Framework.frameHeight - (Framework.frameHeight / 4), (Framework.frameHeight / 15) * 8, (Framework.frameHeight / 15) * 5, null);
 
         g2d.setFont(font);
         g2d.setColor(Color.darkGray);
-
+        
         g2d.drawString("RUNAWAY: " + runawayDucks, 10, 21);
         g2d.drawString("KILLS: " + killedDucks, 160, 21);
         g2d.drawString("SHOOTS: " + shoots, 299, 21);
         g2d.drawString("SCORE: " + score, 440, 21);
         g2d.drawString("Money: " + money, 560, 21);
         g2d.drawString("Weapon: " + currentweapon.getName(), 680, 21);
+        g2d.drawString("LEVEL: " + level, 580, 21);
     }
-
-
+    
+    
     /**
      * Draw the game over screen.
      *
@@ -395,7 +463,7 @@ public class Game {
     public void DrawGameOver(Graphics2D g2d, Point mousePosition)
     {
         Draw(g2d, mousePosition);
-
+        
         // The first text is used for shade.
         g2d.setColor(Color.black);
         g2d.drawString("Your score is " + score + ".", Framework.frameWidth / 2 - 39, (int)(Framework.frameHeight * 0.65) + 1);

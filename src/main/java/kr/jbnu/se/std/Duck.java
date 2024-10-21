@@ -56,7 +56,7 @@ public class Duck {
      */
     public int score;
     public int hp;
-    
+
     /**
      * kr.jbnu.se.std.Duck image.
      */
@@ -79,7 +79,7 @@ public class Duck {
         this.y = y;
 
         this.hp = Game.getlvdata().duckhp;
-        
+
         this.speed = Game.getlvdata().speed;
         
         this.score = Game.getlvdata().ducksc;
