@@ -154,9 +154,9 @@ public class Game {
         };
         threadForInitGame.start();
     }
-    
-    
-   /**
+
+
+    /**
      * Set variables and objects for the game.
      */
     private void Initialize()
@@ -304,6 +304,14 @@ public class Game {
             smgduck.add(new Weaponduck.Smgduck(Framework.frameWidth + random.nextInt(200),
                     (int) (Framework.frameHeight*0.6), lvdata.speed, lvdata.ducksc*2, lvdata.duckhp*2, smgImg ));
         }
+        if(killedDucks == 50 && rifduck.isEmpty()){
+            rifduck.add(new Weaponduck.Rifduck(Framework.frameWidth + random.nextInt(200),
+                    (int) (Framework.frameHeight*0.6), lvdata.speed, lvdata.ducksc*2, lvdata.duckhp*2, rifImg ));
+        }
+        if(killedDucks == 70 && odinduck.isEmpty()){
+            odinduck.add(new Weaponduck.Odinduck(Framework.frameWidth + random.nextInt(200),
+                    (int) (Framework.frameHeight*0.6), lvdata.speed, lvdata.ducksc*2, lvdata.duckhp*2, odinImg ));
+        }
 
         // Update all of the ducks.
         for(int i = 0; i < ducks.size(); i++) {
@@ -325,6 +333,36 @@ public class Game {
             {
                 superducks.remove(i);
                 runawayDucks = 999;
+            }
+        }
+        for(int i = 0; i < smgduck.size(); i++){
+            smgduck.get(i).Update();
+
+            // Checks if the duck leaves the screen and remove it if it does.
+            if(smgduck.get(i).x < 0 - smgImg.getWidth())
+            {
+                smgduck.remove(i);
+                runawayDucks++;
+            }
+        }
+        for(int i = 0; i < rifduck.size(); i++){
+            rifduck.get(i).Update();
+
+            // Checks if the duck leaves the screen and remove it if it does.
+            if(rifduck.get(i).x < 0 - rifImg.getWidth())
+            {
+                rifduck.remove(i);
+                runawayDucks++;
+            }
+        }
+        for(int i = 0; i < odinduck.size(); i++){
+            odinduck.get(i).Update();
+
+            // Checks if the duck leaves the screen and remove it if it does.
+            if(odinduck.get(i).x < 0 - odinImg.getWidth())
+            {
+                odinduck.remove(i);
+                runawayDucks++;
             }
         }
 

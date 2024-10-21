@@ -49,7 +49,7 @@ public class Duck {
     /**
      * How fast the duck should move? And to which direction?
      */
-    private int speed;
+    private float speed;
     
     /**
      * How many points this duck is worth?
@@ -73,7 +73,7 @@ public class Duck {
      * @param duckImg Image of the duck.
      * @param hp Duck's hp
      */
-    public Duck(int x, int y, int speed, int score,int hp, BufferedImage duckImg)
+    public Duck(int x, int y, float speed, int score, int hp, BufferedImage duckImg)
     {
         this.x = x;
         this.y = y;

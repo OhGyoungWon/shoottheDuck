@@ -5,7 +5,7 @@ import java.awt.image.BufferedImage;
 //하고 사진 추가할거면 여기에 URL 선언해서 이미지 저장해놓고 추가해
 //여기는 뭐 함수 추가할 건 아니고 그냥 스테이지 요소들 정보만 저장해놓고 Game클래스에서 여기있는거 불러서 쓸겨
 public class Levels {
-    public int speed;
+    public float speed;
     public int duckhp;
     public int bosshp;
     public int ducksc;
@@ -14,7 +14,7 @@ public class Levels {
     public BufferedImage background;
     public BufferedImage duck;
     public BufferedImage boss;
-    public Levels(int speed, int duckhp, int bosshp, int ducksc, int sumdly) {
+    public Levels(float speed, int duckhp, int bosshp, int ducksc, int sumdly) {
         this.speed = speed;
         this.duckhp = duckhp;
         this.bosshp = bosshp;

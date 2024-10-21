@@ -10,7 +10,7 @@ public class Itemduck {
 
     public int x;
     public int y;
-    private int speed;
+    private float speed;
     public int score;
     public int hp;
     private BufferedImage flyImg;

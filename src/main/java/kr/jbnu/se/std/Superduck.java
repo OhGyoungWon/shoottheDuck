@@ -19,7 +19,7 @@ public class Superduck {
     public static int nextDuckLines = 0;
     public int x;
     public int y;
-    private final int speed;
+    private final float speed;
     public int score;
     private final BufferedImage superduckImg;
 
@@ -32,11 +32,11 @@ public class Superduck {
      * @param score How many points this duck is worth?
      * @param superduckImg Image of the duck.
      */
-    public Superduck(int x, int y, int speed, int score, BufferedImage superduckImg) {
+    public Superduck(int x, int y, float speed, int score, BufferedImage superduckImg) {
         this.x = x;
         this.y = y;
         hp = Game.getlvdata().bosshp;
-        this.speed = Game.getlvdata().speed;
+        this.speed = Game.getlvdata().speed/3;
         this.score = Game.getlvdata().bosssc;
         this.superduckImg = superduckImg;
     }
