@@ -282,6 +282,12 @@ public class Game {
      */
     public void UpdateGame(long gameTime, Point mousePosition)
     {
+        if (shop.isShopOpen()) {
+            if (Canvas.mouseButtonState(MouseEvent.BUTTON1)) {
+                shop.handleClick(mousePosition);  // 상점 클릭 처리
+            }
+            return;
+        }
         // Creates a new duck, if it's the time, and add it to the array list.
         if(System.nanoTime() - Duck.lastDuckTime >= lvdata.sumdly && superducks.isEmpty())
         {
@@ -380,6 +386,7 @@ public class Game {
 
                                 // Remove the duck from the array list.
                                 superducks.remove(i);
+                                shop.openShop();
                                 gamelevel++;
 
                                 // We found the duck that player shoot so we can leave the for loop.
@@ -481,6 +488,7 @@ public class Game {
             return new Levels.lev1();
         }
         else if(gamelevel == 2){
+
             return new Levels.lev2();
         }
         else if(gamelevel == 3){
