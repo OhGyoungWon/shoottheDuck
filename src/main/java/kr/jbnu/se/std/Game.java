@@ -181,7 +181,7 @@ public class Game {
         odinduck = new ArrayList<>();
 
         runawayDucks = 0;
-        killedDucks = 25;
+        killedDucks = 45;
         score = 0;
         money = 0;
         shoots = 0;
@@ -320,15 +320,15 @@ public class Game {
         }
         if(killedDucks == 30 && smgduck.isEmpty()){
             smgduck.add(new Weaponduck.Smgduck(Duck.duckLines[Duck.nextDuckLines][0] + random.nextInt(200),
-                    (int) (Framework.frameHeight*0.3), lvdata.speed, lvdata.ducksc*2, lvdata.duckhp*2, smgImg ));
+                    (int) (Framework.frameHeight*0.2), lvdata.speed, lvdata.ducksc*2, lvdata.duckhp*2, smgImg ));
         }
         if(killedDucks == 50 && rifduck.isEmpty()){
             rifduck.add(new Weaponduck.Rifduck(Framework.frameWidth + random.nextInt(200),
-                    (int) (Framework.frameHeight*0.6), lvdata.speed, lvdata.ducksc*2, lvdata.duckhp*2, rifImg ));
+                    (int) (Framework.frameHeight*0.2), lvdata.speed, lvdata.ducksc*2, lvdata.duckhp*2, rifImg ));
         }
         if(killedDucks == 70 && odinduck.isEmpty()){
             odinduck.add(new Weaponduck.Odinduck(Framework.frameWidth + random.nextInt(200),
-                    (int) (Framework.frameHeight*0.6), lvdata.speed, lvdata.ducksc*2, lvdata.duckhp*2, odinImg ));
+                    (int) (Framework.frameHeight*0.2), lvdata.speed, lvdata.ducksc*2, lvdata.duckhp*2, odinImg ));
         }
 
         // Update all of the ducks.
@@ -471,10 +471,54 @@ public class Game {
                     }
                 }
                 for(int i = 0; i < rifduck.size(); i++){
+                    if (new Rectangle(rifduck.get(i).x, rifduck.get(i).y,
+                            rifImg.getWidth(), rifImg.getHeight()).contains(mousePosition)){
+                        if(!rifduck.isEmpty() && new Rectangle(rifduck.get(i).x, rifduck.get(i).y,
+                                rifImg.getWidth(), rifImg.getHeight()).contains(mousePosition))
+                        {
+                            rifduck.get(i).hp-=currentweapon.getDamage();
 
+                            if(rifduck.get(i).hp <= 0){
+                                killedDucks++;
+                                score += rifduck.get(i).score;
+                                money += rifduck.get(i).score;
+
+                                // Remove the duck from the array list.
+                                rifduck.remove(i);
+                                currentweapon = new Weapon.Rifle(rifImg);
+                                timeBetweenShots = currentweapon.fireDelay;
+                                weapons.add(new Weapon.Rifle(smgImg));
+
+                                // We found the duck that player shoot so we can leave the for loop.
+                                break;
+                            }
+                        }
+                    }
                 }
                 for(int i = 0; i < odinduck.size(); i++){
+                    if (new Rectangle(odinduck.get(i).x, odinduck.get(i).y,
+                            odinImg.getWidth(), odinImg.getHeight()).contains(mousePosition)){
+                        if(!odinduck.isEmpty() && new Rectangle(odinduck.get(i).x, odinduck.get(i).y,
+                                odinImg.getWidth(), odinImg.getHeight()).contains(mousePosition))
+                        {
+                            odinduck.get(i).hp-=currentweapon.getDamage();
 
+                            if(odinduck.get(i).hp <= 0){
+                                killedDucks++;
+                                score += odinduck.get(i).score;
+                                money += odinduck.get(i).score;
+
+                                // Remove the duck from the array list.
+                                odinduck.remove(i);
+                                currentweapon = new Weapon.Odin(smgImg);
+                                timeBetweenShots = currentweapon.fireDelay;
+                                weapons.add(new Weapon.Odin(smgImg));
+
+                                // We found the duck that player shoot so we can leave the for loop.
+                                break;
+                            }
+                        }
+                    }
                 }
 
                 lastTimeShoot = System.nanoTime();
@@ -518,6 +562,9 @@ public class Game {
         }
         for(int i = 0; i < rifduck.size(); i++){
             rifduck.get(i).Draw(g2d);
+        }
+        for(int i = 0; i < odinduck.size(); i++){
+            odinduck.get(i).Draw(g2d);
         }
 
         if (shop.isShopOpen()) {
