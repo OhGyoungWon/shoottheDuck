@@ -16,7 +16,7 @@ public class Shop {
         isVisible = false;
 
         // 닫기 버튼 위치 설정
-        closeButtonBounds = new Rectangle(450, 100, 40, 30);
+        closeButtonBounds = new Rectangle(400, 50, 40, 30);
 
         // 이미지 로드 예시 (이 부분은 적절한 이미지 경로로 변경해야 합니다)
         BufferedImage glovesImage = loadImage("/images/gloves.png");
@@ -48,11 +48,11 @@ public class Shop {
         if (!isVisible) return;
 
         g2d.setColor(Color.BLACK);
-        g2d.fillRect(100, 100, 400, 640);
+        g2d.fillRect(50, 50, 400, 640);
 
         g2d.setColor(Color.WHITE);
         g2d.setFont(new Font("monospaced", Font.BOLD, 20));
-        g2d.drawString("SHOP", 250, 130);
+        g2d.drawString("SHOP", 200, 80);
 
         // 닫기 버튼 그리기
         g2d.setColor(Color.RED);
@@ -61,8 +61,8 @@ public class Shop {
         g2d.drawString("X", closeButtonBounds.x + 15, closeButtonBounds.y + 20);
 
         // 아이템 그리기
-        int x = 120;
-        int y = 160;
+        int x = 70;
+        int y = 110;
         for (ShopItem shopItem : shopItems) {
             shopItem.drawItem(g2d, x, y);
             shopItem.drawDescription(g2d, x + 80, y + 20, 300);  // 아이템 설명을 오른쪽에 표시
@@ -81,8 +81,8 @@ public class Shop {
         }
 
         // 아이템 클릭 확인
-        int x = 120;
-        int y = 160;
+        int x = 70;
+        int y = 110;
         for (ShopItem shopItem : shopItems) {
             if (shopItem.isClicked(mousePosition, x, y)) {
                 System.out.println("Bought: " + shopItem.getName());

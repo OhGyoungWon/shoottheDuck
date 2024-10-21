@@ -359,7 +359,7 @@ public class Game {
         
         g2d.drawImage(sightImg, mousePosition.x - sightImgMiddleWidth, mousePosition.y - sightImgMiddleHeight, null);
 
-        g2d.drawImage(pistol.getCurrentFrame(), 0, Framework.frameHeight - (Framework.frameHeight / 3), (Framework.frameHeight / 10) * 8, (Framework.frameHeight / 10) * 5, null);
+        g2d.drawImage(pistol.getCurrentFrame(), 0, Framework.frameHeight - (Framework.frameHeight / 4), (Framework.frameHeight / 15) * 8, (Framework.frameHeight / 15) * 5, null);
 
         g2d.setFont(font);
         g2d.setColor(Color.darkGray);

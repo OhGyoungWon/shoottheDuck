@@ -4,7 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="48ad350a-5667-49e2-9228-2f0cfb0d2e7c" name="변경" comment="배경음악 추가, 상점아이템 클래스 리팩터링" />
+    <list default="true" id="48ad350a-5667-49e2-9228-2f0cfb0d2e7c" name="변경" comment="배경음악 추가, 상점아이템 클래스 리팩터링">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/kr/jbnu/se/std/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kr/jbnu/se/std/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/kr/jbnu/se/std/Shop.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kr/jbnu/se/std/Shop.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/images/oldBackground.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/images/oldDuck.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/images/oldGrass.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/images/oldMenu.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/images/oldSight.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/sounds/single-gunshot.wav" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/sounds/single-gunshot.wav" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/kr/jbnu/se/std/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kr/jbnu/se/std/Game.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/kr/jbnu/se/std/Shop.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kr/jbnu/se/std/Shop.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/kr/jbnu/se/std/SoundPlayer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kr/jbnu/se/std/SoundPlayer.class" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -42,7 +55,8 @@
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/OhGyoungWon/shoottheDuck.git&quot;,
     &quot;accountId&quot;: &quot;65d9cfd6-6f46-4f4c-b37a-a466e4009839&quot;
-  }
+  },
+  &quot;editorReviewEnabled&quot;: false
 }</component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
@@ -68,10 +82,10 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "모듈",
+    "project.structure.last.edited": "프로젝트",
     "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "vcs.Git",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "editor.preferences.completion",
     "vue.rearranger.settings.migration": "true",
     "애플리케이션.Window.executor": "Run"
   }
@@ -119,7 +133,8 @@
       <workItem from="1729446710534" duration="9938000" />
       <workItem from="1729457978668" duration="396000" />
       <workItem from="1729488123577" duration="36000" />
-      <workItem from="1729488372929" duration="4016000" />
+      <workItem from="1729488372929" duration="5641000" />
+      <workItem from="1729498422076" duration="7952000" />
     </task>
     <task id="LOCAL-00001" summary="테스트">
       <option name="closed" value="true" />
@@ -235,5 +250,9 @@
     <MESSAGE value="Merge remote-tracking branch 'origin/feature/levels' into feature/levels" />
     <MESSAGE value="배경음악 추가, 상점아이템 클래스 리팩터링" />
     <option name="LAST_COMMIT_MESSAGE" value="배경음악 추가, 상점아이템 클래스 리팩터링" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>
