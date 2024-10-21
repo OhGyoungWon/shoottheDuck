@@ -64,7 +64,7 @@ public class Leaderboard {
     }
 
     // 점수를 저장하는 메서드 ('.' → ',')
-    public void saveScore(String email, String nickname, int score) {
+    public void saveScore(String email, int score) {
         String sanitizedEmail = email.replace(".", ",");
 
         // Firebase에서 사용자 데이터를 가져옴
@@ -72,7 +72,8 @@ public class Leaderboard {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // 현재 사용자의 topScore를 가져옴
-                Integer topScore = dataSnapshot.child("topScore").getValue(Integer.class);
+                Integer topScore = dataSnapshot.child("userInfo/" + sanitizedEmail + "/topScore").getValue(Integer.class);
+                String nickname = dataSnapshot.child("userInfo/" + sanitizedEmail + "/nickname").getValue(String.class);
 
                 // topScore와 currentScore 비교
                 if (topScore == null || score > topScore) {

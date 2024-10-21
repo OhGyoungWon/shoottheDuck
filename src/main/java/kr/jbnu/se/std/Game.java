@@ -304,7 +304,6 @@ public class Game {
     public void UpdateGame(long gameTime, Point mousePosition)
     {
         String currentEmail = LoginUI.getuserEmail();
-        String currentNickname = User.getNickname();
 
         if (shop.isShopOpen()) {
             if (Canvas.mouseButtonState(MouseEvent.BUTTON1)) {
@@ -424,7 +423,7 @@ public class Game {
                             killedDucks++;
                             score += ducks.get(i).score;
                             money += ducks.get(i).score;
-                            leaderboard.saveScore(currentEmail, currentNickname, score);
+                            leaderboard.saveScore(currentEmail, score);
 
                             // Remove the duck from the array list.
                             ducks.remove(i);
@@ -567,10 +566,10 @@ public class Game {
         // The first text is used for shade.
         g2d.setColor(Color.black);
         g2d.drawString("Your score is " + score + ".", Framework.frameWidth / 2 - 19, (int)(Framework.frameHeight * 0.65) + 1);
-        g2d.drawString("Who are you: " + User.getNickname(), Framework.frameWidth / 2 - 149, (int)(Framework.frameHeight * 0.70) + 1);
+        g2d.drawString("kr.jbnu.se.std The game is OVER", Framework.frameWidth / 2 - 149, (int)(Framework.frameHeight * 0.70) + 1);
         g2d.setColor(Color.red);
         g2d.drawString("Your score is " + score + ".", Framework.frameWidth / 2 - 20, (int)(Framework.frameHeight * 0.65));
-        g2d.drawString("Who are you: " + User.getNickname(), Framework.frameWidth / 2 - 150, (int)(Framework.frameHeight * 0.70));
+        g2d.drawString("kr.jbnu.se.std The game is OVER", Framework.frameWidth / 2 - 150, (int)(Framework.frameHeight * 0.70));
     }
 
     public int getScore(){
