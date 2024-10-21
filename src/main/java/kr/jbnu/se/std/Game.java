@@ -134,7 +134,7 @@ public class Game {
      * 리더보드 출력
      */
 
-    private static Leaderboard leaderboard = new Leaderboard();;
+    private static Leaderboard leaderboard = new Leaderboard();
     private BufferedImage leaderboardImg;
     private BufferedImage savedscoreImg;
 
@@ -226,12 +226,6 @@ public class Game {
 
             URL sightImgUrl = this.getClass().getResource("/images/pistol_sight.png");
             sightImg = ImageIO.read(sightImgUrl);
-
-            URL LeaderBoardImgUrl = this.getClass().getResource("/images/LeaderBoard.png");
-            leaderboardImg = ImageIO.read(LeaderBoardImgUrl);
-
-            URL savedscoreImgUrl = this.getClass().getResource("/images/savedscore.png");
-            savedscoreImg = ImageIO.read(savedscoreImgUrl);
             sightImgMiddleWidth = sightImg.getWidth() / 2;
             sightImgMiddleHeight = sightImg.getHeight() / 2;
 
@@ -261,8 +255,8 @@ public class Game {
             Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    
+
+
     /**
      * Restart game - reset some variables.
      */
@@ -277,7 +271,7 @@ public class Game {
 
         // We set last duckt time to zero.
         Duck.lastDuckTime = 0;
-        
+
         runawayDucks = 0;
         killedDucks = 0;
         score = 0;
@@ -290,7 +284,7 @@ public class Game {
         killedDucksCheck = 0;
         levelUpTime = 0;
         isLevelUp = false;
-        
+
         lastTimeShoot = 0;
     }
     
@@ -304,6 +298,10 @@ public class Game {
     public void UpdateGame(long gameTime, Point mousePosition)
     {
         String currentEmail = LoginUI.getuserEmail();
+
+        System.out.println("Current weapon: " + currentweapon.getName());
+        System.out.println("Damage: " + currentweapon.getDamage());
+        System.out.println("Fire delay: " + timeBetweenShots);
 
         if (shop.isShopOpen()) {
             if (Canvas.mouseButtonState(MouseEvent.BUTTON1)) {
@@ -330,16 +328,16 @@ public class Game {
                     (int) (Framework.frameHeight*0.6), lvdata.speed/3, lvdata.bosssc, superduckImg));
         }
         if(killedDucks == 30 && smgduck.isEmpty()){
-            smgduck.add(new Weaponduck.Smgduck(Framework.frameWidth + random.nextInt(200),
-                    (int) (Framework.frameHeight*0.6), lvdata.speed, lvdata.ducksc*2, lvdata.duckhp*2, smgImg ));
+            smgduck.add(new Weaponduck.Smgduck(Duck.duckLines[Duck.nextDuckLines][0] + random.nextInt(200),
+                    (int) (Framework.frameHeight*0.2), lvdata.speed, lvdata.ducksc*2, lvdata.duckhp*2, smgImg ));
         }
         if(killedDucks == 50 && rifduck.isEmpty()){
             rifduck.add(new Weaponduck.Rifduck(Framework.frameWidth + random.nextInt(200),
-                    (int) (Framework.frameHeight*0.6), lvdata.speed, lvdata.ducksc*2, lvdata.duckhp*2, rifImg ));
+                    (int) (Framework.frameHeight*0.2), lvdata.speed, lvdata.ducksc*2, lvdata.duckhp*2, rifImg ));
         }
         if(killedDucks == 70 && odinduck.isEmpty()){
             odinduck.add(new Weaponduck.Odinduck(Framework.frameWidth + random.nextInt(200),
-                    (int) (Framework.frameHeight*0.6), lvdata.speed, lvdata.ducksc*2, lvdata.duckhp*2, odinImg ));
+                    (int) (Framework.frameHeight*0.2), lvdata.speed, lvdata.ducksc*2, lvdata.duckhp*2, odinImg ));
         }
 
         // Update all of the ducks.
@@ -348,7 +346,7 @@ public class Game {
             ducks.get(i).Update();
 
             // Checks if the duck leaves the screen and remove it if it does.
-            if(ducks.get(i).x < -duckImg.getWidth())
+            if(ducks.get(i).x < 0 - duckImg.getWidth())
             {
                 ducks.remove(i);
                 runawayDucks++;
@@ -473,7 +471,8 @@ public class Game {
                                 // Remove the duck from the array list.
                                 smgduck.remove(i);
                                 currentweapon = new Weapon.SMG(smgImg);
-                                weapons.add(currentweapon);
+                                timeBetweenShots = currentweapon.fireDelay;
+                                weapons.add(new Weapon.SMG(smgImg));
 
                                 // We found the duck that player shoot so we can leave the for loop.
                                 break;
@@ -482,13 +481,55 @@ public class Game {
                     }
                 }
                 for(int i = 0; i < rifduck.size(); i++){
+                    if (new Rectangle(rifduck.get(i).x, rifduck.get(i).y,
+                            rifImg.getWidth(), rifImg.getHeight()).contains(mousePosition)){
+                        if(!rifduck.isEmpty() && new Rectangle(rifduck.get(i).x, rifduck.get(i).y,
+                                rifImg.getWidth(), rifImg.getHeight()).contains(mousePosition))
+                        {
+                            rifduck.get(i).hp-=currentweapon.getDamage();
 
+                            if(rifduck.get(i).hp <= 0){
+                                killedDucks++;
+                                score += rifduck.get(i).score;
+                                money += rifduck.get(i).score;
+
+                                // Remove the duck from the array list.
+                                rifduck.remove(i);
+                                currentweapon = new Weapon.Rifle(rifImg);
+                                timeBetweenShots = currentweapon.fireDelay;
+                                weapons.add(new Weapon.Rifle(smgImg));
+
+                                // We found the duck that player shoot so we can leave the for loop.
+                                break;
+                            }
+                        }
+                    }
                 }
                 for(int i = 0; i < odinduck.size(); i++){
+                    if (new Rectangle(odinduck.get(i).x, odinduck.get(i).y,
+                            odinImg.getWidth(), odinImg.getHeight()).contains(mousePosition)){
+                        if(!odinduck.isEmpty() && new Rectangle(odinduck.get(i).x, odinduck.get(i).y,
+                                odinImg.getWidth(), odinImg.getHeight()).contains(mousePosition))
+                        {
+                            odinduck.get(i).hp-=currentweapon.getDamage();
 
+                            if(odinduck.get(i).hp <= 0){
+                                killedDucks++;
+                                score += odinduck.get(i).score;
+                                money += odinduck.get(i).score;
+
+                                // Remove the duck from the array list.
+                                odinduck.remove(i);
+                                currentweapon = new Weapon.Odin(smgImg);
+                                timeBetweenShots = currentweapon.fireDelay;
+                                weapons.add(new Weapon.Odin(smgImg));
+
+                                // We found the duck that player shoot so we can leave the for loop.
+                                break;
+                            }
+                        }
+                    }
                 }
-
-
 
                 lastTimeShoot = System.nanoTime();
             }
@@ -508,17 +549,17 @@ public class Game {
             return;
         }
     }
-    
+
     /**
      * Draw the game to the screen.
-     * 
+     *
      * @param g2d Graphics2D
      * @param mousePosition current mouse position.
      */
     public void Draw(Graphics2D g2d, Point mousePosition)
     {
         g2d.drawImage(backgroundImg, 0, 0, Framework.frameWidth, Framework.frameHeight, null);
-        
+
         // Here we draw all the ducks.
         for(int i = 0; i < ducks.size(); i++) {
             ducks.get(i).Draw(g2d);
@@ -529,11 +570,17 @@ public class Game {
         for(int i = 0; i < smgduck.size(); i++){
             smgduck.get(i).Draw(g2d);
         }
+        for(int i = 0; i < rifduck.size(); i++){
+            rifduck.get(i).Draw(g2d);
+        }
+        for(int i = 0; i < odinduck.size(); i++){
+            odinduck.get(i).Draw(g2d);
+        }
 
         if (shop.isShopOpen()) {
             shop.drawShop(g2d);
         }
-        
+
         g2d.drawImage(grassImg, 0, Framework.frameHeight - grassImg.getHeight(), Framework.frameWidth, grassImg.getHeight(), null);
         
         g2d.drawImage(sightImg, mousePosition.x - sightImgMiddleWidth, mousePosition.y - sightImgMiddleHeight, null);
@@ -548,14 +595,14 @@ public class Game {
         g2d.drawString("SHOOTS: " + shoots, 299, 21);
         g2d.drawString("SCORE: " + score, 440, 21);
         g2d.drawString("Money: " + money, 560, 21);
-        g2d.drawString("Weapon: " + currentweapon.getName(), 680, 21);
-        g2d.drawString("LEVEL: " + level, 580, 21);
+        g2d.drawString("LEVEL: " + level, 680, 21);
+        g2d.drawString("Weapon: " + currentweapon.getName(), 840, 21);
     }
     
     
     /**
      * Draw the game over screen.
-     * 
+     *
      * @param g2d Graphics2D
      * @param mousePosition Current mouse position.
      */
@@ -580,7 +627,6 @@ public class Game {
             return new Levels.lev1();
         }
         else if(gamelevel == 2){
-
             return new Levels.lev2();
         }
         else if(gamelevel == 3){
