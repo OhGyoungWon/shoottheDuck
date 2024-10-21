@@ -57,7 +57,23 @@ public class Game {
      * How many times a player is shot?
      */
     private int shoots;
-    
+    /**
+     * 레벨 정수형으로 선언
+      */
+    private int level;
+    /**
+     * 레벨 검증 변수, 레벨 업데이트 조건 만족 시 코드 중복실행 방지용
+     */
+    private int killedDucksCheck;
+    // 시간 관련 변수 추가
+    private long levelUpTime;
+    private boolean isLevelUp;
+
+    // 권총 클래스 추가
+    private Pistol pistol;
+
+    private Shop shop;
+
     /**
      * Last time of the shoot.
      */
@@ -95,10 +111,12 @@ public class Game {
      * Middle height of the sight image.
      */
     private int sightImgMiddleHeight;
+
+    // 사운드 플레이어 추가
+    private SoundPlayer soundPlayer;
     /**
      * 리더보드 출력
      */
-    private final Leaderboard leaderboard;
 
     private BufferedImage leaderboardImg;
     private BufferedImage savedscoreImg;
@@ -107,8 +125,7 @@ public class Game {
     public Game()
     {
         Framework.gameState = Framework.GameState.GAME_CONTENT_LOADING;
-        leaderboard = new Leaderboard();
-        
+
         Thread threadForInitGame = new Thread() {
             @Override
             public void run(){
@@ -116,7 +133,9 @@ public class Game {
                 Initialize();
                 // Load game files (images, sounds, ...)
                 LoadContent();
-                
+
+                soundPlayer.play("backgroundMusic");
+
                 Framework.gameState = Framework.GameState.PLAYING;
             }
         };
@@ -129,18 +148,25 @@ public class Game {
      */
     private void Initialize()
     {
-        random = new Random();        
+        soundPlayer = new SoundPlayer(); // 사운드 플레이어 생성
+
+        random = new Random();
         font = new Font("monospaced", Font.BOLD, 18);
-        
+        shop = new Shop();
+
         ducks = new ArrayList<Duck>();
         
         runawayDucks = 0;
         killedDucks = 0;
         score = 0;
         shoots = 0;
-        
+        level = 1;
+        killedDucksCheck = 0;
+        levelUpTime = 0;
+        isLevelUp = false;
+
         lastTimeShoot = 0;
-        timeBetweenShots = Framework.secInNanosec / 3;
+        timeBetweenShots = Framework.secInNanosec;
     }
     
     /**
@@ -159,7 +185,7 @@ public class Game {
             URL duckImgUrl = this.getClass().getResource("/images/duck.png");
             duckImg = ImageIO.read(duckImgUrl);
             
-            URL sightImgUrl = this.getClass().getResource("/images/sight.png");
+            URL sightImgUrl = this.getClass().getResource("/images/pistol_sight.png");
             sightImg = ImageIO.read(sightImgUrl);
 
             URL LeaderBoardImgUrl = this.getClass().getResource("/images/LeaderBoard.png");
@@ -169,6 +195,16 @@ public class Game {
             savedscoreImg = ImageIO.read(savedscoreImgUrl);
             sightImgMiddleWidth = sightImg.getWidth() / 2;
             sightImgMiddleHeight = sightImg.getHeight() / 2;
+
+            URL pistolImgUrl = this.getClass().getResource("/images/pistol.png");
+            BufferedImage pistolImg = ImageIO.read(pistolImgUrl);
+            pistol = new Pistol(pistolImg, 11, 10_000_000L);  // 11프레임, 프레임당 100ms
+
+            URL gunshotSoundUrl = this.getClass().getResource("/sounds/single-gunshot.wav");
+            soundPlayer.loadSound("gunshot", gunshotSoundUrl);
+
+            URL backgroundMusicUrl = this.getClass().getResource("/sounds/Fluffing a Duck.wav");
+            soundPlayer.loadSound("backgroundMusic", backgroundMusicUrl);
         }
         catch (IOException ex) {
             Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
@@ -192,7 +228,11 @@ public class Game {
         killedDucks = 0;
         score = 0;
         shoots = 0;
-        
+        level = 1;
+        killedDucksCheck = 0;
+        levelUpTime = 0;
+        isLevelUp = false;
+
         lastTimeShoot = 0;
     }
     
@@ -242,18 +282,25 @@ public class Game {
             if(System.nanoTime() - lastTimeShoot >= timeBetweenShots)
             {
                 shoots++;
-                
+                // 총 사운드 재생
+                soundPlayer.play("gunshot");
+
+                // 총 모션 재생
+                if (!pistol.isShooting()) {
+                    pistol.startShooting();
+                }
+
                 // We go over all the ducks and we look if any of them was shoot.
                 for(int i = 0; i < ducks.size(); i++)
                 {
                     // We check, if the mouse was over ducks head or body, when player has shot.
-                    if(new Rectangle(ducks.get(i).x + 18, ducks.get(i).y     , 27, 30).contains(mousePosition) ||
-                       new Rectangle(ducks.get(i).x + 30, ducks.get(i).y + 30, 88, 25).contains(mousePosition))
+                    if(new Rectangle(ducks.get(i).x + 11, ducks.get(i).y     , 44, 50).contains(mousePosition) ||
+                       new Rectangle(ducks.get(i).x + 15, ducks.get(i).y + 39, 64, 44).contains(mousePosition))
                     {
                         killedDucks++;
                         score += ducks.get(i).score;
                         leaderboard.saveScore(email, score);
-                        
+
                         // Remove the duck from the array list.
                         ducks.remove(i);
                         
@@ -265,10 +312,43 @@ public class Game {
                 lastTimeShoot = System.nanoTime();
             }
         }
-        
+        pistol.update();
+
         // When 200 ducks runaway, the game ends.
-        if(runawayDucks >= 10)
+        if(runawayDucks >= 10) {
+            soundPlayer.stop("backgroundMusic");
             Framework.gameState = Framework.GameState.GAMEOVER;
+        }
+
+        //레벨업 조건: 오리 20마리 잡기
+        if(killedDucks != 0 && killedDucks % 10 == 0 && killedDucks != killedDucksCheck){
+            Duck.timeBetweenDucks += 1000000L*600000; //오리 생성 텀 600초 더 증가 (사실상 생성 멈춤)
+            level++;
+            killedDucksCheck = killedDucks;
+            shop.openShop();
+
+            levelUpTime = System.nanoTime();
+            isLevelUp = true;
+//            new Timer().schedule(new java.util.TimerTask() {
+//                @Override
+//                public void run() {
+//                    Duck.timeBetweenDucks -= 1000000L*600010; //오리 생성 텀 60초 + 10밀리초 감소 (레벨 상승시 오리 생성 빨라짐)
+//                }
+//            }, 10000); //10초 후 원래대로 돌아감
+        }
+
+        // 상점이 열려있을 때는 게임 업데이트 중단
+        if (shop.isShopOpen()) {
+            if (Canvas.mouseButtonState(MouseEvent.BUTTON1)) {
+                shop.handleClick(mousePosition);  // 상점 클릭 처리
+            }
+            return;
+        }
+
+        if (isLevelUp && System.nanoTime() - levelUpTime >= 10_000_000_000L) { // 10초(10000밀리초) 경과 시
+            Duck.timeBetweenDucks -= 1000000L * 600010; // 오리 생성 텀 60초 + 10밀리초 감소
+            isLevelUp = false; // 다시 레벨업 상태 해제
+        }
     }
     
     /**
@@ -285,18 +365,25 @@ public class Game {
         for (Duck duck : ducks) {
             duck.Draw(g2d);
         }
-        
+
+        if (shop.isShopOpen()) {
+            shop.drawShop(g2d);
+        }
+
         g2d.drawImage(grassImg, 0, Framework.frameHeight - grassImg.getHeight(), Framework.frameWidth, grassImg.getHeight(), null);
         
         g2d.drawImage(sightImg, mousePosition.x - sightImgMiddleWidth, mousePosition.y - sightImgMiddleHeight, null);
-        
+
+        g2d.drawImage(pistol.getCurrentFrame(), 0, Framework.frameHeight - (Framework.frameHeight / 4), (Framework.frameHeight / 15) * 8, (Framework.frameHeight / 15) * 5, null);
+
         g2d.setFont(font);
         g2d.setColor(Color.darkGray);
-        
+
         g2d.drawString("RUNAWAY: " + runawayDucks, 10, 21);
         g2d.drawString("KILLS: " + killedDucks, 160, 21);
         g2d.drawString("SHOOTS: " + shoots, 299, 21);
         g2d.drawString("SCORE: " + score, 440, 21);
+        g2d.drawString("LEVEL: " + level, 580, 21);
     }
     
     
