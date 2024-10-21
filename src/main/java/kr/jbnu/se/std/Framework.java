@@ -74,14 +74,16 @@ public class Framework extends Canvas {
     /**
      * Image for menu.
      */
-    private BufferedImage shootTheDuckMenuImg;    
-    
+    private BufferedImage shootTheDuckMenuImg;
+
+    private Leaderboard leaderboard;
     
     public Framework ()
     {
         super();
         
         gameState = GameState.VISUALIZING;
+        this.leaderboard = new Leaderboard();
         
         //We start game in new thread.
         Thread gameThread = new Thread() {
@@ -222,6 +224,7 @@ public class Framework extends Canvas {
                 g2d.drawString("Press ESC any time to exit the game.", frameWidth / 2 - 75, (int)(frameHeight * 0.70));
                 g2d.setColor(Color.white);
                 g2d.drawString("WWW.GAMETUTORIAL.NET", 7, frameHeight - 5);
+                leaderboard.renderLeaderboard(g2d, frameWidth, frameHeight);
             break;
             case OPTIONS:
                 //...

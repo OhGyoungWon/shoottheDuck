@@ -95,11 +95,19 @@ public class Game {
      * Middle height of the sight image.
      */
     private int sightImgMiddleHeight;
-    
+    /**
+     * 리더보드 출력
+     */
+    private final Leaderboard leaderboard;
+
+    private BufferedImage leaderboardImg;
+    private BufferedImage savedscoreImg;
+
 
     public Game()
     {
         Framework.gameState = Framework.GameState.GAME_CONTENT_LOADING;
+        leaderboard = new Leaderboard();
         
         Thread threadForInitGame = new Thread() {
             @Override
@@ -153,6 +161,12 @@ public class Game {
             
             URL sightImgUrl = this.getClass().getResource("/images/sight.png");
             sightImg = ImageIO.read(sightImgUrl);
+
+            URL LeaderBoardImgUrl = this.getClass().getResource("/images/LeaderBoard.png");
+            leaderboardImg = ImageIO.read(LeaderBoardImgUrl);
+
+            URL savedscoreImgUrl = this.getClass().getResource("/images/savedscore.png");
+            savedscoreImg = ImageIO.read(savedscoreImgUrl);
             sightImgMiddleWidth = sightImg.getWidth() / 2;
             sightImgMiddleHeight = sightImg.getHeight() / 2;
         }
@@ -160,14 +174,15 @@ public class Game {
             Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    
+
+
     /**
      * Restart game - reset some variables.
      */
     public void RestartGame()
     {
         // Removes all of the ducks from this list.
+
         ducks.clear();
         
         // We set last duckt time to zero.
@@ -190,6 +205,8 @@ public class Game {
      */
     public void UpdateGame(long gameTime, Point mousePosition)
     {
+        String email = LoginUI.getuserEmail();
+
         // Creates a new duck, if it's the time, and add it to the array list.
         if(System.nanoTime() - Duck.lastDuckTime >= Duck.timeBetweenDucks)
         {
@@ -211,7 +228,7 @@ public class Game {
             ducks.get(i).Update();
             
             // Checks if the duck leaves the screen and remove it if it does.
-            if(ducks.get(i).x < 0 - duckImg.getWidth())
+            if(ducks.get(i).x < -duckImg.getWidth())
             {
                 ducks.remove(i);
                 runawayDucks++;
@@ -235,6 +252,7 @@ public class Game {
                     {
                         killedDucks++;
                         score += ducks.get(i).score;
+                        leaderboard.saveScore(email, score);
                         
                         // Remove the duck from the array list.
                         ducks.remove(i);
@@ -249,7 +267,7 @@ public class Game {
         }
         
         // When 200 ducks runaway, the game ends.
-        if(runawayDucks >= 200)
+        if(runawayDucks >= 10)
             Framework.gameState = Framework.GameState.GAMEOVER;
     }
     
@@ -264,9 +282,8 @@ public class Game {
         g2d.drawImage(backgroundImg, 0, 0, Framework.frameWidth, Framework.frameHeight, null);
         
         // Here we draw all the ducks.
-        for(int i = 0; i < ducks.size(); i++)
-        {
-            ducks.get(i).Draw(g2d);
+        for (Duck duck : ducks) {
+            duck.Draw(g2d);
         }
         
         g2d.drawImage(grassImg, 0, Framework.frameHeight - grassImg.getHeight(), Framework.frameWidth, grassImg.getHeight(), null);
@@ -292,13 +309,15 @@ public class Game {
     public void DrawGameOver(Graphics2D g2d, Point mousePosition)
     {
         Draw(g2d, mousePosition);
-        
+
         // The first text is used for shade.
         g2d.setColor(Color.black);
-        g2d.drawString("kr.jbnu.se.std.Game Over", Framework.frameWidth / 2 - 39, (int)(Framework.frameHeight * 0.65) + 1);
+        g2d.drawString("Your score is " + score + ".", Framework.frameWidth / 2 - 39, (int)(Framework.frameHeight * 0.65) + 1);
         g2d.drawString("Press space or enter to restart.", Framework.frameWidth / 2 - 149, (int)(Framework.frameHeight * 0.70) + 1);
         g2d.setColor(Color.red);
         g2d.drawString("kr.jbnu.se.std.Game Over", Framework.frameWidth / 2 - 40, (int)(Framework.frameHeight * 0.65));
         g2d.drawString("Press space or enter to restart.", Framework.frameWidth / 2 - 150, (int)(Framework.frameHeight * 0.70));
+        leaderboard.renderLeaderboard(g2d, Framework.frameWidth, Framework.frameHeight);
+        leaderboard.renderSavedScore(g2d, Framework.frameWidth, Framework.frameHeight, score);
     }
 }
