@@ -127,6 +127,8 @@ public class Game {
                 Initialize();
                 // Load game files (images, sounds, ...)
                 LoadContent();
+
+                soundPlayer.play("backgroundMusic");
                 
                 Framework.gameState = Framework.GameState.PLAYING;
             }
@@ -188,6 +190,9 @@ public class Game {
 
             URL gunshotSoundUrl = this.getClass().getResource("/sounds/single-gunshot.wav");
             soundPlayer.loadSound("gunshot", gunshotSoundUrl);
+
+            URL backgroundMusicUrl = this.getClass().getResource("/sounds/Fluffing a Duck.wav");
+            soundPlayer.loadSound("backgroundMusic", backgroundMusicUrl);
         }
         catch (IOException ex) {
             Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
@@ -295,6 +300,7 @@ public class Game {
 
         // When 200 ducks runaway, the game ends.
         if(runawayDucks >= 200) {
+            soundPlayer.stop("backgroundMusic");
             Framework.gameState = Framework.GameState.GAMEOVER;
         }
 

@@ -2,18 +2,17 @@ package kr.jbnu.se.std;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
-import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
 
 public class Shop {
-    private ArrayList<Item> items;  // 아이템 목록
+    private ArrayList<ShopItem> shopItems;  // 아이템 목록
     private boolean isVisible;
     private Rectangle closeButtonBounds;
 
     public Shop() {
-        items = new ArrayList<>();
+        shopItems = new ArrayList<>();
         isVisible = false;
 
         // 닫기 버튼 위치 설정
@@ -27,11 +26,11 @@ public class Shop {
         BufferedImage rubberDuckImage = loadImage("/images/rubberduck.png");
 
         // 아이템 추가
-        items.add(new Item("장갑", 1000, glovesImage, "사실 고무장갑이랍니다     피해량 증가"));
-        items.add(new Item("총알", 1500, bulletImage, "오리를 위한 깜짝선물    장탄수 증가"));
-        items.add(new Item("콜라", 2000, colaImage, "제로콜라는 아니네요       체력 회복"));
-        items.add(new Item("와인", 3000, wineImage, "문ㅇㅇ씨의 최애 음료수     오리 생성 속도 증가"));
-        items.add(new Item("러버덕", 5000, rubberDuckImage, "적의 우두머리를 본딴 형상.       오리 생성 속도 감소"));
+        shopItems.add(new ShopItem("장갑", 1000, glovesImage, "사실 고무장갑이랍니다     피해량 증가"));
+        shopItems.add(new ShopItem("총알", 1500, bulletImage, "오리를 위한 깜짝선물    장탄수 증가"));
+        shopItems.add(new ShopItem("콜라", 2000, colaImage, "제로콜라는 아니네요       체력 회복"));
+        shopItems.add(new ShopItem("와인", 3000, wineImage, "문ㅇㅇ씨의 최애 음료수     오리 생성 속도 증가"));
+        shopItems.add(new ShopItem("러버덕", 5000, rubberDuckImage, "적의 우두머리를 본딴 형상.       오리 생성 속도 감소"));
     }
 
     // 이미지 로드 함수
@@ -64,10 +63,10 @@ public class Shop {
         // 아이템 그리기
         int x = 120;
         int y = 160;
-        for (Item item : items) {
-            item.drawItem(g2d, x, y);
-            item.drawDescription(g2d, x + 80, y + 20, 300);  // 아이템 설명을 오른쪽에 표시
-            y += item.getImage().getHeight() + 50;  // 다음 아이템 위치 설정
+        for (ShopItem shopItem : shopItems) {
+            shopItem.drawItem(g2d, x, y);
+            shopItem.drawDescription(g2d, x + 80, y + 20, 300);  // 아이템 설명을 오른쪽에 표시
+            y += shopItem.getImage().getHeight() + 50;  // 다음 아이템 위치 설정
         }
     }
 
@@ -84,13 +83,13 @@ public class Shop {
         // 아이템 클릭 확인
         int x = 120;
         int y = 160;
-        for (Item item : items) {
-            if (item.isClicked(mousePosition, x, y)) {
-                System.out.println("Bought: " + item.getName());
+        for (ShopItem shopItem : shopItems) {
+            if (shopItem.isClicked(mousePosition, x, y)) {
+                System.out.println("Bought: " + shopItem.getName());
                 closeShop();
                 break;
             }
-            y += item.getImage().getHeight() + 50;
+            y += shopItem.getImage().getHeight() + 50;
         }
     }
 

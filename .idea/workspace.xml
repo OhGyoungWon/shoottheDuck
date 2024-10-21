@@ -4,9 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="48ad350a-5667-49e2-9228-2f0cfb0d2e7c" name="변경" comment="상점 기능, 아이템 추가 아직 효과는 없음">
+    <list default="true" id="48ad350a-5667-49e2-9228-2f0cfb0d2e7c" name="변경" comment="Merge remote-tracking branch 'origin/feature/levels' into feature/levels">
+      <change afterPath="$PROJECT_DIR$/src/main/resources/sounds/Fluffing a Duck.wav" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/kr/jbnu/se/std/Shop.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kr/jbnu/se/std/Shop.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/kr/jbnu/se/std/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kr/jbnu/se/std/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/kr/jbnu/se/std/Item.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kr/jbnu/se/std/ItemDraw.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/kr/jbnu/se/std/Shop.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kr/jbnu/se/std/Shop.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/kr/jbnu/se/std/Game$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kr/jbnu/se/std/Game$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/kr/jbnu/se/std/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kr/jbnu/se/std/Game.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,7 +49,7 @@
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/OhGyoungWon/shoottheDuck.git&quot;,
-    &quot;accountId&quot;: &quot;d15f9784-c259-4270-874a-3845965f77d9&quot;
+    &quot;accountId&quot;: &quot;65d9cfd6-6f46-4f4c-b37a-a466e4009839&quot;
   }
 }</component>
   <component name="ProblemsViewState">
@@ -65,18 +70,24 @@
     "git-widget-placeholder": "feature/levels에 #1개",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/pcy79/OneDrive - 전북대학교/shoottheDuck",
+    "last_opened_file_path": "C:/Users/pcy79/OneDrive - 전북대학교/shoottheDuck/src/main/resources/sounds",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "모듈",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
     "settings.editor.selected.configurable": "vcs.Git",
     "vue.rearranger.settings.migration": "true",
     "애플리케이션.Window.executor": "Run"
   }
 }]]></component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\pcy79\OneDrive - 전북대학교\shoottheDuck\src\main\resources\sounds" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\pcy79\OneDrive - 전북대학교\shoottheDuck\src\main\resources\sounds" />
       <recent name="C:\Users\pcy79\OneDrive - 전북대학교\shoottheDuck\src\main\resources\images" />
@@ -114,6 +125,9 @@
       <workItem from="1729268872763" duration="604000" />
       <workItem from="1729432062085" duration="3459000" />
       <workItem from="1729446710534" duration="9938000" />
+      <workItem from="1729457978668" duration="396000" />
+      <workItem from="1729488123577" duration="36000" />
+      <workItem from="1729488372929" duration="3127000" />
     </task>
     <task id="LOCAL-00001" summary="테스트">
       <option name="closed" value="true" />
@@ -171,7 +185,15 @@
       <option name="project" value="LOCAL" />
       <updated>1729457625228</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Merge remote-tracking branch 'origin/feature/levels' into feature/levels">
+      <option name="closed" value="true" />
+      <created>1729458264004</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1729458264004</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -210,6 +232,7 @@
     <MESSAGE value="권총 크기 결정 로직을 화면비율 기반으로 바꿈&#10;그래픽 변경 (초안)&#10;작은화면 사이즈 1280x720 비율로 변경" />
     <MESSAGE value="권총 크기 결정 로직을 화면비율 기반으로 바꿈&#10;그래픽 변경 (초안)&#10;작은화면 사이즈 1280x720 비율로 변경" />
     <MESSAGE value="상점 기능, 아이템 추가 아직 효과는 없음" />
-    <option name="LAST_COMMIT_MESSAGE" value="상점 기능, 아이템 추가 아직 효과는 없음" />
+    <MESSAGE value="Merge remote-tracking branch 'origin/feature/levels' into feature/levels" />
+    <option name="LAST_COMMIT_MESSAGE" value="Merge remote-tracking branch 'origin/feature/levels' into feature/levels" />
   </component>
 </project>
