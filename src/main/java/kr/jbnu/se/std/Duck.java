@@ -14,7 +14,6 @@ public class Duck {
     /**
      * How much time must pass in order to create a new duck?
      */
-    public static long timeBetweenDucks = 1_000_000_000;
     /**
      * Last time when the duck was created.
      */
@@ -56,7 +55,7 @@ public class Duck {
      * How many points this duck is worth?
      */
     public int score;
-    public static int hp;
+    public int hp;
     
     /**
      * kr.jbnu.se.std.Duck image.
@@ -72,13 +71,14 @@ public class Duck {
      * @param speed The speed of this duck.
      * @param score How many points this duck is worth?
      * @param duckImg Image of the duck.
+     * @param hp Duck's hp
      */
-    public Duck(int x, int y, int speed, int score, BufferedImage duckImg)
+    public Duck(int x, int y, int speed, int score,int hp, BufferedImage duckImg)
     {
         this.x = x;
         this.y = y;
 
-        hp = 1;
+        this.hp = Game.getlvdata().duckhp;
         
         this.speed = Game.getlvdata().speed;
         

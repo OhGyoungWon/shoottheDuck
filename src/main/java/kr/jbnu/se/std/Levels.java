@@ -24,12 +24,12 @@ public class Levels {
     }
     public static class lev1 extends Levels {
         public lev1() {
-            super(-2, 3, 20, 30, 1_000_000_000); // 원하면 수치 조정해도 됨
+            super(-2, 2, 20, 30, 1_000_000_000); // 원하면 수치 조정해도 됨
         }
     }
     public static class lev2 extends Levels{
         public lev2() {
-            super(-3, 5, 50, 45, 900_000_000);
+            super(-3, 3, 50, 45, 900_000_000);
         }
     }
     public static class lev3 extends Levels {

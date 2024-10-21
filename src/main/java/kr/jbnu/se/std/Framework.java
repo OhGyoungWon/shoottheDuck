@@ -74,8 +74,7 @@ public class Framework extends Canvas {
     /**
      * Image for menu.
      */
-    private BufferedImage shootTheDuckMenuImg;    
-    
+    private BufferedImage shootTheDuckMenuImg;
     
     public Framework ()
     {

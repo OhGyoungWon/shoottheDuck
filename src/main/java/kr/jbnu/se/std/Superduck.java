@@ -10,17 +10,9 @@ import java.awt.image.BufferedImage;
  */
 
 public class Superduck {
-    public static int max;
-    public static int hp;
-    public static long timeBetweenDucks = 1_500_000_000;
-    public static long lastDuckTime = 0;
+    public static int max = Game.getlvdata().bosshp;
+    public int hp;
 
-    public static int[][] duckLines = {
-            {Framework.frameWidth, (int)(Framework.frameHeight * 0.60), -2, 30},  // 크기 30으로 변경
-            {Framework.frameWidth, (int)(Framework.frameHeight * 0.65), -3, 40},  // 크기 40으로 변경
-            {Framework.frameWidth, (int)(Framework.frameHeight * 0.70), -4, 50},  // 크기 50으로 변경
-            {Framework.frameWidth, (int)(Framework.frameHeight * 0.78), -5, 60}   // 크기 60으로 변경
-    };
     /**
      * Indicate which is next duck line.
      */
@@ -44,7 +36,7 @@ public class Superduck {
         this.x = x;
         this.y = y;
         hp = Game.getlvdata().bosshp;
-        this.speed = Game.getlvdata().speed/3;
+        this.speed = Game.getlvdata().speed;
         this.score = Game.getlvdata().bosssc;
         this.superduckImg = superduckImg;
     }
@@ -58,11 +50,11 @@ public class Superduck {
      */
     public void Draw(Graphics2D g2d) {
 // Superduck 이미지 그리기
-        g2d.drawImage(superduckImg, x, y,null);
+        g2d.drawImage(superduckImg, x, (int) (Framework.frameHeight*0.60),null);
 // 체력바 그리기
         g2d.setColor(Color.RED); // 체력 바 배경 색상
-        g2d.fillRect(x + 50, y - 20, 120, 10); // 이미지 위에 배경 그리기
+        g2d.fillRect(x + 50, (int)((Framework.frameHeight)*0.60)-21, 120, 10); // 이미지 위에 배경 그리기
         g2d.setColor(Color.GREEN); // 현재 체력 색상
-        g2d.fillRect(x + 50, y - 20, 120 * hp / 10, 10); // 체력 바 그리기
+        g2d.fillRect(x + 50, (int)((Framework.frameHeight)*0.60)-21, 120 * hp / max, 10); // 체력 바 그리기
     }
 }
