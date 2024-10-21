@@ -15,10 +15,11 @@ public class FirebaseAuthService {
 
     public FirebaseAuthService() {
         FirebaseDatabase db = FirebaseDatabase.getInstance();
-        DatabaseReference usersRef = db.getReference("Users");
+        DatabaseReference usersRef = db.getReference("users/userInfo");
+        DatabaseReference leaderboardRef = db.getReference("users/leaderboard");
     }
 
-    // Firebase에 사용자를 등록하는 메소드
+    // Firebase AuthService에 사용자를 등록하는 메소드
     public static void registerUser(String username, String password) {
         CreateRequest request = new CreateRequest();
         request.setEmail(username);
@@ -32,9 +33,10 @@ public class FirebaseAuthService {
         }
     }
 
+    //Firebase Realtime Database에 사용자 정보를 저장하는 메소드
     public static void setUser(String email, String password) {
         // Firebase Realtime Database 참조 가져오기(User라는 큰 데이터 틀 형성)
-        DatabaseReference databaseRef = FirebaseDatabase.getInstance().getReference("users");
+        DatabaseReference databaseRef = FirebaseDatabase.getInstance().getReference("users/userInfo");
 
         // 이메일을 키로 사용하기 위해 특수문자 "."를 ","로 변환
         String sanitizedEmail = email.replace(".", ",");
@@ -55,7 +57,7 @@ public class FirebaseAuthService {
         String sanitizedEmail = email.replace(".", ",");
 
         // Firebase Realtime Database 참조 가져오기
-        DatabaseReference databaseRef = FirebaseDatabase.getInstance().getReference("users/" + sanitizedEmail + "/password");
+        DatabaseReference databaseRef = FirebaseDatabase.getInstance().getReference("users/userInfo/" + sanitizedEmail + "/password");
 
         // 비동기 결과를 동기적으로 처리하기 위해 CompletableFuture 사용
         CompletableFuture<Boolean> future = new CompletableFuture<>();
@@ -107,24 +109,6 @@ public class FirebaseAuthService {
         } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException("Error hashing password", e);
         }
-    }
-
-    // 사용자의 스코어를 Firebase에 저장하는 메서드
-    public static void setUserScore(String email, int score) {
-        // 이메일을 키로 사용하기 위해 특수문자 "."를 ","로 변환
-        String sanitizedEmail = email.replace(".", ",");
-
-        // Firebase Realtime Database 참조 가져오기
-        DatabaseReference databaseRef = FirebaseDatabase.getInstance().getReference("users/" + sanitizedEmail);
-
-        // 사용자 정보 저장 (스코어 포함)
-        databaseRef.child("score").setValue(score, (databaseError, databaseReference) -> {
-            if (databaseError != null) {
-                System.out.println("Error saving user score: " + databaseError.getMessage());
-            } else {
-                System.out.println("User score saved successfully.");
-            }
-        });
     }
 }
 
