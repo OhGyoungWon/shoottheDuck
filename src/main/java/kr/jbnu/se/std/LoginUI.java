@@ -3,6 +3,7 @@ package kr.jbnu.se.std;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import javax.swing.*;
 
 public class LoginUI extends JPanel {
@@ -76,7 +77,11 @@ public class LoginUI extends JPanel {
         loginButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                handleLogin();  // 로그인 처리 메소드 호출
+                try {
+                    handleLogin();  // 로그인 처리 메소드 호출
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
             }
         });
 
@@ -98,7 +103,7 @@ public class LoginUI extends JPanel {
     }
 
     // 로그인 처리를 위한 메소드
-    private void handleLogin() {
+    private void handleLogin() throws IOException {
         String username = usernameField.getText();  // 사용자 입력 이름 가져오기
         String password = new String(passwordField.getPassword());  // 비밀번호 가져오기
         // 사용자 이름과 비밀번호가 유효한지 확인

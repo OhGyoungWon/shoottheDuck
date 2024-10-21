@@ -75,11 +75,12 @@ public class Framework extends Canvas {
      * Image for menu.
      */
     private BufferedImage shootTheDuckMenuImg;
+    private BufferedImage leaderboardImg;
     
     public Framework ()
     {
         super();
-        
+
         gameState = GameState.VISUALIZING;
         
         //We start game in new thread.
@@ -112,6 +113,14 @@ public class Framework extends Canvas {
         {
             URL shootTheDuckMenuImgUrl = this.getClass().getResource("/images/menu.jpg");
             shootTheDuckMenuImg = ImageIO.read(shootTheDuckMenuImgUrl);
+        }
+        catch (IOException ex) {
+            Logger.getLogger(Framework.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try
+        {
+            URL leaderboardImgUrl = this.getClass().getResource("/images/LeaderBoard.png");
+            leaderboardImg = ImageIO.read(leaderboardImgUrl);
         }
         catch (IOException ex) {
             Logger.getLogger(Framework.class.getName()).log(Level.SEVERE, null, ex);
@@ -216,12 +225,7 @@ public class Framework extends Canvas {
             break;
             case MAIN_MENU:
                 g2d.drawImage(shootTheDuckMenuImg, 0, 0, frameWidth, frameHeight, null);
-                g2d.drawString("Use left mouse button to shot the duck.", frameWidth / 2 - 83, (int)(frameHeight * 0.65));   
-                g2d.drawString("Click with left mouse button to start the game.", frameWidth / 2 - 100, (int)(frameHeight * 0.67));                
-                g2d.drawString("Press ESC any time to exit the game.", frameWidth / 2 - 75, (int)(frameHeight * 0.70));
-                g2d.setColor(Color.white);
-                g2d.drawString("WWW.GAMETUTORIAL.NET", 7, frameHeight - 5);
-                Leaderboard.drawLeaderboardBackground(g2d, Framework.frameWidth, Framework.frameHeight);
+                g2d.drawImage(leaderboardImg, 0, 0, frameWidth, frameHeight, null);
                 Leaderboard.drawLeaderboard(g2d, Framework.frameWidth, Framework.frameHeight);
             break;
             case OPTIONS:

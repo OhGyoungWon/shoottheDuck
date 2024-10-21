@@ -139,7 +139,7 @@
       <workItem from="1729488123577" duration="36000" />
       <workItem from="1729488372929" duration="5641000" />
       <workItem from="1729498422076" duration="7952000" />
-      <workItem from="1729530034416" duration="4149000" />
+      <workItem from="1729530034416" duration="7418000" />
     </task>
     <task id="LOCAL-00001" summary="테스트">
       <option name="closed" value="true" />
@@ -221,7 +221,31 @@
       <option name="project" value="LOCAL" />
       <updated>1729518655386</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="tlqk">
+      <option name="closed" value="true" />
+      <created>1729534330579</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1729534330579</updated>
+    </task>
+    <task id="LOCAL-00012" summary="tlqk">
+      <option name="closed" value="true" />
+      <created>1729534349004</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1729534349004</updated>
+    </task>
+    <task id="LOCAL-00013" summary="tlqk">
+      <option name="closed" value="true" />
+      <created>1729534362143</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1729534362143</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -248,7 +272,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="origin/trying-merge" />
+                        <option value="dev" />
                       </list>
                     </value>
                   </entry>
@@ -276,7 +300,18 @@
     <MESSAGE value="머지했어요!!!" />
     <MESSAGE value="superduck 스피드 조정(형 변환해서 조정)" />
     <MESSAGE value="[리더보드 클래스] 닉네임과 점수가 표시&#10;[회원가입 클래스] 닉네임 설정 가능&#10;[게임 클래스] Leaderboard 객체 생성(이거 없애지 마셈)&#10;[유저 클래스] 닉네임 추가 및 각 변수마다 getter setter 추가&#10;[프레임워크 클래스] drawLeaderboard 매개변수 추가" />
-    <option name="LAST_COMMIT_MESSAGE" value="머지했어요!!!" />
+    <MESSAGE value="tlqk" />
+    <option name="LAST_COMMIT_MESSAGE" value="tlqk" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.NullPointerException" package="java.lang" />
+          <option name="timeStamp" value="1" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

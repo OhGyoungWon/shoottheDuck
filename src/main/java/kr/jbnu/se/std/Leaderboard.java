@@ -16,23 +16,19 @@ import java.io.IOException;
 import java.util.HashMap;
 import javax.imageio.ImageIO;
 
+/**
+ * 해당 클래스는 리더보드의
+ */
+
 public class Leaderboard {
-    private static DatabaseReference usersRef;
-    private static Image leaderboardImage; // 리더보드 배경 이미지
-    private static DatabaseReference leaderboardRef;
+    private static FirebaseDatabase db = FirebaseDatabase.getInstance();
+    private static DatabaseReference usersRef = db.getReference("users");
+    private static DatabaseReference leaderboardRef = db.getReference("users/leaderboard");;
     private static final List<Map.Entry<String, Integer>> leaderboardList = new ArrayList<>();
 
     public Leaderboard() {
-        FirebaseDatabase db = FirebaseDatabase.getInstance();
         usersRef = db.getReference("users");
         leaderboardRef = db.getReference("users/leaderboard");
-
-        // 리더보드 배경 이미지 로드
-        try {
-            leaderboardImage = ImageIO.read(new File("src/main/resources/images/LeaderBoard.png")); // 리더보드 배경 이미지 파일 경로
-        } catch (IOException e) {
-            System.out.println("Failed to load leaderboard background image: " + e.getMessage());
-        }
     }
 
     // 1. 모든 이메일(key)과 스코어(value)를 리스트에 저장하는 메서드
@@ -106,28 +102,6 @@ public class Leaderboard {
         });
     }
 
-    // 리더보드 배경 이미지를 그리는 정적 메서드
-    public static void drawLeaderboardBackground(Graphics2D g, int panelWidth, int panelHeight) {
-        if (leaderboardImage != null) {
-            // 이미지의 비율을 유지하면서 화면 크기에 맞게 조정
-            int imageWidth = leaderboardImage.getWidth(null);
-            int imageHeight = leaderboardImage.getHeight(null);
-
-            double widthRatio = (double) panelWidth / imageWidth;
-            double heightRatio = (double) panelHeight / imageHeight;
-            double scale = Math.min(widthRatio, heightRatio);
-
-            int drawWidth = (int) (imageWidth * scale);
-            int drawHeight = (int) (imageHeight * scale);
-            int x = (panelWidth - drawWidth) / 2;
-            int y = (panelHeight - drawHeight) / 2;
-
-            g.drawImage(leaderboardImage, x, y, drawWidth, drawHeight, null);
-        } else {
-            g.drawString("Leaderboard image not found.", 50, 50);
-        }
-    }
-
     // 3. 리더보드를 화면에 그리는 메서드
     public static void drawLeaderboard(Graphics2D g, int panelWidth, int panelHeight) {
         List<Map.Entry<String, Integer>> leaderboardList = getLeaderboardData();
@@ -150,7 +124,7 @@ public class Leaderboard {
             int textX = panelWidth / 3;
             int textY = y;
 
-            g.drawString(leaderboardEntry, textX + 7, textY + fontSize);
+            g.drawString(leaderboardEntry, textX + 5, textY + fontSize);
             y += fontSize + 13; // 다음 줄로 이동
 
         }
