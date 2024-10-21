@@ -70,6 +70,13 @@ public class SignUpUI extends JPanel {
         gbc.gridwidth = 1;
         add(registerButton, gbc);
 
+        // 로그인 화면으로 돌아가는 BACK 버튼 추가
+        JButton backButton = new JButton("BACK");
+        gbc.gridx = 0;
+        gbc.gridy = 3;
+        gbc.gridwidth = 1;
+        add(backButton, gbc);
+
         // 회원가입 결과를 표시할 레이블
         messageLabel = new JLabel();
         gbc.gridx = 0;
@@ -80,6 +87,11 @@ public class SignUpUI extends JPanel {
         // 회원가입 버튼에 대한 액션 리스너 추가
         registerButton.addActionListener(e -> {
             handleRegistration();  // 회원가입 처리 메소드 호출
+        });
+
+        // 돌아가기 버튼에 대한 액션 리스너 추가
+        backButton.addActionListener(e ->{
+            window.switchToLogin();
         });
     }
 

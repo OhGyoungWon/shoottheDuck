@@ -119,7 +119,7 @@ public class Framework extends Canvas {
         }
         try
         {
-            URL leaderboardImgUrl = this.getClass().getResource("/images/LeaderBoard.png");
+            URL leaderboardImgUrl = this.getClass().getResource("/images/leaderboard.png");
             leaderboardImg = ImageIO.read(leaderboardImgUrl);
         }
         catch (IOException ex) {

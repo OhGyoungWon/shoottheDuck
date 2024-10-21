@@ -18,9 +18,9 @@ import java.util.HashMap;
  */
 
 public class Leaderboard {
-    private static FirebaseDatabase db = FirebaseDatabase.getInstance();
+    private static final FirebaseDatabase db = FirebaseDatabase.getInstance();
     private static DatabaseReference usersRef = db.getReference("users");
-    private static DatabaseReference leaderboardRef = db.getReference("users/leaderboard");;
+    private static DatabaseReference leaderboardRef = db.getReference("users/leaderboard");
     private static final List<Map.Entry<String, Integer>> leaderboardList = new ArrayList<>();
 
     public Leaderboard() {
@@ -67,11 +67,11 @@ public class Leaderboard {
                 // 현재 사용자의 topScore를 가져옴
                 Integer topScore = dataSnapshot.child("userInfo/" + sanitizedEmail + "/topScore").getValue(Integer.class);
                 String nickname = dataSnapshot.child("userInfo/" + sanitizedEmail + "/nickname").getValue(String.class);
+                Map<String, Object> userUpdates = new HashMap<>();
 
                 // topScore와 currentScore 비교
                 if (topScore == null || score > topScore) {
                     // currentScore가 topScore보다 크면 topScore를 currentScore로 업데이트
-                    Map<String, Object> userUpdates = new HashMap<>();
                     userUpdates.put("userInfo/" + sanitizedEmail + "/topScore", score);
                     userUpdates.put("userInfo/" + sanitizedEmail + "/currentScore", score);
                     userUpdates.put("leaderboard/" + nickname, score);
@@ -83,7 +83,6 @@ public class Leaderboard {
                     System.out.println("Updated topScore to: " + score);
                 } else {
                     // currentScore는 그대로 저장
-                    Map<String, Object> userUpdates = new HashMap<>();
                     userUpdates.put("userInfo/" + sanitizedEmail + "/currentScore", score);
 
                     usersRef.updateChildrenAsync(userUpdates);
@@ -110,7 +109,7 @@ public class Leaderboard {
 
         g.setColor(Color.BLACK);
 
-        int y = 165; // 리더보드 점수 출력 시작 위치
+        int y = (int) (panelHeight * (174.0 / 720));
 
         // 상위 10명의 리더보드 점수 출력
         for (int i = 0; i < Math.min(10, leaderboardList.size()); i++) {
@@ -118,11 +117,12 @@ public class Leaderboard {
             String leaderboardEntry = entry.getKey() + " ( " + entry.getValue() + " )";
 
             // 화면 중앙에 맞추기 위한 x 위치 계산
-            int textX = panelWidth / 3;
+            int textX = (int) (panelWidth / 3.0);
             int textY = y;
 
-            g.drawString(leaderboardEntry, textX + 5, textY + fontSize);
-            y += fontSize + 13; // 다음 줄로 이동
+            g.drawString(leaderboardEntry, textX + (int) (panelWidth * (5.0 / 1280)), textY + fontSize);
+            y += fontSize + (int) (panelHeight * (14.0 / 720));
+            // 다음 줄로 이동
 
         }
     }
