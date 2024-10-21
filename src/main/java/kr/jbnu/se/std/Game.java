@@ -118,6 +118,7 @@ public class Game {
      * 리더보드 출력
      */
 
+    private static Leaderboard leaderboard;
     private BufferedImage leaderboardImg;
     private BufferedImage savedscoreImg;
 
@@ -125,6 +126,7 @@ public class Game {
     public Game()
     {
         Framework.gameState = Framework.GameState.GAME_CONTENT_LOADING;
+        leaderboard = new Leaderboard();
 
         Thread threadForInitGame = new Thread() {
             @Override
@@ -245,7 +247,8 @@ public class Game {
      */
     public void UpdateGame(long gameTime, Point mousePosition)
     {
-        String email = LoginUI.getuserEmail();
+        String currentEmail = LoginUI.getuserEmail();
+        String currentNickname = User.getNickname();
 
         // Creates a new duck, if it's the time, and add it to the array list.
         if(System.nanoTime() - Duck.lastDuckTime >= Duck.timeBetweenDucks)
@@ -299,7 +302,7 @@ public class Game {
                     {
                         killedDucks++;
                         score += ducks.get(i).score;
-                        leaderboard.saveScore(email, score);
+                        leaderboard.saveScore(currentEmail, currentNickname, score);
 
                         // Remove the duck from the array list.
                         ducks.remove(i);

@@ -1,0 +1,33 @@
+<changelist name="Uncommitted_changes_before_Update_at_2024-10-21_오후_2_31" date="1729488699985" recycled="false" toDelete="true">
+  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2024-10-21_오후_2_31/shelved.patch" />
+  <option name="DESCRIPTION" value="Uncommitted changes before Update at 2024-10-21 오후 2:31" />
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/kr/jbnu/se/std/Duck.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/kr/jbnu/se/std/Framework.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/kr/jbnu/se/std/Game$1.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/kr/jbnu/se/std/Window.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/kr/jbnu/se/std/Framework$1.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/kr/jbnu/se/std/Window$1.class" />
+    <option name="AFTER_PATH" value="target/classes/kr/jbnu/se/std/Window$1.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2024-10-21_오후_2_31/Window$1.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/kr/jbnu/se/std/Canvas.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/kr/jbnu/se/std/Framework$GameState.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/kr/jbnu/se/std/Game.class" />
+  </binary>
+</changelist>

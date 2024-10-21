@@ -225,7 +225,7 @@ public class Framework extends Canvas {
                 g2d.setColor(Color.white);
                 g2d.drawString("WWW.GAMETUTORIAL.NET", 7, frameHeight - 5);
                 Leaderboard.drawLeaderboardBackground(g2d, Framework.frameWidth, Framework.frameHeight);
-                Leaderboard.drawLeaderboard(g2d, Framework.frameWidth);
+                Leaderboard.drawLeaderboard(g2d, Framework.frameWidth, Framework.frameHeight);
             break;
             case OPTIONS:
                 //...

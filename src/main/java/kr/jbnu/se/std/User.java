@@ -7,14 +7,44 @@ package kr.jbnu.se.std;
  */
 
 public class User{
-    public String password;
-    public int currentScore;
-    public int topScore;
+    private String password;
+    private int currentScore;
+    private int topScore;
+    private static String nickname;
 
-    public User(String password, int currentScore, int topScore) {
+    public User(String password, int currentScore, int topScore, String nickname) {
         this.password = password;
         this.currentScore = currentScore;
         this.topScore = topScore;
+        this.nickname = nickname;
         //...
+    }
+
+    public static String getNickname() {
+        return nickname;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public int getCurrentScore() {
+        return currentScore;
+    }
+
+    public void setCurrentScore(int currentScore) {
+        this.currentScore = currentScore;
+    }
+
+    public int getTopScore() {
+        return topScore;
+    }
+
+    public void setTopScore(int topScore) {
+        this.topScore = topScore;
     }
 }

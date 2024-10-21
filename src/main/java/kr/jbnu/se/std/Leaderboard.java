@@ -8,8 +8,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
+
 import java.util.List;
 import java.util.Map;
 import java.io.File;
@@ -42,11 +41,11 @@ public class Leaderboard {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot entry : dataSnapshot.getChildren()) {
-                    String email = entry.getKey().replace(",", ".");
+                    String nikname = entry.getKey();
                     Integer score = entry.getValue(Integer.class);
-                    boolean exists = leaderboardList.stream().anyMatch(e -> e.getKey().equals(email));
+                    boolean exists = leaderboardList.stream().anyMatch(e -> e.getKey().equals(nikname));
                     if (score != null && !exists) {
-                        leaderboardList.add(Map.entry(email, score));
+                        leaderboardList.add(Map.entry(nikname, score));
                     }
                 }
             }
@@ -65,11 +64,11 @@ public class Leaderboard {
     }
 
     // 점수를 저장하는 메서드 ('.' → ',')
-    public void saveScore(String email, int score) {
+    public void saveScore(String email, String nickname, int score) {
         String sanitizedEmail = email.replace(".", ",");
 
         // Firebase에서 사용자 데이터를 가져옴
-        usersRef.child("userInfo/"+sanitizedEmail).addListenerForSingleValueEvent(new ValueEventListener() {
+        usersRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // 현재 사용자의 topScore를 가져옴
@@ -81,7 +80,7 @@ public class Leaderboard {
                     Map<String, Object> userUpdates = new HashMap<>();
                     userUpdates.put("userInfo/" + sanitizedEmail + "/topScore", score);
                     userUpdates.put("userInfo/" + sanitizedEmail + "/currentScore", score);
-                    userUpdates.put("leaderboard/" + sanitizedEmail, score);
+                    userUpdates.put("leaderboard/" + nickname, score);
 
 
                     usersRef.updateChildrenAsync(userUpdates);
@@ -89,7 +88,7 @@ public class Leaderboard {
                 } else {
                     // currentScore는 그대로 저장
                     Map<String, Object> userUpdates = new HashMap<>();
-                    userUpdates.put("userInfo/"+sanitizedEmail + "/currentScore", score);
+                    userUpdates.put("userInfo/" + sanitizedEmail + "/currentScore", score);
 
                     usersRef.updateChildrenAsync(userUpdates);
                     System.out.println("Current score saved: " + score);
@@ -130,16 +129,17 @@ public class Leaderboard {
     }
 
     // 3. 리더보드를 화면에 그리는 메서드
-    public static void drawLeaderboard(Graphics2D g, int panelWidth) {
+    public static void drawLeaderboard(Graphics2D g, int panelWidth, int panelHeight) {
         List<Map.Entry<String, Integer>> leaderboardList = getLeaderboardData();
         sortLeaderboardData(leaderboardList);
 
         // 폰트 및 색상 설정
-        g.setFont(new Font("monospaced", Font.BOLD, 20));
+        int fontSize = Math.max(12, panelHeight / 23);
+        g.setFont(new Font("monospaced", Font.BOLD, fontSize));
+
         g.setColor(Color.BLACK);
 
-        int y = 150; // 리더보드 점수 출력 시작 위치
-        int rank = 1;
+        int y = 165; // 리더보드 점수 출력 시작 위치
 
         // 상위 10명의 리더보드 점수 출력
         for (int i = 0; i < Math.min(10, leaderboardList.size()); i++) {
@@ -150,8 +150,9 @@ public class Leaderboard {
             int textX = panelWidth / 3;
             int textY = y;
 
-            g.drawString(leaderboardEntry, textX+1, textY+35);
-            y += 28; // 다음 줄로 이동
+            g.drawString(leaderboardEntry, textX + 7, textY + fontSize);
+            y += fontSize + 13; // 다음 줄로 이동
+
         }
     }
 }

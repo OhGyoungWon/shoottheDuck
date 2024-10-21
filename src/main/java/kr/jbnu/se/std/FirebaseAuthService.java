@@ -34,7 +34,7 @@ public class FirebaseAuthService {
     }
 
     //Firebase Realtime Database에 사용자 정보를 저장하는 메소드
-    public static void setUser(String email, String password) {
+    public static void setUser(String email, String password, String nickname) {
         // Firebase Realtime Database 참조 가져오기(User라는 큰 데이터 틀 형성)
         DatabaseReference databaseRef = FirebaseDatabase.getInstance().getReference("users/userInfo");
 
@@ -42,7 +42,7 @@ public class FirebaseAuthService {
         String sanitizedEmail = email.replace(".", ",");
 
         // 이메일 아래에 비밀번호 저장
-        databaseRef.child(sanitizedEmail).setValue(new User(password, 0, 0), (databaseError, databaseReference) -> {
+        databaseRef.child(sanitizedEmail).setValue(new User(password, 0, 0, nickname), (databaseError, databaseReference) -> {
             if (databaseError != null) {
                 System.out.println("Error saving user: " + databaseError.getMessage());
             } else {
