@@ -24,7 +24,7 @@ import javax.imageio.ImageIO;
  */
 
 public class Game {
-    
+
     /**
      * We use this to generate a random number.
      */
@@ -83,7 +83,7 @@ public class Game {
 
     private Shop shop;
 
-    private ArrayList<Weapon> weapons;
+    private static ArrayList<Weapon> weapons;
 
     /**
      * Last time of the shoot.
@@ -92,7 +92,7 @@ public class Game {
     /**
      * The time which must elapse between shots.
      */
-    private long timeBetweenShots;
+    public static long timeBetweenShots;
 
     /**
      * kr.jbnu.se.std.Game background image.
@@ -131,7 +131,7 @@ public class Game {
     // 사운드 플레이어 추가
     private SoundPlayer soundPlayer;
 
-    public Weapon currentweapon;
+    public static Weapon currentweapon;
 
     public static Levels lvdata;
     public static int gamelevel;
@@ -194,6 +194,7 @@ public class Game {
         lvdata = getlvdata();
         currentweapon = new Weapon.Revolver(revImg);
         weapons = new ArrayList<>();
+        weapons.add(new Weapon.Revolver(revImg));
         lastTimeShoot = 0;
         timeBetweenShots = currentweapon.fireDelay;
         damageTexts = new ArrayList<>();
@@ -264,6 +265,9 @@ public class Game {
         rifduck.clear();
         odinduck.clear();
         damageTexts.clear();
+        weapons.clear();
+        currentweapon = new Weapon.Revolver(revImg);
+        weapons.add(new Weapon.Revolver(revImg));
         
         // We set last duckt time to zero.
         Duck.lastDuckTime = 0;
@@ -293,9 +297,6 @@ public class Game {
      */
     public void UpdateGame(long gameTime, Point mousePosition)
     {
-        System.out.println("Current weapon: " + currentweapon.getName());
-        System.out.println("Damage: " + currentweapon.getDamage());
-        System.out.println("Fire delay: " + timeBetweenShots);
 
         if (shop.isShopOpen()) {
             if (Canvas.mouseButtonState(MouseEvent.BUTTON1)) {
@@ -638,5 +639,8 @@ public class Game {
         else{
             return new Levels.lev4();
         }
+    }
+    public static ArrayList<Weapon> getWeapons(){
+        return weapons;
     }
 }
