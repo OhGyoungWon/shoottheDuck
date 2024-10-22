@@ -46,13 +46,13 @@
     &quot;assignee&quot;: &quot;pcy79&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/OhGyoungWon/shoottheDuck.git",
-    "accountId": "41030b30-f7dc-4881-83db-6e6c99099e2b"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/OhGyoungWon/shoottheDuck.git&quot;,
+    &quot;accountId&quot;: &quot;41030b30-f7dc-4881-83db-6e6c99099e2b&quot;
   },
-  "editorReviewEnabled": false
-}]]></component>
+  &quot;editorReviewEnabled&quot;: false
+}</component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
   </component>
@@ -65,34 +65,34 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.Window.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "dev",
-    "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/pcy79/OneDrive - 전북대학교/shoottheDuck/src/main/resources/sounds",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "프로젝트",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "editor.preferences.tabs",
-    "vue.rearranger.settings.migration": "true",
-    "애플리케이션.Window.executor": "Run"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.Window.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;dev&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/pcy79/OneDrive - 전북대학교/shoottheDuck/src/main/resources/sounds&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;프로젝트&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.tabs&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;,
+    &quot;애플리케이션.Window.executor&quot;: &quot;Run&quot;
   },
-  "keyToStringList": {
-    "GitStage.ChangesTree.GroupingKeys": [
-      "directory",
-      "module",
-      "repository"
+  &quot;keyToStringList&quot;: {
+    &quot;GitStage.ChangesTree.GroupingKeys&quot;: [
+      &quot;directory&quot;,
+      &quot;module&quot;,
+      &quot;repository&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\pcy79\OneDrive - 전북대학교\shoottheDuck\src\main\resources\sounds" />
@@ -115,7 +115,6 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="애플리케이션 수준" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="디폴트 작업">
-      <changelist id="" name="변경" comment="" />
       <created>1728312835815</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -140,7 +139,8 @@
       <workItem from="1729488123577" duration="36000" />
       <workItem from="1729488372929" duration="5641000" />
       <workItem from="1729498422076" duration="7952000" />
-      <workItem from="1729530034416" duration="11638000" />
+      <workItem from="1729530034416" duration="14913000" />
+      <workItem from="1729579565473" duration="47000" />
     </task>
     <task id="LOCAL-00001" summary="테스트">
       <option name="closed" value="true" />
@@ -262,7 +262,23 @@
       <option name="project" value="LOCAL" />
       <updated>1729538060360</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="화면 비율 변경해도 리더보드 크기 유지 추가">
+      <option name="closed" value="true" />
+      <created>1729542186153</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1729542186153</updated>
+    </task>
+    <task id="LOCAL-00017" summary="화면 비율 변경해도 리더보드 크기 유지 추가">
+      <option name="closed" value="true" />
+      <created>1729542213975</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1729542213975</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -319,7 +335,8 @@
     <MESSAGE value="[리더보드 클래스] 닉네임과 점수가 표시&#10;[회원가입 클래스] 닉네임 설정 가능&#10;[게임 클래스] Leaderboard 객체 생성(이거 없애지 마셈)&#10;[유저 클래스] 닉네임 추가 및 각 변수마다 getter setter 추가&#10;[프레임워크 클래스] drawLeaderboard 매개변수 추가" />
     <MESSAGE value="tlqk" />
     <MESSAGE value="리더보드 포함 데이터 Structure 완성" />
-    <option name="LAST_COMMIT_MESSAGE" value="리더보드 포함 데이터 Structure 완성" />
+    <MESSAGE value="화면 비율 변경해도 리더보드 크기 유지 추가" />
+    <option name="LAST_COMMIT_MESSAGE" value="화면 비율 변경해도 리더보드 크기 유지 추가" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -421,7 +421,7 @@ public class Game {
                             killedDucks++;
                             score += ducks.get(i).score;
                             money += ducks.get(i).score;
-                            leaderboard.saveScore(currentEmail, score);
+                            inGameData.saveScore(currentEmail, score);
 
                             // Remove the duck from the array list.
                             ducks.remove(i);
@@ -443,6 +443,7 @@ public class Game {
                                 killedDucks++;
                                 score += superducks.get(i).score;
                                 money += superducks.get(i).score;
+                                inGameData.saveScore(currentEmail, score);
 
                                 // Remove the duck from the array list.
                                 superducks.remove(i);
@@ -467,6 +468,7 @@ public class Game {
                                 killedDucks++;
                                 score += smgduck.get(i).score;
                                 money += smgduck.get(i).score;
+                                inGameData.saveScore(currentEmail, score);
 
                                 // Remove the duck from the array list.
                                 smgduck.remove(i);
@@ -492,6 +494,7 @@ public class Game {
                                 killedDucks++;
                                 score += rifduck.get(i).score;
                                 money += rifduck.get(i).score;
+                                inGameData.saveScore(currentEmail, score);
 
                                 // Remove the duck from the array list.
                                 rifduck.remove(i);
@@ -517,6 +520,7 @@ public class Game {
                                 killedDucks++;
                                 score += odinduck.get(i).score;
                                 money += odinduck.get(i).score;
+                                inGameData.saveScore(currentEmail, score);
 
                                 // Remove the duck from the array list.
                                 odinduck.remove(i);
