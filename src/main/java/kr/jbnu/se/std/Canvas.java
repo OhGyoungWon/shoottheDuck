@@ -37,8 +37,9 @@ public abstract class Canvas extends JPanel implements KeyListener, MouseListene
         this.setDoubleBuffered(true);
         this.setFocusable(true);
         this.setBackground(Color.black);
-        
-        // If you will draw your own mouse cursor or if you just want that mouse cursor disapear, 
+        this.requestFocusInWindow();
+
+        // If you will draw your own mouse cursor or if you just want that mouse cursor disapear,
         // insert "true" into if condition and mouse cursor will be removed.
         if(true)
         {
@@ -46,7 +47,7 @@ public abstract class Canvas extends JPanel implements KeyListener, MouseListene
             Cursor blankCursor = Toolkit.getDefaultToolkit().createCustomCursor(blankCursorImg, new Point(0, 0), null);
             this.setCursor(blankCursor);
         }
-        
+
         // Adds the keyboard listener to JPanel to receive key events from this component.
         this.addKeyListener(this);
         // Adds the mouse listener to JPanel to receive mouse events from this component.
@@ -80,24 +81,86 @@ public abstract class Canvas extends JPanel implements KeyListener, MouseListene
     
     // Methods of the keyboard listener.
     @Override
-    public void keyPressed(KeyEvent e) 
-    {
+    public void keyPressed(KeyEvent e) {
         keyboardState[e.getKeyCode()] = true;
+        int keyCode = e.getKeyCode();
+
+        // 1번 키: Revolver
+        if (keyCode == KeyEvent.VK_1) {
+            for (Weapon weapon : Game.getWeapons()) {
+                if (weapon instanceof Weapon.Revolver) {
+                    Game.currentweapon = weapon;
+                    Game.timeBetweenShots = Game.currentweapon.getFireDelay();
+                    Game.maxAmmo = Game.currentweapon.maxammo;
+                    Game.currentAmmo = Game.maxAmmo;
+                    Game.isReloading = false;
+                    break;
+                }
+            }
+        }
+
+        // 2번 키: SMG
+        if (keyCode == KeyEvent.VK_2) {
+            for (Weapon weapon : Game.getWeapons()) {
+                if (weapon instanceof Weapon.SMG) {
+                    Game.currentweapon = weapon;
+                    Game.timeBetweenShots = Game.currentweapon.getFireDelay();
+                    Game.maxAmmo = Game.currentweapon.maxammo;
+                    Game.currentAmmo = Game.maxAmmo;
+                    Game.isReloading = false;
+                    break;
+                }
+            }
+        }
+
+        // 3번 키: Rifle
+        if (keyCode == KeyEvent.VK_3) {
+            for (Weapon weapon : Game.getWeapons()) {
+                if (weapon instanceof Weapon.Rifle) {
+                    Game.currentweapon = weapon;
+                    Game.timeBetweenShots = Game.currentweapon.getFireDelay();
+                    Game.maxAmmo = Game.currentweapon.maxammo;
+                    Game.currentAmmo = Game.maxAmmo;
+                    Game.isReloading = false;
+                    break;
+                }
+            }
+        }
+
+        // 4번 키: Odin
+        if (keyCode == KeyEvent.VK_4) {
+            for (Weapon weapon : Game.getWeapons()) {
+                if (weapon instanceof Weapon.Sniper) {
+                    Game.currentweapon = weapon;
+                    Game.timeBetweenShots = Game.currentweapon.getFireDelay();
+                    Game.maxAmmo = Game.currentweapon.maxammo;
+                    Game.currentAmmo = Game.maxAmmo;
+                    Game.isReloading = false;
+                    break;
+                }
+            }
+        }
+        if (keyCode == KeyEvent.VK_R){
+            if(Game.rubberduckskills > 0){
+                Game.rubberduckskills--;
+                Game.nuclearswitch = true;
+            }
+        }
+
     }
     
     @Override
-    public void keyReleased(KeyEvent e)
-    {
+    public void keyReleased(KeyEvent e) {
         keyboardState[e.getKeyCode()] = false;
-        keyReleasedFramework(e);
     }
     
     @Override
     public void keyTyped(KeyEvent e) { }
-    
-    public abstract void keyReleasedFramework(KeyEvent e);
-    
-    
+
+    public void keyReleasedFramework(KeyEvent e) {
+            int keyCode = e.getKeyCode();
+
+    }
     // Mouse
     /**
      * Is mouse button "button" down?

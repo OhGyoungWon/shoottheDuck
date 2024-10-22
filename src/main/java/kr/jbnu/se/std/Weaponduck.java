@@ -17,7 +17,7 @@ public class Weaponduck {
         this.x = x;
         this.y = y;
         this.speed = Game.getlvdata().speed/2;
-        this.hp = Game.getlvdata().bosshp/3;
+        this.hp = Game.getlvdata().bosshp/4;
         this.weadckImg = weadckImg;
     }
     public void Update(){x += speed;}
@@ -34,8 +34,8 @@ public class Weaponduck {
             super(x, y, speed, score, hp, weadckImg);
         }
     }
-    public static class Odinduck extends Weaponduck{
-        public Odinduck(int x, int y, float speed, int score, int hp, BufferedImage weadckImg) {
+    public static class Sniperduck extends Weaponduck{
+        public Sniperduck(int x, int y, float speed, int score, int hp, BufferedImage weadckImg) {
             super(x, y, speed, score, hp, weadckImg);
         }
     }
