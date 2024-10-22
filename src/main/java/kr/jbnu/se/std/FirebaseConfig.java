@@ -20,7 +20,7 @@ public class FirebaseConfig {
 
         FirebaseOptions options = new FirebaseOptions.Builder()
                 .setCredentials(GoogleCredentials.fromStream(serviceAccount))
-                .setDatabaseUrl("https://your-project.firebaseio.com")  //realtime base url
+                .setDatabaseUrl("https://your-database-name.firebaseio.com")  //realtime base url
                 .build();
 
         // FirebaseApp이 이미 초기화되어 있는지 확인

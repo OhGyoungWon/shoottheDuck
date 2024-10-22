@@ -27,6 +27,11 @@
     "node.js.selected.package.tslint": "(autodetect)"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\ok993\IdeaProjects\shoottheDuck\src\main\resources" />
+    </key>
+  </component>
   <component name="TaskManager">
     <task id="LOCAL-00001" summary="예시용 smgducks 완성(추가, 무기 바뀜)">
       <option name="closed" value="true" />
@@ -44,7 +49,15 @@
       <option name="project" value="LOCAL" />
       <updated>1729606773015</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="리얼 마지막의 마지막의 마지막">
+      <option name="closed" value="true" />
+      <created>1729606837946</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1729606837946</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
