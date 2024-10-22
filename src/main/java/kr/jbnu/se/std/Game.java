@@ -316,10 +316,6 @@ public class Game {
             if (System.nanoTime() - reloadStartTime >= reloadDuration) {  // 1.5초 장전 시간
                 isReloading = false;  // 장전 완료
                 currentAmmo = maxAmmo;  // 탄창 재충전
-            } else {
-                // 장전 시간이 지나면 장전 완료 처리
-                isReloading = false;
-                currentAmmo = maxAmmo;
             }
         }
         if(nuclearswitch){
@@ -558,7 +554,7 @@ public class Game {
                 else if(currentAmmo == 0){
                     isReloading = true;
                     reloadStartTime = System.nanoTime();  // 장전 시작 시간 기록
-                    System.out.println("장전 시작...");
+                    System.out.println("RELOADING...");
                 }
 
                 lastTimeShoot = System.nanoTime();
@@ -592,7 +588,7 @@ public class Game {
             g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);  // 부드러운 텍스트
             g2d.setFont(new Font("Arial", Font.BOLD, 30));  // 폰트 설정
             g2d.setColor(Color.RED);  // 색상 설정
-            String reloadMessage = "장전 중...";
+            String reloadMessage = "RELOADING...";
             int stringWidth = g2d.getFontMetrics().stringWidth(reloadMessage);  // 텍스트 가로 길이
             g2d.drawString(reloadMessage, (Framework.frameWidth - stringWidth) / 2, Framework.frameHeight / 2);  // 화면 중앙에 텍스트 표시
         }
