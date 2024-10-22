@@ -184,7 +184,7 @@ public class Game {
         sniperduck = new ArrayList<>();
 
         runawayDucks = 0;
-        killedDucks = 15;
+        killedDucks = 0;
         score = 0;
         money = 0;
         shoots = 0;
@@ -598,7 +598,6 @@ public class Game {
                 else if(currentAmmo == 0){
                     isReloading = true;
                     reloadStartTime = System.nanoTime();  // 장전 시작 시간 기록;
-                    System.out.println("RELOADING...");
                 }
 
                 lastTimeShoot = System.nanoTime();
@@ -667,7 +666,6 @@ public class Game {
             g2d.setFont(new Font("Arial", Font.BOLD, 30));  // 폰트 설정
             g2d.setColor(Color.RED);  // 색상 설정
             String reloadMessage = "RELOADING...";
-            System.out.println("왜안돼");
             int stringWidth = g2d.getFontMetrics().stringWidth(reloadMessage);  // 텍스트 가로 길이
             g2d.drawString(reloadMessage, (Framework.frameWidth - stringWidth) / 2, Framework.frameHeight / 2);  // 화면 중앙에 텍스트 표시
         }

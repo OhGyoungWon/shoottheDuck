@@ -91,7 +91,6 @@ public abstract class Canvas extends JPanel implements KeyListener, MouseListene
                     Game.maxAmmo = Game.currentweapon.maxammo;
                     Game.currentAmmo = Game.maxAmmo;
                     Game.isReloading = false;
-                    System.out.println("Revolver selected.");
                     break;
                 }
             }
@@ -106,7 +105,6 @@ public abstract class Canvas extends JPanel implements KeyListener, MouseListene
                     Game.maxAmmo = Game.currentweapon.maxammo;
                     Game.currentAmmo = Game.maxAmmo;
                     Game.isReloading = false;
-                    System.out.println("SMG selected.");
                     break;
                 }
             }
@@ -121,7 +119,6 @@ public abstract class Canvas extends JPanel implements KeyListener, MouseListene
                     Game.maxAmmo = Game.currentweapon.maxammo;
                     Game.currentAmmo = Game.maxAmmo;
                     Game.isReloading = false;
-                    System.out.println("Rifle selected.");
                     break;
                 }
             }
@@ -136,20 +133,14 @@ public abstract class Canvas extends JPanel implements KeyListener, MouseListene
                     Game.maxAmmo = Game.currentweapon.maxammo;
                     Game.currentAmmo = Game.maxAmmo;
                     Game.isReloading = false;
-                    System.out.println("Sniper selected.");
                     break;
                 }
             }
         }
         if (keyCode == KeyEvent.VK_R){
-            System.out.println("R PRESSED");
             if(Game.rubberduckskills > 0){
                 Game.rubberduckskills--;
                 Game.nuclearswitch = true;
-                System.out.println("NUCLEAR");
-            }
-            else{
-                System.out.println("NO CHARGES");
             }
         }
 

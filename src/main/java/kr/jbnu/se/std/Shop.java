@@ -115,7 +115,6 @@ public class Shop {
 
         // 장갑 클릭 확인
         if (glovesBounds.contains(mousePosition)) {
-            System.out.println("장갑 아이템 클릭됨!");
             // 장갑 아이템 클릭 처리 로직 추가
             if(Game.money > 200){
                 Game.money -= 200;
@@ -130,7 +129,6 @@ public class Shop {
 
         // 총알 클릭 확인
         if (bulletBounds.contains(mousePosition)) {//여기 로직 구현해야돼 장전을 구현해야 이걸 할수가 있어
-            System.out.println("총알 아이템 클릭됨!");
             // 총알 아이템 클릭 처리 로직 추가
             if(Game.money > 300){
                 Game.money -= 300;
@@ -140,7 +138,6 @@ public class Shop {
                 else{
                     Game.reloadDuration -= 300_000_000;
                 }
-                System.out.println(Game.reloadDuration);
                 Purchase("총알");
             }
             else{
@@ -151,7 +148,6 @@ public class Shop {
 
         // 콜라 클릭 확인
         if (colaBounds.contains(mousePosition)) {
-            System.out.println("콜라 아이템 클릭됨!");
             // 콜라 아이템 클릭 처리 로직 추가
             if(Game.money > 500){
                 Game.money -= 500;
@@ -171,7 +167,6 @@ public class Shop {
 
         // 와인 클릭 확인
         if (wineBounds.contains(mousePosition)) {
-            System.out.println("와인 아이템 클릭됨!");
             // 와인 아이템 클릭 처리 로직 추가
             if(Game.money > 1000){
                 Game.money -= 1000;
@@ -186,7 +181,6 @@ public class Shop {
 
         // 러버덕 클릭 확인
         if (rubberDuckBounds.contains(mousePosition)) {
-            System.out.println("러버덕 아이템 클릭됨!");
             // 러버덕 아이템 클릭 처리 로직 추가
             if(Game.money > 2000){
                 Game.money -= 2000;
