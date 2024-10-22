@@ -36,12 +36,21 @@
       <option name="project" value="LOCAL" />
       <updated>1729525581399</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="리얼 마지막의 마지막의 마지막">
+      <option name="closed" value="true" />
+      <created>1729606773015</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1729606773015</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="커밋스" />
     <MESSAGE value="예시용 smgducks 완성(추가, 무기 바뀜)" />
-    <option name="LAST_COMMIT_MESSAGE" value="예시용 smgducks 완성(추가, 무기 바뀜)" />
+    <MESSAGE value="리얼 마지막의 마지막의 마지막" />
+    <option name="LAST_COMMIT_MESSAGE" value="리얼 마지막의 마지막의 마지막" />
   </component>
 </project>
