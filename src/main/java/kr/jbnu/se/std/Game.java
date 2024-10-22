@@ -616,6 +616,7 @@ public class Game {
             g2d.setFont(new Font("Arial", Font.BOLD, 30));  // 폰트 설정
             g2d.setColor(Color.RED);  // 색상 설정
             String reloadMessage = "RELOADING...";
+            System.out.println("왜안돼");
             int stringWidth = g2d.getFontMetrics().stringWidth(reloadMessage);  // 텍스트 가로 길이
             g2d.drawString(reloadMessage, (Framework.frameWidth - stringWidth) / 2, Framework.frameHeight / 2);  // 화면 중앙에 텍스트 표시
         }
