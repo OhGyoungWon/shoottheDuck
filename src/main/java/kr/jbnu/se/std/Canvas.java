@@ -88,6 +88,9 @@ public abstract class Canvas extends JPanel implements KeyListener, MouseListene
                 if (weapon instanceof Weapon.Revolver) {
                     Game.currentweapon = weapon;
                     Game.timeBetweenShots = Game.currentweapon.getFireDelay();
+                    Game.maxAmmo = Game.currentweapon.maxammo;
+                    Game.currentAmmo = Game.maxAmmo;
+                    Game.isReloading = false;
                     System.out.println("Revolver selected.");
                     break;
                 }
@@ -100,6 +103,9 @@ public abstract class Canvas extends JPanel implements KeyListener, MouseListene
                 if (weapon instanceof Weapon.SMG) {
                     Game.currentweapon = weapon;
                     Game.timeBetweenShots = Game.currentweapon.getFireDelay();
+                    Game.maxAmmo = Game.currentweapon.maxammo;
+                    Game.currentAmmo = Game.maxAmmo;
+                    Game.isReloading = false;
                     System.out.println("SMG selected.");
                     break;
                 }
@@ -112,6 +118,9 @@ public abstract class Canvas extends JPanel implements KeyListener, MouseListene
                 if (weapon instanceof Weapon.Rifle) {
                     Game.currentweapon = weapon;
                     Game.timeBetweenShots = Game.currentweapon.getFireDelay();
+                    Game.maxAmmo = Game.currentweapon.maxammo;
+                    Game.currentAmmo = Game.maxAmmo;
+                    Game.isReloading = false;
                     System.out.println("Rifle selected.");
                     break;
                 }
@@ -124,6 +133,9 @@ public abstract class Canvas extends JPanel implements KeyListener, MouseListene
                 if (weapon instanceof Weapon.Odin) {
                     Game.currentweapon = weapon;
                     Game.timeBetweenShots = Game.currentweapon.getFireDelay();
+                    Game.maxAmmo = Game.currentweapon.maxammo;
+                    Game.currentAmmo = Game.maxAmmo;
+                    Game.isReloading = false;
                     System.out.println("Odin selected.");
                     break;
                 }

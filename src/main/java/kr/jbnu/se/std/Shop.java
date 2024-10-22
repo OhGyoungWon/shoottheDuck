@@ -39,7 +39,7 @@ public class Shop {
         shopItems.add(new ShopItem("총알", 300, bulletImage, "오리를 위한 깜짝선물    장탄수 증가"));
         shopItems.add(new ShopItem("콜라", 500, colaImage, "제로콜라는 아니네요       체력 회복"));
         shopItems.add(new ShopItem("와인", 1000, wineImage, "문ㅇㅇ씨의 최애 음료수     사격 속도 증가"));
-        shopItems.add(new ShopItem("러버덕", 2500, rubberDuckImage, "적의 우두머리를 본딴 형상.       특수 스킬 획득"));
+        shopItems.add(new ShopItem("러버덕", 2000, rubberDuckImage, "적의 우두머리를 본딴 형상.       특수 스킬 획득"));
 
         setupItemBounds(glovesImage, bulletImage, colaImage, wineImage, rubberDuckImage);
     }
@@ -134,7 +134,13 @@ public class Shop {
             // 총알 아이템 클릭 처리 로직 추가
             if(Game.money > 300){
                 Game.money -= 300;
-                Game.adiatt += 3;
+                if(Game.reloadDuration <=300_000_000){
+                    Game.reloadDuration = 300_000_000;
+                }
+                else{
+                    Game.reloadDuration -= 300_000_000;
+                }
+                System.out.println(Game.reloadDuration);
                 Purchase("총알");
             }
             else{
