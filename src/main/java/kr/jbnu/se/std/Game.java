@@ -37,7 +37,7 @@ public class Game {
     private ArrayList<Superduck> superducks;
     private ArrayList<Weaponduck.Smgduck> smgduck;
     private ArrayList<Weaponduck.Rifduck> rifduck;
-    private ArrayList<Weaponduck.Odinduck> odinduck;
+    private ArrayList<Weaponduck.Sniperduck> sniperduck;
 
     /**
      * How many ducks leave the screen alive?
@@ -108,7 +108,7 @@ public class Game {
     private BufferedImage revImg;
     private BufferedImage smgImg;
     private BufferedImage rifImg;
-    private BufferedImage odinImg;
+    private BufferedImage sniperImg;
 
     /**
      * Middle width of the sight image.
@@ -179,7 +179,7 @@ public class Game {
         superducks = new ArrayList<>();
         smgduck = new ArrayList<>();
         rifduck = new ArrayList<>();
-        odinduck = new ArrayList<>();
+        sniperduck = new ArrayList<>();
 
         runawayDucks = 0;
         killedDucks = 15;
@@ -267,8 +267,8 @@ public class Game {
             URL rifImgUrl = this.getClass().getResource("/images/gunbox.png");
             rifImg = ImageIO.read(rifImgUrl);
 
-            URL odinImgUrl = this.getClass().getResource("/images/gunbox.png");
-            odinImg = ImageIO.read(odinImgUrl);
+            URL sniperImgUrl = this.getClass().getResource("/images/gunbox.png");
+            sniperImg = ImageIO.read(sniperImgUrl);
 
         }
         catch (IOException ex) {
@@ -287,7 +287,7 @@ public class Game {
         superducks.clear();
         smgduck.clear();
         rifduck.clear();
-        odinduck.clear();
+        sniperduck.clear();
         damageTexts.clear();
         weapons.clear();
         currentweapon = new Weapon.Revolver(revImg);
@@ -364,9 +364,9 @@ public class Game {
             rifduck.add(new Weaponduck.Rifduck(Framework.frameWidth + random.nextInt(200),
                     (int) (Framework.frameHeight*0.25), lvdata.speed, lvdata.ducksc*2, lvdata.duckhp*2, rifImg ));
         }
-        if(killedDucks == 70 && odinduck.isEmpty()){
-            odinduck.add(new Weaponduck.Odinduck(Framework.frameWidth + random.nextInt(200),
-                    (int) (Framework.frameHeight*0.25), lvdata.speed, lvdata.ducksc*2, lvdata.duckhp*2, odinImg ));
+        if(killedDucks == 70 && sniperduck.isEmpty()){
+            sniperduck.add(new Weaponduck.Sniperduck(Framework.frameWidth + random.nextInt(200),
+                    (int) (Framework.frameHeight*0.25), lvdata.speed, lvdata.ducksc*2, lvdata.duckhp*2, sniperImg));
         }
 
         // Update all of the ducks.
@@ -411,13 +411,13 @@ public class Game {
                 runawayDucks++;
             }
         }
-        for(int i = 0; i < odinduck.size(); i++){
-            odinduck.get(i).Update();
+        for(int i = 0; i < sniperduck.size(); i++){
+            sniperduck.get(i).Update();
 
             // Checks if the duck leaves the screen and remove it if it does.
-            if(odinduck.get(i).x < 0 - odinImg.getWidth())
+            if(sniperduck.get(i).x < 0 - sniperImg.getWidth())
             {
-                odinduck.remove(i);
+                sniperduck.remove(i);
                 runawayDucks++;
             }
         }
@@ -541,26 +541,26 @@ public class Game {
                             }
                         }
                     }
-                    for (int i = 0; i < odinduck.size(); i++) {
-                        if (new Rectangle(odinduck.get(i).x, odinduck.get(i).y,
-                                odinImg.getWidth(), odinImg.getHeight()).contains(mousePosition)) {
-                            if (!odinduck.isEmpty() && new Rectangle(odinduck.get(i).x, odinduck.get(i).y,
-                                    odinImg.getWidth(), odinImg.getHeight()).contains(mousePosition)) {
-                                odinduck.get(i).hp -= currentweapon.getDamage() + adiatt;
+                    for (int i = 0; i < sniperduck.size(); i++) {
+                        if (new Rectangle(sniperduck.get(i).x, sniperduck.get(i).y,
+                                sniperImg.getWidth(), sniperImg.getHeight()).contains(mousePosition)) {
+                            if (!sniperduck.isEmpty() && new Rectangle(sniperduck.get(i).x, sniperduck.get(i).y,
+                                    sniperImg.getWidth(), sniperImg.getHeight()).contains(mousePosition)) {
+                                sniperduck.get(i).hp -= currentweapon.getDamage() + adiatt;
                                 damageTexts.add(new DamageText(mousePosition.x, mousePosition.y, currentweapon.getDamage() + adiatt));
-                                if (odinduck.get(i).hp <= 0) {
+                                if (sniperduck.get(i).hp <= 0) {
                                     killedDucks++;
-                                    score += odinduck.get(i).score;
-                                    money += odinduck.get(i).score;
+                                    score += sniperduck.get(i).score;
+                                    money += sniperduck.get(i).score;
 
                                     // Remove the duck from the array list.
-                                    odinduck.remove(i);
-                                    currentweapon = new Weapon.Odin(smgImg);
+                                    sniperduck.remove(i);
+                                    currentweapon = new Weapon.Sniper(sniperImg);
                                     maxAmmo = currentweapon.maxammo;
                                     currentAmmo = maxAmmo;
                                     isReloading = false;
                                     timeBetweenShots = currentweapon.fireDelay;
-                                    weapons.add(new Weapon.Odin(smgImg));
+                                    weapons.add(new Weapon.Sniper(sniperImg));
 
                                     // We found the duck that player shoot so we can leave the for loop.
                                     break;
@@ -632,8 +632,8 @@ public class Game {
         for(int i = 0; i < rifduck.size(); i++){
             rifduck.get(i).Draw(g2d);
         }
-        for(int i = 0; i < odinduck.size(); i++){
-            odinduck.get(i).Draw(g2d);
+        for(int i = 0; i < sniperduck.size(); i++){
+            sniperduck.get(i).Draw(g2d);
         }
 
         g2d.drawImage(backgrassImg, 0, Framework.frameHeight/32 * 10, Framework.frameWidth, backgrassImg.getHeight(), null);
@@ -774,16 +774,16 @@ public class Game {
             }
         }
 
-        // odinduck 리스트의 모든 객체 체력을 999 감소
-        for (int i = 0; i < odinduck.size(); i++) {
-            Weaponduck.Odinduck odin = odinduck.get(i);
-            odin.hp -= 999;
+        // sniperduck 리스트의 모든 객체 체력을 999 감소
+        for (int i = 0; i < sniperduck.size(); i++) {
+            Weaponduck.Sniperduck sni = sniperduck.get(i);
+            sni.hp -= 999;
 
             // DamageText 추가
-            damageTexts.add(new DamageText(odin.x, odin.y, 999));
+            damageTexts.add(new DamageText(sni.x, sni.y, 999));
 
-            if (odin.hp <= 0) {
-                odinduck.remove(i);
+            if (sni.hp <= 0) {
+                sniperduck.remove(i);
                 i--;
             }
         }

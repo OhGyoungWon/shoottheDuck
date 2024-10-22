@@ -4,22 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e23e4792-88cd-4c5b-8837-984a947fb4ab" name="변경" comment="장전기능 완성">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/images/backgrass.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/images/background2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/images/gunbox.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/images/submachine.png" afterDir="false" />
+    <list default="true" id="e23e4792-88cd-4c5b-8837-984a947fb4ab" name="변경" comment="로직 완성">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/kr/jbnu/se/std/Canvas.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kr/jbnu/se/std/Canvas.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/kr/jbnu/se/std/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kr/jbnu/se/std/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kr/jbnu/se/std/Levels.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kr/jbnu/se/std/Levels.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/kr/jbnu/se/std/Shop.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kr/jbnu/se/std/Shop.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kr/jbnu/se/std/Superduck.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kr/jbnu/se/std/Superduck.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/kr/jbnu/se/std/Weapon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kr/jbnu/se/std/Weapon.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/kr/jbnu/se/std/Weaponduck.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kr/jbnu/se/std/Weaponduck.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/kr/jbnu/se/std/Canvas.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kr/jbnu/se/std/Canvas.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/kr/jbnu/se/std/Game$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kr/jbnu/se/std/Game$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/kr/jbnu/se/std/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kr/jbnu/se/std/Game.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/kr/jbnu/se/std/Levels$lev4.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kr/jbnu/se/std/Levels$lev4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/kr/jbnu/se/std/Levels.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kr/jbnu/se/std/Levels.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/kr/jbnu/se/std/Shop.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kr/jbnu/se/std/Shop.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/kr/jbnu/se/std/Superduck.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kr/jbnu/se/std/Superduck.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,14 +32,14 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "git-widget-placeholder": "trying-merge",
-    "last_opened_file_path": "C:/Users/pcy79/OneDrive - 전북대학교/shoottheDuck/src/main/resources/images",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "애플리케이션.Window.executor": "Run"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;git-widget-placeholder&quot;: &quot;trying-merge&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/pcy79/OneDrive - 전북대학교/shoottheDuck/src/main/resources/images&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;애플리케이션.Window.executor&quot;: &quot;Run&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\pcy79\OneDrive - 전북대학교\shoottheDuck\src\main\resources\images" />
@@ -117,7 +113,15 @@
       <option name="project" value="LOCAL" />
       <updated>1729585075337</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="로직 완성">
+      <option name="closed" value="true" />
+      <created>1729586404781</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1729586404781</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -130,6 +134,7 @@
     <MESSAGE value="장전 제외 모두 완료(이미지 추가 필요)" />
     <MESSAGE value="장전 리볼버 제외 다른 무기들 안됨(수정 필요)" />
     <MESSAGE value="장전기능 완성" />
-    <option name="LAST_COMMIT_MESSAGE" value="장전기능 완성" />
+    <MESSAGE value="로직 완성" />
+    <option name="LAST_COMMIT_MESSAGE" value="로직 완성" />
   </component>
 </project>

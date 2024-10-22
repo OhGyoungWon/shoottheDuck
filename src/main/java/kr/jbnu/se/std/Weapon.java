@@ -72,14 +72,14 @@ public abstract class Weapon {
         }
     }
 
-    public static class Odin extends Weapon {
-        public Odin(BufferedImage gunImage) {
-            super(gunImage, 2, 150_000_000, 70); // 피해량 5, 발사 딜레이 0.2초
+    public static class Sniper extends Weapon {
+        public Sniper(BufferedImage gunImage) {
+            super(gunImage, 30, 3_000_000_000L, 5); // 피해량 5, 발사 딜레이 0.2초
         }
 
         @Override
         public String getName() {
-            return "Odin";
+            return "Sniper";
         }
 
     }

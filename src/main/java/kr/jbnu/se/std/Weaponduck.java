@@ -34,8 +34,8 @@ public class Weaponduck {
             super(x, y, speed, score, hp, weadckImg);
         }
     }
-    public static class Odinduck extends Weaponduck{
-        public Odinduck(int x, int y, float speed, int score, int hp, BufferedImage weadckImg) {
+    public static class Sniperduck extends Weaponduck{
+        public Sniperduck(int x, int y, float speed, int score, int hp, BufferedImage weadckImg) {
             super(x, y, speed, score, hp, weadckImg);
         }
     }

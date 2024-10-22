@@ -130,13 +130,13 @@ public abstract class Canvas extends JPanel implements KeyListener, MouseListene
         // 4번 키: Odin
         if (keyCode == KeyEvent.VK_4) {
             for (Weapon weapon : Game.getWeapons()) {
-                if (weapon instanceof Weapon.Odin) {
+                if (weapon instanceof Weapon.Sniper) {
                     Game.currentweapon = weapon;
                     Game.timeBetweenShots = Game.currentweapon.getFireDelay();
                     Game.maxAmmo = Game.currentweapon.maxammo;
                     Game.currentAmmo = Game.maxAmmo;
                     Game.isReloading = false;
-                    System.out.println("Odin selected.");
+                    System.out.println("Sniper selected.");
                     break;
                 }
             }
