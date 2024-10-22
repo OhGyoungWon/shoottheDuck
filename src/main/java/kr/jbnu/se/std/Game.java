@@ -71,7 +71,9 @@ public class Game {
      */
 
     // 권총 클래스 추가
-    private Pistol pistol;
+    private DrawGun pistol;
+    private DrawGun revolver;
+    private DrawGun submachine;
 
     private Shop shop;
 
@@ -95,6 +97,7 @@ public class Game {
      * Bottom grass.
      */
     private BufferedImage grassImg;
+    private BufferedImage backgrassImg;
     
     /**
      * kr.jbnu.se.std.Duck image.
@@ -209,11 +212,14 @@ public class Game {
     {
         try
         {
-            URL backgroundImgUrl = this.getClass().getResource("/images/background.jpg");
+            URL backgroundImgUrl = this.getClass().getResource("/images/background2.png");
             backgroundImg = ImageIO.read(backgroundImgUrl);
             
             URL grassImgUrl = this.getClass().getResource("/images/grass.png");
             grassImg = ImageIO.read(grassImgUrl);
+
+            URL backgrassImgUrl = this.getClass().getResource("/images/backgrass.png");
+            backgrassImg = ImageIO.read(backgrassImgUrl);
             
             URL duckImgUrl = this.getClass().getResource("/images/duck.png");
             duckImg = ImageIO.read(duckImgUrl);
@@ -228,7 +234,15 @@ public class Game {
 
             URL pistolImgUrl = this.getClass().getResource("/images/pistol.png");
             BufferedImage pistolImg = ImageIO.read(pistolImgUrl);
-            pistol = new Pistol(pistolImg, 11, 10_000_000L);  // 11프레임, 프레임당 100ms
+            pistol = new DrawGun(pistolImg, 11, 10_000_000L);  // 11프레임, 프레임당 100ms
+
+            URL revolverImgUrl = this.getClass().getResource("/images/revolver.png");
+            BufferedImage revolverImg = ImageIO.read(revolverImgUrl);
+            revolver = new DrawGun(revolverImg, 10, 30_000_000L);  // 10프레임, 프레임당 300ms
+
+            URL submachineImgUrl = this.getClass().getResource("/images/submachine.png");
+            BufferedImage submachineImg = ImageIO.read(submachineImgUrl);
+            submachine = new DrawGun(submachineImg, 12, 8_000_000L);  // 10프레임, 프레임당 300ms
 
             URL gunshotSoundUrl = this.getClass().getResource("/sounds/single-gunshot.wav");
             soundPlayer.loadSound("gunshot", gunshotSoundUrl);
@@ -236,16 +250,16 @@ public class Game {
             URL backgroundMusicUrl = this.getClass().getResource("/sounds/Fluffing a Duck.wav");
             soundPlayer.loadSound("backgroundMusic", backgroundMusicUrl);
 
-            URL revImgUrl = this.getClass().getResource("/images/revolver.png");
+            URL revImgUrl = this.getClass().getResource("/images/gunbox.png");
             revImg = ImageIO.read(revImgUrl);
 
-            URL smgImgUrl = this.getClass().getResource("/images/smg.png");
+            URL smgImgUrl = this.getClass().getResource("/images/gunbox.png");
             smgImg = ImageIO.read(smgImgUrl);
 
-            URL rifImgUrl = this.getClass().getResource("/images/rifle.png");
+            URL rifImgUrl = this.getClass().getResource("/images/gunbox.png");
             rifImg = ImageIO.read(rifImgUrl);
 
-            URL odinImgUrl = this.getClass().getResource("/images/odin.png");
+            URL odinImgUrl = this.getClass().getResource("/images/gunbox.png");
             odinImg = ImageIO.read(odinImgUrl);
 
         }
@@ -330,15 +344,15 @@ public class Game {
         //Weapon ducks 소환
         if(killedDucks == 30 && smgduck.isEmpty()){
             smgduck.add(new Weaponduck.Smgduck(Duck.duckLines[Duck.nextDuckLines][0] + random.nextInt(200),
-                    (int) (Framework.frameHeight*0.2), lvdata.speed, lvdata.ducksc*2, lvdata.duckhp*2, smgImg ));
+                    (int) (Framework.frameHeight*0.25), lvdata.speed, lvdata.ducksc*2, lvdata.duckhp*2, smgImg ));
         }
         if(killedDucks == 50 && rifduck.isEmpty()){
             rifduck.add(new Weaponduck.Rifduck(Framework.frameWidth + random.nextInt(200),
-                    (int) (Framework.frameHeight*0.2), lvdata.speed, lvdata.ducksc*2, lvdata.duckhp*2, rifImg ));
+                    (int) (Framework.frameHeight*0.25), lvdata.speed, lvdata.ducksc*2, lvdata.duckhp*2, rifImg ));
         }
         if(killedDucks == 70 && odinduck.isEmpty()){
             odinduck.add(new Weaponduck.Odinduck(Framework.frameWidth + random.nextInt(200),
-                    (int) (Framework.frameHeight*0.2), lvdata.speed, lvdata.ducksc*2, lvdata.duckhp*2, odinImg ));
+                    (int) (Framework.frameHeight*0.25), lvdata.speed, lvdata.ducksc*2, lvdata.duckhp*2, odinImg ));
         }
 
         // Update all of the ducks.
@@ -406,8 +420,12 @@ public class Game {
                 soundPlayer.play("gunshot");
 
                 // 총 모션 재생
-                if (!pistol.isShooting()) {
+                if (!pistol.isShooting() && currentweapon.getName().equals("Pistol")) {
                     pistol.startShooting();
+                } else if (!revolver.isShooting() && currentweapon.getName().equals("Revolver")) {
+                    revolver.startShooting();
+                } else if (!submachine.isShooting() && currentweapon.getName().equals("SMG")) {
+                    submachine.startShooting();
                 }
 
                 // We go over all the ducks and we look if any of them was shoot.
@@ -566,7 +584,16 @@ public class Game {
                 i--;
             }
         }
-        pistol.update();
+
+        if (currentweapon.getName().equals("Pistol")) {
+            pistol.update();
+        }
+        else if (currentweapon.getName().equals("Revolver")) {
+            revolver.update();
+        }
+        else if (currentweapon.getName().equals("SMG")) {
+            submachine.update();
+        }
 
         // When 200 ducks runaway, the game ends.
         if(runawayDucks >= 100) {
@@ -609,6 +636,8 @@ public class Game {
             odinduck.get(i).Draw(g2d);
         }
 
+        g2d.drawImage(backgrassImg, 0, Framework.frameHeight/32 * 10, Framework.frameWidth, backgrassImg.getHeight(), null);
+
         if (shop.isShopOpen()) {
             shop.drawShop(g2d);
         }
@@ -618,10 +647,17 @@ public class Game {
         }
 
         g2d.drawImage(grassImg, 0, Framework.frameHeight - grassImg.getHeight(), Framework.frameWidth, grassImg.getHeight(), null);
-        
         g2d.drawImage(sightImg, mousePosition.x - sightImgMiddleWidth, mousePosition.y - sightImgMiddleHeight, null);
 
-        g2d.drawImage(pistol.getCurrentFrame(), 0, Framework.frameHeight - (Framework.frameHeight / 4), (Framework.frameHeight / 15) * 8, (Framework.frameHeight / 15) * 5, null);
+        if (currentweapon.getName().equals("Pistol")) {
+            g2d.drawImage(pistol.getCurrentFrame(), 0, Framework.frameHeight - (Framework.frameHeight / 4), (Framework.frameHeight / 15) * 8, (Framework.frameHeight / 15) * 5, null);
+        }
+        else if (currentweapon.getName().equals("Revolver")) {
+            g2d.drawImage(revolver.getCurrentFrame(), Framework.frameHeight/10, Framework.frameHeight - (Framework.frameHeight / 3), (Framework.frameHeight / 15) * 8, (Framework.frameHeight / 15) * 5, null);
+        }
+        else if (currentweapon.getName().equals("SMG")) {
+            g2d.drawImage(submachine.getCurrentFrame(), Framework.frameHeight/10, Framework.frameHeight - (Framework.frameHeight / 4), (Framework.frameHeight / 15) * 8, (Framework.frameHeight / 15) * 5, null);
+        }
 
         g2d.setFont(font);
         g2d.setColor(Color.darkGray);
