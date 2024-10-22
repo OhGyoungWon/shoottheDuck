@@ -133,6 +133,9 @@ public class Game {
     public static int atspdpls;
     public static int redspd;
 
+    public static int rubberduckskills;
+    public static boolean nuclearswitch;
+
     private ArrayList<DamageText> damageTexts;
 
     public Game()
@@ -179,6 +182,7 @@ public class Game {
         money = 0;
         shoots = 0;
         level = 1;
+        nuclearswitch = false;
 
         adiatt = 0;
         redspd = 0;
@@ -299,6 +303,10 @@ public class Game {
                 shop.handleClick(mousePosition);  // 상점 클릭 처리
             }
             return;
+        }
+        if(nuclearswitch){
+            reduceHealthOfAllObjects();
+            nuclearswitch = false;
         }
         // Creates a new duck, if it's the time, and add it to the array list.
         if(System.nanoTime() - Duck.lastDuckTime >= lvdata.sumdly && superducks.isEmpty())
@@ -667,5 +675,78 @@ public class Game {
     }
     public static ArrayList<Weapon> getWeapons(){
         return weapons;
+    }
+    public void reduceHealthOfAllObjects() {
+        // ducks 리스트의 모든 객체 체력을 999 감소
+        for (int i = 0; i < ducks.size(); i++) {
+            Duck duck = ducks.get(i);
+            duck.hp -= 999;
+
+            // DamageText 추가
+            damageTexts.add(new DamageText(duck.x, duck.y, 999));
+
+            if (duck.hp <= 0) {
+                ducks.remove(i);
+                i--; // 리스트에서 객체를 제거한 후 인덱스 조정
+            }
+        }
+
+        // superducks 리스트의 모든 객체 체력을 999 감소
+        for (int i = 0; i < superducks.size(); i++) {
+            Superduck superduck = superducks.get(i);
+            superduck.hp -= 999;
+
+            // DamageText 추가
+            damageTexts.add(new DamageText(superduck.x, superduck.y, 999));
+
+            if (superduck.hp <= 0) {
+                superducks.remove(i);
+                i--;
+            }
+        }
+
+        // smgduck 리스트의 모든 객체 체력을 999 감소
+        for (int i = 0; i < smgduck.size(); i++) {
+            Weaponduck.Smgduck smg = smgduck.get(i);
+            smg.hp -= 999;
+
+            // DamageText 추가
+            damageTexts.add(new DamageText(smg.x, smg.y, 999));
+
+            if (smg.hp <= 0) {
+                smgduck.remove(i);
+                i--;
+            }
+        }
+
+        // rifduck 리스트의 모든 객체 체력을 999 감소
+        for (int i = 0; i < rifduck.size(); i++) {
+            Weaponduck.Rifduck rif = rifduck.get(i);
+            rif.hp -= 999;
+
+            // DamageText 추가
+            damageTexts.add(new DamageText(rif.x, rif.y, 999));
+
+            if (rif.hp <= 0) {
+                rifduck.remove(i);
+                i--;
+            }
+        }
+
+        // odinduck 리스트의 모든 객체 체력을 999 감소
+        for (int i = 0; i < odinduck.size(); i++) {
+            Weaponduck.Odinduck odin = odinduck.get(i);
+            odin.hp -= 999;
+
+            // DamageText 추가
+            damageTexts.add(new DamageText(odin.x, odin.y, 999));
+
+            if (odin.hp <= 0) {
+                odinduck.remove(i);
+                i--;
+            }
+        }
+
+        // 여기서 다른 객체 리스트에 대해서도 동일한 처리를 해줄 수 있습니다.
     }
 }

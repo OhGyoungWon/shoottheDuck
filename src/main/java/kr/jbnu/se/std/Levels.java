@@ -29,17 +29,17 @@ public class Levels {
     }
     public static class lev2 extends Levels{
         public lev2() {
-            super(-3, 3, 50, 45, 800_000_000);
+            super(-3, 4, 60, 45, 800_000_000);
         }
     }
     public static class lev3 extends Levels {
         public lev3() {
-            super(-5, 6, 70, 60, 600_000_000);
+            super(-4, 6, 100, 60, 600_000_000);
         }
     }
     public static class lev4 extends Levels {
         public lev4() {
-            super(-7, 8, 100, 70, 700_000_000);
+            super(-5, 8, 120, 75, 400_000_000);
         }
     }
 }

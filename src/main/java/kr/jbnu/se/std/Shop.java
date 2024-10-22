@@ -129,7 +129,7 @@ public class Shop {
         }
 
         // 총알 클릭 확인
-        if (bulletBounds.contains(mousePosition)) {
+        if (bulletBounds.contains(mousePosition)) {//여기 로직 구현해야돼 장전을 구현해야 이걸 할수가 있어
             System.out.println("총알 아이템 클릭됨!");
             // 총알 아이템 클릭 처리 로직 추가
             if(Game.money > 300){
@@ -182,9 +182,9 @@ public class Shop {
         if (rubberDuckBounds.contains(mousePosition)) {
             System.out.println("러버덕 아이템 클릭됨!");
             // 러버덕 아이템 클릭 처리 로직 추가
-            if(Game.money > 1500){
-                Game.money -= 1500;
-                Game.adiatt += 3;
+            if(Game.money > 2000){
+                Game.money -= 2000;
+                Game.rubberduckskills++;
                 Purchase("러버덕");
             }
             else{
