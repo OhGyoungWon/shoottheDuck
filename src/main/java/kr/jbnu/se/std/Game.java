@@ -463,7 +463,7 @@ public class Game {
                 if(currentAmmo > 0) {
                     shoots++;
                     currentAmmo--;
-// 총 사운드 재생
+                    // 총 사운드 재생
 
                     // 총 모션 재생
                     if (!pistol.isShooting() && currentweapon.getName().equals("Pistol")) {

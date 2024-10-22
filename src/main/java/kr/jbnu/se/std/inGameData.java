@@ -8,7 +8,7 @@ import java.util.Map;
 public class inGameData {
 
     private static final FirebaseDatabase db = FirebaseDatabase.getInstance();
-    private static DatabaseReference usersRef = db.getReference("users/userInfo");
+    private static DatabaseReference usersRef = db.getReference("users/");
 
     public inGameData(){
 
