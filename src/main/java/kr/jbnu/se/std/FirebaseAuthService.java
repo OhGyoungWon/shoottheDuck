@@ -35,14 +35,12 @@ public class FirebaseAuthService {
 
     //Firebase Realtime Database에 사용자 정보를 저장하는 메소드
     public static void setUser(String email, String password, String nickname) {
-        // Firebase Realtime Database 참조 가져오기(User라는 큰 데이터 틀 형성)
         DatabaseReference databaseRef = FirebaseDatabase.getInstance().getReference("users/userInfo");
-
-        // 이메일을 키로 사용하기 위해 특수문자 "."를 ","로 변환
         String sanitizedEmail = email.replace(".", ",");
 
         // 이메일 아래에 비밀번호 저장
-        databaseRef.child(sanitizedEmail).setValue(new User(password, 0, 0, nickname), (databaseError, databaseReference) -> {
+        databaseRef.child(sanitizedEmail).setValue(new User(password, 0, 0, nickname),
+                (databaseError, databaseReference) -> {
             if (databaseError != null) {
                 System.out.println("Error saving user: " + databaseError.getMessage());
             } else {
@@ -56,16 +54,9 @@ public class FirebaseAuthService {
 
     // 이메일과 비밀번호로 로그인하는 메서드
     public static boolean loginUser(String email, String password) {
-        // 이메일을 키로 사용하기 위해 특수문자 "."를 ","로 변환
         String sanitizedEmail = email.replace(".", ",");
-
-        // Firebase Realtime Database 참조 가져오기
         DatabaseReference databaseRef = FirebaseDatabase.getInstance().getReference("users/userInfo/" + sanitizedEmail);
-
-        // 비동기 결과를 동기적으로 처리하기 위해 CompletableFuture 사용
         CompletableFuture<Boolean> future = new CompletableFuture<>();
-
-        // 비밀번호를 동일한 방식으로 해시
         String hashedPassword = hashPassword(password);
 
         // 데이터베이스에서 비밀번호 가져오기
@@ -97,7 +88,7 @@ public class FirebaseAuthService {
         }
     }
 
-    // 비밀번호 해싱 함수 예시
+    // 비밀번호 해싱 함수
     static String hashPassword(String password) {
         try {
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
