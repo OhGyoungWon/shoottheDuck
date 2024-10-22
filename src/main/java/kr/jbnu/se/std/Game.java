@@ -1,11 +1,7 @@
 package kr.jbnu.se.std;
 
 
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Graphics2D;
-import java.awt.Point;
-import java.awt.Rectangle;
+import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -136,6 +132,12 @@ public class Game {
     public static int rubberduckskills;
     public static boolean nuclearswitch;
 
+    public static boolean isReloading = false;  // 장전 중인지 여부
+    public static int currentAmmo;  // 현재 남은 탄약 수
+    public static int maxAmmo;  // 탄창 크기
+    private long reloadStartTime;  // 장전 시작 시간
+    private static long reloadDuration;  // 장전 시간 1.5초
+
     private ArrayList<DamageText> damageTexts;
 
     public Game()
@@ -183,6 +185,8 @@ public class Game {
         shoots = 0;
         level = 1;
         nuclearswitch = false;
+        reloadDuration = 1_500_000_000L;
+        isReloading = false;
 
         adiatt = 0;
         redspd = 0;
@@ -200,6 +204,10 @@ public class Game {
             timeBetweenShots = 50_000_000;
         }
         damageTexts = new ArrayList<>();
+
+        maxAmmo = currentweapon.maxammo;
+        currentAmmo = maxAmmo;
+
     }
 
     /**
@@ -304,6 +312,16 @@ public class Game {
             }
             return;
         }
+        if (isReloading) {
+            if (System.nanoTime() - reloadStartTime >= reloadDuration) {  // 1.5초 장전 시간
+                isReloading = false;  // 장전 완료
+                currentAmmo = maxAmmo;  // 탄창 재충전
+            } else {
+                // 장전 시간이 지나면 장전 완료 처리
+                isReloading = false;
+                currentAmmo = maxAmmo;
+            }
+        }
         if(nuclearswitch){
             reduceHealthOfAllObjects();
             nuclearswitch = false;
@@ -395,166 +413,152 @@ public class Game {
         }
 
         // Does player shoots?
-        if(Canvas.mouseButtonState(MouseEvent.BUTTON1))
+        if(Canvas.mouseButtonState(MouseEvent.BUTTON1) && !isReloading)
         {
             // Checks if it can shoot again.
             if(System.nanoTime() - lastTimeShoot >= timeBetweenShots)
             {
 
-                shoots++;
+                if(currentAmmo > 0) {
+                    shoots++;
+                    currentAmmo--;
 // 총 사운드 재생
-                soundPlayer.play("gunshot");
+                    soundPlayer.play("gunshot");
 
-                // 총 모션 재생
-                if (!pistol.isShooting()) {
-                    pistol.startShooting();
-                }
-
-                // We go over all the ducks and we look if any of them was shoot.
-                for(int i = 0; i < ducks.size(); i++)
-                {
-                    // We check, if the mouse was over ducks head or body, when player has shot.
-                    if(new Rectangle(ducks.get(i).x + 11, ducks.get(i).y     , 44, 50).contains(mousePosition) ||
-                       new Rectangle(ducks.get(i).x + 15, ducks.get(i).y + 39, 64, 44).contains(mousePosition))
-                    {
-                        ducks.get(i).hp-=currentweapon.getDamage() + adiatt;
-                        damageTexts.add(new DamageText(mousePosition.x, mousePosition.y, currentweapon.getDamage() + adiatt));
-                        if(ducks.get(i).hp <= 0){
-                            killedDucks++;
-                            score += ducks.get(i).score;
-                            money += ducks.get(i).score;
-
-                            // Remove the duck from the array list.
-                            ducks.remove(i);
-
-                            // We found the duck that player shoot so we can leave the for loop.
-                            break;
-                        }
+                    // 총 모션 재생
+                    if (!pistol.isShooting()) {
+                        pistol.startShooting();
                     }
-                }
-                for(int i = 0; i < superducks.size(); i++){
-                    if (new Rectangle(superducks.get(i).x, superducks.get(i).y,
-                            superduckImg.getWidth(), superduckImg.getHeight()).contains(mousePosition)){
-                        if(!superducks.isEmpty() && new Rectangle(superducks.get(i).x, superducks.get(i).y,
-                                superduckImg.getWidth(), superduckImg.getHeight()).contains(mousePosition))
-                        {
-                            superducks.get(i).hp-=currentweapon.getDamage() + adiatt;
+
+                    // We go over all the ducks and we look if any of them was shoot.
+                    for (int i = 0; i < ducks.size(); i++) {
+                        // We check, if the mouse was over ducks head or body, when player has shot.
+                        if (new Rectangle(ducks.get(i).x + 11, ducks.get(i).y, 44, 50).contains(mousePosition) ||
+                                new Rectangle(ducks.get(i).x + 15, ducks.get(i).y + 39, 64, 44).contains(mousePosition)) {
+                            ducks.get(i).hp -= currentweapon.getDamage() + adiatt;
                             damageTexts.add(new DamageText(mousePosition.x, mousePosition.y, currentweapon.getDamage() + adiatt));
-                            if(superducks.get(i).hp <= 0){
+                            if (ducks.get(i).hp <= 0) {
                                 killedDucks++;
-                                score += superducks.get(i).score;
-                                money += superducks.get(i).score;
+                                score += ducks.get(i).score;
+                                money += ducks.get(i).score;
 
                                 // Remove the duck from the array list.
-                                superducks.remove(i);
-                                shop.openShop();
-                                gamelevel++;
+                                ducks.remove(i);
 
                                 // We found the duck that player shoot so we can leave the for loop.
                                 break;
                             }
                         }
                     }
-                }
-                for(int i = 0; i < smgduck.size(); i++){
-                    if (new Rectangle(smgduck.get(i).x, smgduck.get(i).y,
-                            smgImg.getWidth(), smgImg.getHeight()).contains(mousePosition)){
-                        if(!smgduck.isEmpty() && new Rectangle(smgduck.get(i).x, smgduck.get(i).y,
-                                smgImg.getWidth(), smgImg.getHeight()).contains(mousePosition))
-                        {
-                            smgduck.get(i).hp-=currentweapon.getDamage() + adiatt;
-                            damageTexts.add(new DamageText(mousePosition.x, mousePosition.y, currentweapon.getDamage() + adiatt));
-                            if(smgduck.get(i).hp <= 0){
-                                killedDucks++;
-                                score += smgduck.get(i).score;
-                                money += smgduck.get(i).score;
+                    for (int i = 0; i < superducks.size(); i++) {
+                        if (new Rectangle(superducks.get(i).x, superducks.get(i).y,
+                                superduckImg.getWidth(), superduckImg.getHeight()).contains(mousePosition)) {
+                            if (!superducks.isEmpty() && new Rectangle(superducks.get(i).x, superducks.get(i).y,
+                                    superduckImg.getWidth(), superduckImg.getHeight()).contains(mousePosition)) {
+                                superducks.get(i).hp -= currentweapon.getDamage() + adiatt;
+                                damageTexts.add(new DamageText(mousePosition.x, mousePosition.y, currentweapon.getDamage() + adiatt));
+                                if (superducks.get(i).hp <= 0) {
+                                    killedDucks++;
+                                    score += superducks.get(i).score;
+                                    money += superducks.get(i).score;
 
-                                // Remove the duck from the array list.
-                                smgduck.remove(i);
-                                currentweapon = new Weapon.SMG(smgImg);
-                                timeBetweenShots = currentweapon.fireDelay;
-                                weapons.add(new Weapon.SMG(smgImg));
+                                    // Remove the duck from the array list.
+                                    superducks.remove(i);
+                                    shop.openShop();
+                                    gamelevel++;
 
-                                // We found the duck that player shoot so we can leave the for loop.
-                                break;
+                                    // We found the duck that player shoot so we can leave the for loop.
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                    for (int i = 0; i < smgduck.size(); i++) {
+                        if (new Rectangle(smgduck.get(i).x, smgduck.get(i).y,
+                                smgImg.getWidth(), smgImg.getHeight()).contains(mousePosition)) {
+                            if (!smgduck.isEmpty() && new Rectangle(smgduck.get(i).x, smgduck.get(i).y,
+                                    smgImg.getWidth(), smgImg.getHeight()).contains(mousePosition)) {
+                                smgduck.get(i).hp -= currentweapon.getDamage() + adiatt;
+                                damageTexts.add(new DamageText(mousePosition.x, mousePosition.y, currentweapon.getDamage() + adiatt));
+                                if (smgduck.get(i).hp <= 0) {
+                                    killedDucks++;
+                                    score += smgduck.get(i).score;
+                                    money += smgduck.get(i).score;
+
+                                    // Remove the duck from the array list.
+                                    smgduck.remove(i);
+                                    currentweapon = new Weapon.SMG(smgImg);
+                                    maxAmmo = currentweapon.maxammo;
+                                    currentAmmo = maxAmmo;
+                                    isReloading = false;
+                                    timeBetweenShots = currentweapon.fireDelay;
+                                    weapons.add(new Weapon.SMG(smgImg));
+
+                                    // We found the duck that player shoot so we can leave the for loop.
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                    for (int i = 0; i < rifduck.size(); i++) {
+                        if (new Rectangle(rifduck.get(i).x, rifduck.get(i).y,
+                                rifImg.getWidth(), rifImg.getHeight()).contains(mousePosition)) {
+                            if (!rifduck.isEmpty() && new Rectangle(rifduck.get(i).x, rifduck.get(i).y,
+                                    rifImg.getWidth(), rifImg.getHeight()).contains(mousePosition)) {
+                                rifduck.get(i).hp -= currentweapon.getDamage() + adiatt;
+                                damageTexts.add(new DamageText(mousePosition.x, mousePosition.y, currentweapon.getDamage() + adiatt));
+                                if (rifduck.get(i).hp <= 0) {
+                                    killedDucks++;
+                                    score += rifduck.get(i).score;
+                                    money += rifduck.get(i).score;
+
+                                    // Remove the duck from the array list.
+                                    rifduck.remove(i);
+                                    currentweapon = new Weapon.Rifle(rifImg);
+                                    maxAmmo = currentweapon.maxammo;
+                                    currentAmmo = maxAmmo;
+                                    isReloading = false;
+                                    timeBetweenShots = currentweapon.fireDelay;
+                                    weapons.add(new Weapon.Rifle(smgImg));
+
+                                    // We found the duck that player shoot so we can leave the for loop.
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                    for (int i = 0; i < odinduck.size(); i++) {
+                        if (new Rectangle(odinduck.get(i).x, odinduck.get(i).y,
+                                odinImg.getWidth(), odinImg.getHeight()).contains(mousePosition)) {
+                            if (!odinduck.isEmpty() && new Rectangle(odinduck.get(i).x, odinduck.get(i).y,
+                                    odinImg.getWidth(), odinImg.getHeight()).contains(mousePosition)) {
+                                odinduck.get(i).hp -= currentweapon.getDamage() + adiatt;
+                                damageTexts.add(new DamageText(mousePosition.x, mousePosition.y, currentweapon.getDamage() + adiatt));
+                                if (odinduck.get(i).hp <= 0) {
+                                    killedDucks++;
+                                    score += odinduck.get(i).score;
+                                    money += odinduck.get(i).score;
+
+                                    // Remove the duck from the array list.
+                                    odinduck.remove(i);
+                                    currentweapon = new Weapon.Odin(smgImg);
+                                    maxAmmo = currentweapon.maxammo;
+                                    currentAmmo = maxAmmo;
+                                    isReloading = false;
+                                    timeBetweenShots = currentweapon.fireDelay;
+                                    weapons.add(new Weapon.Odin(smgImg));
+
+                                    // We found the duck that player shoot so we can leave the for loop.
+                                    break;
+                                }
                             }
                         }
                     }
                 }
-                for(int i = 0; i < rifduck.size(); i++){
-                    if (new Rectangle(rifduck.get(i).x, rifduck.get(i).y,
-                            rifImg.getWidth(), rifImg.getHeight()).contains(mousePosition)){
-                        if(!rifduck.isEmpty() && new Rectangle(rifduck.get(i).x, rifduck.get(i).y,
-                                rifImg.getWidth(), rifImg.getHeight()).contains(mousePosition))
-                        {
-                            rifduck.get(i).hp-=currentweapon.getDamage() + adiatt;
-                            damageTexts.add(new DamageText(mousePosition.x, mousePosition.y, currentweapon.getDamage() + adiatt));
-                            if(rifduck.get(i).hp <= 0){
-                                killedDucks++;
-                                score += rifduck.get(i).score;
-                                money += rifduck.get(i).score;
-
-                                // Remove the duck from the array list.
-                                rifduck.remove(i);
-                                currentweapon = new Weapon.Rifle(rifImg);
-                                timeBetweenShots = currentweapon.fireDelay;
-                                weapons.add(new Weapon.Rifle(smgImg));
-
-                                // We found the duck that player shoot so we can leave the for loop.
-                                break;
-                            }
-                        }
-                    }
-                }
-                for(int i = 0; i < odinduck.size(); i++){
-                    if (new Rectangle(odinduck.get(i).x, odinduck.get(i).y,
-                            odinImg.getWidth(), odinImg.getHeight()).contains(mousePosition)){
-                        if(!odinduck.isEmpty() && new Rectangle(odinduck.get(i).x, odinduck.get(i).y,
-                                odinImg.getWidth(), odinImg.getHeight()).contains(mousePosition))
-                        {
-                            odinduck.get(i).hp-=currentweapon.getDamage() + adiatt;
-                            damageTexts.add(new DamageText(mousePosition.x, mousePosition.y, currentweapon.getDamage() + adiatt));
-                            if(odinduck.get(i).hp <= 0){
-                                killedDucks++;
-                                score += odinduck.get(i).score;
-                                money += odinduck.get(i).score;
-
-                                // Remove the duck from the array list.
-                                odinduck.remove(i);
-                                currentweapon = new Weapon.Odin(smgImg);
-                                timeBetweenShots = currentweapon.fireDelay;
-                                weapons.add(new Weapon.Odin(smgImg));
-
-                                // We found the duck that player shoot so we can leave the for loop.
-                                break;
-                            }
-                        }
-                    }
-                }
-                for(int i = 0; i < odinduck.size(); i++){
-                    if (new Rectangle(odinduck.get(i).x, odinduck.get(i).y,
-                            odinImg.getWidth(), odinImg.getHeight()).contains(mousePosition)){
-                        if(!odinduck.isEmpty() && new Rectangle(odinduck.get(i).x, odinduck.get(i).y,
-                                odinImg.getWidth(), odinImg.getHeight()).contains(mousePosition))
-                        {
-                            odinduck.get(i).hp-=currentweapon.getDamage() + adiatt;
-                            damageTexts.add(new DamageText(mousePosition.x, mousePosition.y, currentweapon.getDamage() + adiatt));
-                            if(odinduck.get(i).hp <= 0){
-                                killedDucks++;
-                                score += odinduck.get(i).score;
-                                money += odinduck.get(i).score;
-
-                                // Remove the duck from the array list.
-                                odinduck.remove(i);
-                                currentweapon = new Weapon.Odin(smgImg);
-                                timeBetweenShots = currentweapon.fireDelay;
-                                weapons.add(new Weapon.Odin(smgImg));
-
-                                // We found the duck that player shoot so we can leave the for loop.
-                                break;
-                            }
-                        }
-                    }
+                else if(currentAmmo == 0){
+                    isReloading = true;
+                    reloadStartTime = System.nanoTime();  // 장전 시작 시간 기록
+                    System.out.println("장전 시작...");
                 }
 
                 lastTimeShoot = System.nanoTime();
@@ -573,13 +577,6 @@ public class Game {
             soundPlayer.stop("backgroundMusic");
             Framework.gameState = Framework.GameState.GAMEOVER;
         }
-
-        if (shop.isShopOpen()) {
-            if (Canvas.mouseButtonState(MouseEvent.BUTTON1)) {
-                shop.handleClick(mousePosition);  // 상점 클릭 처리
-            }
-            return;
-        }
     }
 
     /**
@@ -591,7 +588,14 @@ public class Game {
     public void Draw(Graphics2D g2d, Point mousePosition)
     {
         g2d.drawImage(backgroundImg, 0, 0, Framework.frameWidth, Framework.frameHeight, null);
-
+        if (isReloading) {
+            g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);  // 부드러운 텍스트
+            g2d.setFont(new Font("Arial", Font.BOLD, 30));  // 폰트 설정
+            g2d.setColor(Color.RED);  // 색상 설정
+            String reloadMessage = "장전 중...";
+            int stringWidth = g2d.getFontMetrics().stringWidth(reloadMessage);  // 텍스트 가로 길이
+            g2d.drawString(reloadMessage, (Framework.frameWidth - stringWidth) / 2, Framework.frameHeight / 2);  // 화면 중앙에 텍스트 표시
+        }
         // Here we draw all the ducks.
         for(int i = 0; i < ducks.size(); i++) {
             ducks.get(i).Draw(g2d);
@@ -633,7 +637,9 @@ public class Game {
         g2d.drawString("Money: " + money, 560, 21);
         g2d.drawString("LEVEL: " + level, 680, 21);
         g2d.drawString("Weapon: " + currentweapon.getName(), 840, 21);
+        g2d.drawString("Boolets: " + currentAmmo, 840, 42);
         shop.drawPurchaseMessage(g2d);
+
     }
     
     
