@@ -222,7 +222,7 @@ public class Game {
     {
         try
         {
-            URL backgroundImgUrl = this.getClass().getResource("/images/background2.png");
+            URL backgroundImgUrl = this.getClass().getResource("/images/background.png");
             backgroundImg = ImageIO.read(backgroundImgUrl);
             
             URL grassImgUrl = this.getClass().getResource("/images/grass.png");
@@ -237,7 +237,7 @@ public class Game {
             URL superduckImgUrl = this.getClass().getResource("/images/superduck.png");
             superduckImg = ImageIO.read(superduckImgUrl);
 
-            URL sightImgUrl = this.getClass().getResource("/images/pistol_sight.png");
+            URL sightImgUrl = this.getClass().getResource("/images/sight.png");
             sightImg = ImageIO.read(sightImgUrl);
             sightImgMiddleWidth = sightImg.getWidth() / 2;
             sightImgMiddleHeight = sightImg.getHeight() / 2;
@@ -262,12 +262,17 @@ public class Game {
             BufferedImage sniperImg = ImageIO.read(sniperImgUrl);
             sniper = new DrawGun(sniperImg, 56, 26_000_000L);
 
-            URL revolverReloadImgUrl = this.getClass().getResource("/images/revolver_reload.png");
-            BufferedImage revolverReloadImg = ImageIO.read(revolverReloadImgUrl);
-            revolver = new DrawGun(revolverReloadImg, 29, 15_000_000L);
-
             URL gunshotSoundUrl = this.getClass().getResource("/sounds/single-gunshot.wav");
             soundPlayer.loadSound("gunshot", gunshotSoundUrl);
+
+            URL smgSoundUrl = this.getClass().getResource("/sounds/Submachine.wav");
+            soundPlayer.loadSound("smg", smgSoundUrl);
+
+            URL rifleSoundUrl = this.getClass().getResource("/sounds/Rifle.wav");
+            soundPlayer.loadSound("rifle", rifleSoundUrl);
+
+            URL sniperSoundUrl = this.getClass().getResource("/sounds/Sniper.wav");
+            soundPlayer.loadSound("sniper", sniperSoundUrl);
 
             URL backgroundMusicUrl = this.getClass().getResource("/sounds/Fluffing a Duck.wav");
             soundPlayer.loadSound("backgroundMusic", backgroundMusicUrl);
@@ -447,18 +452,21 @@ public class Game {
                     shoots++;
                     currentAmmo--;
 // 총 사운드 재생
-                    soundPlayer.play("gunshot");
-                    
+
                     // 총 모션 재생
                     if (!pistol.isShooting() && currentweapon.getName().equals("Pistol")) {
                         pistol.startShooting();
                     } else if (!revolver.isShooting() && currentweapon.getName().equals("Revolver")) {
+                        soundPlayer.play("gunshot");
                         revolver.startShooting();
                     } else if (!submachine.isShooting() && currentweapon.getName().equals("SMG")) {
+                        soundPlayer.play("smg");
                         submachine.startShooting();
                     } else if (!rifle.isShooting() && currentweapon.getName().equals("Rifle")) {
+                        soundPlayer.play("rifle");
                         rifle.startShooting();
                     } else if (!sniper.isShooting() && currentweapon.getName().equals("Sniper")) {
+                        soundPlayer.play("sniper");
                         sniper.startShooting();
                     }
 
@@ -635,15 +643,6 @@ public class Game {
     public void Draw(Graphics2D g2d, Point mousePosition)
     {
         g2d.drawImage(backgroundImg, 0, 0, Framework.frameWidth, Framework.frameHeight, null);
-        if (isReloading) {
-            g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);  // 부드러운 텍스트
-            g2d.setFont(new Font("Arial", Font.BOLD, 30));  // 폰트 설정
-            g2d.setColor(Color.RED);  // 색상 설정
-            String reloadMessage = "RELOADING...";
-            System.out.println("왜안돼");
-            int stringWidth = g2d.getFontMetrics().stringWidth(reloadMessage);  // 텍스트 가로 길이
-            g2d.drawString(reloadMessage, (Framework.frameWidth - stringWidth) / 2, Framework.frameHeight / 2);  // 화면 중앙에 텍스트 표시
-        }
         // Here we draw all the ducks.
         for(int i = 0; i < ducks.size(); i++) {
             ducks.get(i).Draw(g2d);
@@ -663,6 +662,15 @@ public class Game {
 
         g2d.drawImage(backgrassImg, 0, Framework.frameHeight/32 * 10, Framework.frameWidth, backgrassImg.getHeight(), null);
 
+        if (isReloading) {
+            g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);  // 부드러운 텍스트
+            g2d.setFont(new Font("Arial", Font.BOLD, 30));  // 폰트 설정
+            g2d.setColor(Color.RED);  // 색상 설정
+            String reloadMessage = "RELOADING...";
+            System.out.println("왜안돼");
+            int stringWidth = g2d.getFontMetrics().stringWidth(reloadMessage);  // 텍스트 가로 길이
+            g2d.drawString(reloadMessage, (Framework.frameWidth - stringWidth) / 2, Framework.frameHeight / 2);  // 화면 중앙에 텍스트 표시
+        }
         if (shop.isShopOpen()) {
             shop.drawShop(g2d);
         }

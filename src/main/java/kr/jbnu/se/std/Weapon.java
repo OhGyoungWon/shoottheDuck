@@ -74,7 +74,7 @@ public abstract class Weapon {
 
     public static class Sniper extends Weapon {
         public Sniper(BufferedImage gunImage) {
-            super(gunImage, 30, 1_800_000_000L, 5); // 피해량 5, 발사 딜레이 0.2초
+            super(gunImage, 30, 1_800_000_000L, 5); // 피해량 5, 발사 딜레이 1.8초
         }
 
         @Override
