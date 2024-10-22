@@ -8,8 +8,6 @@ import com.google.firebase.database.*;
  * this 포인터 써서 안하면 안 만들어진다
  */
 public class User {
-    private static final FirebaseDatabase db = FirebaseDatabase.getInstance();
-    private static final DatabaseReference usersRef = db.getReference("users/userInfo");
     public String password;
     public int currentScore;
     public int topScore;

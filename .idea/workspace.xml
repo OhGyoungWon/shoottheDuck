@@ -65,34 +65,34 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.Window.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;dev&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/pcy79/OneDrive - 전북대학교/shoottheDuck/src/main/resources/sounds&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;프로젝트&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.tabs&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;,
-    &quot;애플리케이션.Window.executor&quot;: &quot;Run&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Window.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "dev",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/ok993/Downloads/shoottheduck(1) (1)/shoottheduck_default",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "프로젝트",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "vue.rearranger.settings.migration": "true",
+    "애플리케이션.Window.executor": "Run"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;GitStage.ChangesTree.GroupingKeys&quot;: [
-      &quot;directory&quot;,
-      &quot;module&quot;,
-      &quot;repository&quot;
+  "keyToStringList": {
+    "GitStage.ChangesTree.GroupingKeys": [
+      "directory",
+      "module",
+      "repository"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\pcy79\OneDrive - 전북대학교\shoottheDuck\src\main\resources\sounds" />
@@ -140,7 +140,8 @@
       <workItem from="1729488372929" duration="5641000" />
       <workItem from="1729498422076" duration="7952000" />
       <workItem from="1729530034416" duration="14913000" />
-      <workItem from="1729579565473" duration="47000" />
+      <workItem from="1729579565473" duration="9770000" />
+      <workItem from="1729591347113" duration="5757000" />
     </task>
     <task id="LOCAL-00001" summary="테스트">
       <option name="closed" value="true" />
@@ -278,7 +279,23 @@
       <option name="project" value="LOCAL" />
       <updated>1729542213975</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="[인게임 데이터 클래스] 인게임 데이터를 다루는 클래스 추가&#10;[게임 클래스] 스코어 올리는 메소드 다 추가함&#10;[리더보드 클래스] 기존 saveScore 메소드 삭제(인게임 데이터 클래스로 이전)&#10;새 리더보드 이미지와 게임시작 버튼 이미지 추가">
+      <option name="closed" value="true" />
+      <created>1729580186930</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1729580186930</updated>
+    </task>
+    <task id="LOCAL-00019" summary="수정 쪼금">
+      <option name="closed" value="true" />
+      <created>1729591509104</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1729591509104</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -336,7 +353,9 @@
     <MESSAGE value="tlqk" />
     <MESSAGE value="리더보드 포함 데이터 Structure 완성" />
     <MESSAGE value="화면 비율 변경해도 리더보드 크기 유지 추가" />
-    <option name="LAST_COMMIT_MESSAGE" value="화면 비율 변경해도 리더보드 크기 유지 추가" />
+    <MESSAGE value="[인게임 데이터 클래스] 인게임 데이터를 다루는 클래스 추가&#10;[게임 클래스] 스코어 올리는 메소드 다 추가함&#10;[리더보드 클래스] 기존 saveScore 메소드 삭제(인게임 데이터 클래스로 이전)&#10;새 리더보드 이미지와 게임시작 버튼 이미지 추가" />
+    <MESSAGE value="수정 쪼금" />
+    <option name="LAST_COMMIT_MESSAGE" value="수정 쪼금" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

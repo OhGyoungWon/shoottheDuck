@@ -225,7 +225,7 @@ public class Framework extends Canvas {
             break;
             case MAIN_MENU:
                 g2d.drawImage(shootTheDuckMenuImg, 0, 0, frameWidth, frameHeight, null);
-                g2d.drawImage(leaderboardImg, 0, 0, frameWidth, frameHeight, null);
+                g2d.drawImage(leaderboardImg, 0, 70, frameWidth, frameHeight, null);
                 Leaderboard.drawLeaderboard(g2d, Framework.frameWidth, Framework.frameHeight);
             break;
             case OPTIONS:

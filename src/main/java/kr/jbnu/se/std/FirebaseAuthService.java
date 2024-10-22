@@ -44,9 +44,6 @@ public class FirebaseAuthService {
             if (databaseError != null) {
                 System.out.println("Error saving user: " + databaseError.getMessage());
             } else {
-                System.out.println("Email: " + email);
-                System.out.println("Hashed password: " + password);
-                System.out.println("Nickname: " + nickname);
                 System.out.println("User saved successfully.");
             }
         });

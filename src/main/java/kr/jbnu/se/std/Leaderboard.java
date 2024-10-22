@@ -11,7 +11,6 @@ import java.util.ArrayList;
 
 import java.util.List;
 import java.util.Map;
-import java.util.HashMap;
 
 /**
  * 해당 클래스는 리더보드의
@@ -19,12 +18,10 @@ import java.util.HashMap;
 
 public class Leaderboard {
     private static final FirebaseDatabase db = FirebaseDatabase.getInstance();
-    private static DatabaseReference usersRef = db.getReference("users");
     private static DatabaseReference leaderboardRef = db.getReference("users/leaderboard");
     private static final List<Map.Entry<String, Integer>> leaderboardList = new ArrayList<>();
 
     public Leaderboard() {
-        usersRef = db.getReference("users");
         leaderboardRef = db.getReference("users/leaderboard");
     }
 
@@ -62,24 +59,24 @@ public class Leaderboard {
         sortLeaderboardData(leaderboardList);
 
         // 폰트 및 색상 설정
-        int fontSize = Math.max(12, panelHeight / 23);
-        g.setFont(new Font("monospaced", Font.BOLD, fontSize));
+        int fontSize = Math.max(9, panelHeight / 23);
+        g.setFont(new Font("pixel", Font.BOLD, fontSize));
 
         g.setColor(Color.BLACK);
 
-        int y = (int) (panelHeight * (174.0 / 720));
+        int y = (int) (panelHeight * (360.0 / 720));
 
         // 상위 10명의 리더보드 점수 출력
-        for (int i = 0; i < Math.min(10, leaderboardList.size()); i++) {
+        for (int i = 0; i < Math.min(3, leaderboardList.size()); i++) {
             Map.Entry<String, Integer> entry = leaderboardList.get(i);
-            String leaderboardEntry = entry.getKey() + " ( " + entry.getValue() + " )";
+            String leaderboardEntry = entry.getKey() + "( " + entry.getValue() + " )";
 
             // 화면 중앙에 맞추기 위한 x 위치 계산
-            int textX = (int) (panelWidth / 3.0);
+            int textX = (int) (panelWidth /2.0);
             int textY = y;
 
-            g.drawString(leaderboardEntry, textX + (int) (panelWidth * (5.0 / 1280)), textY + fontSize);
-            y += fontSize + (int) (panelHeight * (14.0 / 720));
+            g.drawString(leaderboardEntry, textX -90 + (int) (panelWidth * (1.0 / 1280)), textY + fontSize);
+            y += fontSize + (int) (panelHeight * (45.0 / 720));
             // 다음 줄로 이동
 
         }

@@ -46,18 +46,13 @@ public class inGameData {
                     userUpdates.put("userInfo/" + sanitizedEmail + "/currentScore", score);
                     userUpdates.put("leaderboard/" + nickname, score);
 
-
                     usersRef.updateChildrenAsync(userUpdates);
-                    System.out.println("User nickname: " + nickname);
-                    System.out.println("Current score: " + score);
-                    System.out.println("Updated topScore to: " + score);
                 } else {
                     // currentScore는 그대로 저장
                     userUpdates.put("userInfo/" + sanitizedEmail + "/currentScore", score);
 
                     usersRef.updateChildrenAsync(userUpdates);
-                    System.out.println("User nickname: " + email);
-                    System.out.println("Current score saved: " + score);
+
                 }
             }
 
