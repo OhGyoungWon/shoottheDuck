@@ -7,13 +7,18 @@ public abstract class Weapon {
     protected BufferedImage gunImage; // 무기 이미지
     protected int damage; // 피해량
     protected long fireDelay; // 발사 딜레이 (밀리초 단위)
-    protected int ammos;
+    protected int maxammo;
+    public int currentammo;
 
-    public Weapon(BufferedImage gunImage, int damage, long fireDelay, int ammos) {
+    public Weapon(BufferedImage gunImage, int damage, long fireDelay, int maxammo) {
         this.gunImage = gunImage;
         this.damage = damage;
         this.fireDelay = fireDelay;
-        this.ammos = ammos;
+        this.maxammo = maxammo;
+    }
+
+    public boolean canshoot(){
+        return currentammo > 0;
     }
 
     public int getDamage() {

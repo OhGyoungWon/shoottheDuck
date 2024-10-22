@@ -81,7 +81,6 @@ public abstract class Canvas extends JPanel implements KeyListener, MouseListene
     public void keyPressed(KeyEvent e) {
         keyboardState[e.getKeyCode()] = true;
         int keyCode = e.getKeyCode();
-        System.out.println("Key Pressed: " + e.getKeyCode());
 
         // 1번 키: Revolver
         if (keyCode == KeyEvent.VK_1) {
@@ -144,8 +143,6 @@ public abstract class Canvas extends JPanel implements KeyListener, MouseListene
             int keyCode = e.getKeyCode();
 
     }
-
-
     // Mouse
     /**
      * Is mouse button "button" down?

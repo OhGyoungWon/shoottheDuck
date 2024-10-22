@@ -6,10 +6,10 @@ import java.awt.image.BufferedImage;
 //여기는 뭐 함수 추가할 건 아니고 그냥 스테이지 요소들 정보만 저장해놓고 Game클래스에서 여기있는거 불러서 쓸겨
 public class Levels {
     public float speed;
-    public int duckhp;
-    public int bosshp;
-    public int ducksc;
-    public int bosssc;
+    public int duckhp;//오리 체력
+    public int bosshp;//보스 체력
+    public int ducksc;//오리 점수
+    public int bosssc;//보스 점수
     public int sumdly;//소환 속도 조절
     public BufferedImage background;
     public BufferedImage duck;
@@ -29,12 +29,12 @@ public class Levels {
     }
     public static class lev2 extends Levels{
         public lev2() {
-            super(-3, 3, 50, 45, 900_000_000);
+            super(-3, 3, 50, 45, 800_000_000);
         }
     }
     public static class lev3 extends Levels {
         public lev3() {
-            super(-5, 6, 70, 60, 800_000_000);
+            super(-5, 6, 70, 60, 600_000_000);
         }
     }
     public static class lev4 extends Levels {

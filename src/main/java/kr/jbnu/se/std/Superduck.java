@@ -53,8 +53,8 @@ public class Superduck {
         g2d.drawImage(superduckImg, x, (int) (Framework.frameHeight*0.60),null);
 // 체력바 그리기
         g2d.setColor(Color.RED); // 체력 바 배경 색상
-        g2d.fillRect(x + 50, (int)((Framework.frameHeight)*0.60)-21, 120, 10); // 이미지 위에 배경 그리기
+        g2d.fillRect(x - 20, (int)((Framework.frameHeight)*0.60)-21, 120, 10); // 이미지 위에 배경 그리기
         g2d.setColor(Color.GREEN); // 현재 체력 색상
-        g2d.fillRect(x + 50, (int)((Framework.frameHeight)*0.60)-21, 120 * hp / max, 10); // 체력 바 그리기
+        g2d.fillRect(x - 20, (int)((Framework.frameHeight)*0.60)-21, 120 * hp / max, 10); // 체력 바 그리기
     }
 }
