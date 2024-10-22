@@ -70,6 +70,8 @@ public class Game {
     private DrawGun pistol;
     private DrawGun revolver;
     private DrawGun submachine;
+    private DrawGun rifle;
+    private DrawGun sniper;
 
     private Shop shop;
 
@@ -108,7 +110,7 @@ public class Game {
     private BufferedImage revImg;
     private BufferedImage smgImg;
     private BufferedImage rifImg;
-    private BufferedImage sniperImg;
+    private BufferedImage snipImg;
 
     /**
      * Middle width of the sight image.
@@ -250,7 +252,19 @@ public class Game {
 
             URL submachineImgUrl = this.getClass().getResource("/images/submachine.png");
             BufferedImage submachineImg = ImageIO.read(submachineImgUrl);
-            submachine = new DrawGun(submachineImg, 12, 8_000_000L);  // 10프레임, 프레임당 300ms
+            submachine = new DrawGun(submachineImg, 12, 8_000_000L);
+
+            URL rifleImgUrl = this.getClass().getResource("/images/rifle.png");
+            BufferedImage rifleImg = ImageIO.read(rifleImgUrl);
+            rifle = new DrawGun(rifleImg, 12, 10_000_000L);
+
+            URL sniperImgUrl = this.getClass().getResource("/images/sniper.png");
+            BufferedImage sniperImg = ImageIO.read(sniperImgUrl);
+            sniper = new DrawGun(sniperImg, 56, 26_000_000L);
+
+            URL revolverReloadImgUrl = this.getClass().getResource("/images/revolver_reload.png");
+            BufferedImage revolverReloadImg = ImageIO.read(revolverReloadImgUrl);
+            revolver = new DrawGun(revolverReloadImg, 29, 15_000_000L);
 
             URL gunshotSoundUrl = this.getClass().getResource("/sounds/single-gunshot.wav");
             soundPlayer.loadSound("gunshot", gunshotSoundUrl);
@@ -267,8 +281,8 @@ public class Game {
             URL rifImgUrl = this.getClass().getResource("/images/gunbox.png");
             rifImg = ImageIO.read(rifImgUrl);
 
-            URL sniperImgUrl = this.getClass().getResource("/images/gunbox.png");
-            sniperImg = ImageIO.read(sniperImgUrl);
+            URL snipImgUrl = this.getClass().getResource("/images/gunbox.png");
+            snipImg = ImageIO.read(snipImgUrl);
 
         }
         catch (IOException ex) {
@@ -366,7 +380,7 @@ public class Game {
         }
         if(killedDucks == 70 && sniperduck.isEmpty()){
             sniperduck.add(new Weaponduck.Sniperduck(Framework.frameWidth + random.nextInt(200),
-                    (int) (Framework.frameHeight*0.25), lvdata.speed, lvdata.ducksc*2, lvdata.duckhp*2, sniperImg));
+                    (int) (Framework.frameHeight*0.25), lvdata.speed, lvdata.ducksc*2, lvdata.duckhp*2, snipImg));
         }
 
         // Update all of the ducks.
@@ -415,7 +429,7 @@ public class Game {
             sniperduck.get(i).Update();
 
             // Checks if the duck leaves the screen and remove it if it does.
-            if(sniperduck.get(i).x < 0 - sniperImg.getWidth())
+            if(sniperduck.get(i).x < 0 - snipImg.getWidth())
             {
                 sniperduck.remove(i);
                 runawayDucks++;
@@ -442,6 +456,10 @@ public class Game {
                         revolver.startShooting();
                     } else if (!submachine.isShooting() && currentweapon.getName().equals("SMG")) {
                         submachine.startShooting();
+                    } else if (!rifle.isShooting() && currentweapon.getName().equals("Rifle")) {
+                        rifle.startShooting();
+                    } else if (!sniper.isShooting() && currentweapon.getName().equals("Sniper")) {
+                        sniper.startShooting();
                     }
 
                     // We go over all the ducks and we look if any of them was shoot.
@@ -543,9 +561,9 @@ public class Game {
                     }
                     for (int i = 0; i < sniperduck.size(); i++) {
                         if (new Rectangle(sniperduck.get(i).x, sniperduck.get(i).y,
-                                sniperImg.getWidth(), sniperImg.getHeight()).contains(mousePosition)) {
+                                snipImg.getWidth(), snipImg.getHeight()).contains(mousePosition)) {
                             if (!sniperduck.isEmpty() && new Rectangle(sniperduck.get(i).x, sniperduck.get(i).y,
-                                    sniperImg.getWidth(), sniperImg.getHeight()).contains(mousePosition)) {
+                                    snipImg.getWidth(), snipImg.getHeight()).contains(mousePosition)) {
                                 sniperduck.get(i).hp -= currentweapon.getDamage() + adiatt;
                                 damageTexts.add(new DamageText(mousePosition.x, mousePosition.y, currentweapon.getDamage() + adiatt));
                                 if (sniperduck.get(i).hp <= 0) {
@@ -555,12 +573,12 @@ public class Game {
 
                                     // Remove the duck from the array list.
                                     sniperduck.remove(i);
-                                    currentweapon = new Weapon.Sniper(sniperImg);
+                                    currentweapon = new Weapon.Sniper(snipImg);
                                     maxAmmo = currentweapon.maxammo;
                                     currentAmmo = maxAmmo;
                                     isReloading = false;
                                     timeBetweenShots = currentweapon.fireDelay;
-                                    weapons.add(new Weapon.Sniper(sniperImg));
+                                    weapons.add(new Weapon.Sniper(snipImg));
 
                                     // We found the duck that player shoot so we can leave the for loop.
                                     break;
@@ -593,6 +611,12 @@ public class Game {
         }
         else if (currentweapon.getName().equals("SMG")) {
             submachine.update();
+        }
+        else if (currentweapon.getName().equals("Rifle")) {
+            rifle.update();
+        }
+        else if (currentweapon.getName().equals("Sniper")) {
+            sniper.update();
         }
 
         // When 200 ducks runaway, the game ends.
@@ -659,6 +683,12 @@ public class Game {
         }
         else if (currentweapon.getName().equals("SMG")) {
             g2d.drawImage(submachine.getCurrentFrame(), Framework.frameHeight/10, Framework.frameHeight - (Framework.frameHeight / 4), (Framework.frameHeight / 15) * 8, (Framework.frameHeight / 15) * 5, null);
+        }
+        else if (currentweapon.getName().equals("Rifle")) {
+            g2d.drawImage(rifle.getCurrentFrame(), Framework.frameHeight/10, Framework.frameHeight - (Framework.frameHeight / 4), (Framework.frameHeight / 15) * 8, (Framework.frameHeight / 15) * 5, null);
+        }
+        else if (currentweapon.getName().equals("Sniper")) {
+            g2d.drawImage(sniper.getCurrentFrame(), Framework.frameHeight/10, Framework.frameHeight - (Framework.frameHeight / 5), (Framework.frameHeight / 15) * 12, (Framework.frameHeight / 15) * 5 / 2, null);
         }
 
         g2d.setFont(font);
@@ -788,7 +818,5 @@ public class Game {
                 i--;
             }
         }
-
-        // 여기서 다른 객체 리스트에 대해서도 동일한 처리를 해줄 수 있습니다.
     }
 }

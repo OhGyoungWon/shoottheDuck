@@ -15,12 +15,20 @@ public class DrawGun {
         this.frameDuration = frameDuration;
         frames = new BufferedImage[totalFrames];
 
-        // 스프라이트 시트에서 프레임을 나누는 작업
-        int frameWidth = spriteSheet.getWidth() / totalFrames;
-        int frameHeight = spriteSheet.getHeight();
-        for (int i = 0; i < totalFrames; i++) {
-            frames[i] = spriteSheet.getSubimage(i * frameWidth, 0, frameWidth, frameHeight);
+        if (spriteSheet.getHeight() > spriteSheet.getWidth()) {
+            int frameWidth = spriteSheet.getWidth();
+            int frameHeight = spriteSheet.getHeight() / totalFrames;
+            for (int i = 0; i < totalFrames; i++) {
+                frames[i] = spriteSheet.getSubimage(0, i * frameHeight, frameWidth, frameHeight);
+            }
+        } else {
+            int frameWidth = spriteSheet.getWidth() / totalFrames;
+            int frameHeight = spriteSheet.getHeight();
+            for (int i = 0; i < totalFrames; i++) {
+                frames[i] = spriteSheet.getSubimage(i * frameWidth, 0, frameWidth, frameHeight);
+            }
         }
+
         reset();
     }
 
