@@ -39,8 +39,10 @@ public class Levels {
     }
     public static class lev4 extends Levels {
         public lev4() {
-            super(-5, 8, 120, 75, 400_000_000);
-        }
+            super(-5, 8, 120, 75, 400_000_000); }
+    }
+    public static class lev5 extends Levels {
+        public lev5() {super(-5, 12, 200, 120, 300_000_000); }
     }
 }
 

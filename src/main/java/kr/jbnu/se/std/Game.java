@@ -136,7 +136,7 @@ public class Game {
     public static int currentAmmo;  // 현재 남은 탄약 수
     public static int maxAmmo;  // 탄창 크기
     private long reloadStartTime;  // 장전 시작 시간
-    private static long reloadDuration;  // 장전 시간 1.5초
+    public static long reloadDuration;  // 장전 시간 1.5초
 
     private ArrayList<DamageText> damageTexts;
 
@@ -553,7 +553,7 @@ public class Game {
                 }
                 else if(currentAmmo == 0){
                     isReloading = true;
-                    reloadStartTime = System.nanoTime();  // 장전 시작 시간 기록
+                    reloadStartTime = System.nanoTime();  // 장전 시작 시간 기록;
                     System.out.println("RELOADING...");
                 }
 
@@ -671,8 +671,11 @@ public class Game {
         else if(gamelevel == 3){
             return new Levels.lev3();
         }
-        else{
+        else if(gamelevel == 4){
             return new Levels.lev4();
+        }
+        else{
+            return new Levels.lev5();
         }
     }
     public static ArrayList<Weapon> getWeapons(){

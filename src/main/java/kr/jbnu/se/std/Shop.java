@@ -134,7 +134,13 @@ public class Shop {
             // 총알 아이템 클릭 처리 로직 추가
             if(Game.money > 300){
                 Game.money -= 300;
-                Game.adiatt += 3;
+                if(Game.reloadDuration <=300_000_000){
+                    Game.reloadDuration = 300_000_000;
+                }
+                else{
+                    Game.reloadDuration -= 300_000_000;
+                }
+                System.out.println(Game.reloadDuration);
                 Purchase("총알");
             }
             else{
