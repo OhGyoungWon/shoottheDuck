@@ -5,6 +5,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -13,15 +15,16 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 해당 클래스는 리더보드의
+ * 해당 클래스는 리더보드를 화면에 그리는 매서드
  */
 
 public class Leaderboard {
     private static final FirebaseDatabase db = FirebaseDatabase.getInstance();
+    private static final Logger log = LoggerFactory.getLogger(Leaderboard.class);
     private static DatabaseReference leaderboardRef = db.getReference("users/leaderboard");
     private static final List<Map.Entry<String, Integer>> leaderboardList = new ArrayList<>();
 
-    public Leaderboard() {
+    private Leaderboard() {
         leaderboardRef = db.getReference("users/leaderboard");
     }
 
@@ -42,7 +45,7 @@ public class Leaderboard {
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                System.err.println("Failed to load leaderboard data: " + databaseError.getMessage());
+                log.error("Failed to load leaderboard data: {}", databaseError.getMessage());
             }
         });
         return leaderboardList;

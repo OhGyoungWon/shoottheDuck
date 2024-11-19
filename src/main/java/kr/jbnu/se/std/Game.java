@@ -127,10 +127,6 @@ public class Game {
      * 리더보드 출력
      */
 
-    private static Leaderboard leaderboard = new Leaderboard();
-    private BufferedImage leaderboardImg;
-    private BufferedImage savedscoreImg;
-
     public static Weapon currentweapon;
 
     public static Levels lvdata;
@@ -345,7 +341,7 @@ public class Game {
      */
     public void UpdateGame(long gameTime, Point mousePosition)
     {
-        String currentEmail = LoginUI.getuserEmail();
+        String currentEmail = LoginUI.getUserEmail();
 
         System.out.println("Current weapon: " + currentweapon.getName());
         System.out.println("Damage: " + currentweapon.getDamage());

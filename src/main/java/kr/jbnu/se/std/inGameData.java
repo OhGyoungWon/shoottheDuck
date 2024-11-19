@@ -1,6 +1,8 @@
 package kr.jbnu.se.std;
 
 import com.google.firebase.database.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -8,22 +10,23 @@ import java.util.Map;
 public class inGameData {
 
     private static final FirebaseDatabase db = FirebaseDatabase.getInstance();
+    private static final Logger log = LoggerFactory.getLogger(inGameData.class);
     private static DatabaseReference usersRef = db.getReference("users/");
 
     public inGameData(){
-
+        //...
     }
 
     public void saveMoney(String email, int money) {
-
+        //...
     }
 
     public void saveKills(String email, int kills){
-
+        //...
     }
 
     public void saveRunawayDucks(String email, int run){
-
+        //...
     }
 
     // 점수를 저장하는 메서드 ('.' → ',')
@@ -58,7 +61,7 @@ public class inGameData {
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                System.out.println("Failed to read user data: " + databaseError.getMessage());
+                log.info("Failed to read user data: {}", databaseError.getMessage());
             }
         });
     }
