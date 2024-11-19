@@ -379,7 +379,8 @@ public class Game {
         }
         if(killedDucks % 20 == 0 && killedDucks != 0 && superducks.isEmpty()){
             superducks.add(new Superduck(Duck.duckLines[Duck.nextDuckLines][0] + random.nextInt(200),
-                    (int) (Framework.frameHeight*0.6), lvdata.speed/3, lvdata.bosssc, superduckImg));
+                                            (int) (Framework.frameHeight*0.6),
+                                            superduckImg));
         }
 
         //Weapon ducks 소환
