@@ -11,7 +11,7 @@ public class inGameData {
 
     private static final FirebaseDatabase db = FirebaseDatabase.getInstance();
     private static final Logger log = LoggerFactory.getLogger(inGameData.class);
-    private static DatabaseReference usersRef = db.getReference("users/");
+    private static final DatabaseReference usersRef = db.getReference("users/");
 
     public inGameData(){
         //...
