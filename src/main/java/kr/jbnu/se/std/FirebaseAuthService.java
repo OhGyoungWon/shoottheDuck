@@ -13,16 +13,17 @@ import java.util.concurrent.ExecutionException;
 
 public class FirebaseAuthService {
 
+    static FirebaseDatabase db = FirebaseDatabase.getInstance();
+    static DatabaseReference usersRef = db.getReference("users/userInfo");
+    static DatabaseReference leaderboardRef = db.getReference("users/leaderboard");
+
     public FirebaseAuthService() {
-        FirebaseDatabase db = FirebaseDatabase.getInstance();
-        DatabaseReference usersRef = db.getReference("users/userInfo");
-        DatabaseReference leaderboardRef = db.getReference("users/leaderboard");
     }
 
     // Firebase AuthService에 사용자를 등록하는 메소드
-    public static void registerUser(String username, String password) {
+    private static void registerUser(String email, String password) {
         CreateRequest request = new CreateRequest();
-        request.setEmail(username);
+        request.setEmail(email);
         request.setPassword(password);
 
         try {
@@ -34,12 +35,11 @@ public class FirebaseAuthService {
     }
 
     //Firebase Realtime Database에 사용자 정보를 저장하는 메소드
-    public static void setUser(String email, String password, String nickname) {
-        DatabaseReference databaseRef = FirebaseDatabase.getInstance().getReference("users/userInfo");
+    private static void setUser(String email, String password, String nickname) {
         String sanitizedEmail = email.replace(".", ",");
 
         // 이메일 아래에 비밀번호 저장
-        databaseRef.child(sanitizedEmail).setValue(new User(password, 0, 0, nickname),
+        usersRef.child(sanitizedEmail).setValue(new User(password, 0, 0, nickname),
                 (databaseError, databaseReference) -> {
             if (databaseError != null) {
                 System.out.println("Error saving user: " + databaseError.getMessage());
@@ -49,8 +49,13 @@ public class FirebaseAuthService {
         });
     }
 
+    public static void runRegisterUser(String email, String password, String nickname){
+        registerUser(email, password);
+        setUser(email, password, nickname);
+    }
+
     // 이메일과 비밀번호로 로그인하는 메서드
-    public static boolean loginUser(String email, String password) {
+    public static boolean runloginUser(String email, String password) {
         String sanitizedEmail = email.replace(".", ",");
         DatabaseReference databaseRef = FirebaseDatabase.getInstance().getReference("users/userInfo/" + sanitizedEmail);
         CompletableFuture<Boolean> future = new CompletableFuture<>();
@@ -86,7 +91,7 @@ public class FirebaseAuthService {
     }
 
     // 비밀번호 해싱 함수
-    static String hashPassword(String password) {
+    public static String hashPassword(String password) {
         try {
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
             byte[] hash = digest.digest(password.getBytes(StandardCharsets.UTF_8));

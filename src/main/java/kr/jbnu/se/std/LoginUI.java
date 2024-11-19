@@ -8,7 +8,7 @@ import javax.swing.*;
 
 public class LoginUI extends JPanel {
 
-    private static JTextField usernameField;   // 사용자 이름 입력 필드
+    private static JTextField emailField;   // 사용자 이름 입력 필드
     private static JPasswordField passwordField;  // 비밀번호 입력 필드
     private JButton loginButton;   // 로그인 버튼
     private JLabel messageLabel;   // 로그인 결과 메시지 레이블
@@ -33,11 +33,11 @@ public class LoginUI extends JPanel {
         gbc.gridwidth = 1;
         add(usernameLabel, gbc);
 
-        usernameField = new JTextField(20);
+        emailField = new JTextField(20);
         gbc.gridx = 1;
         gbc.gridy = 0;
         gbc.gridwidth = 2;
-        add(usernameField, gbc);
+        add(emailField, gbc);
 
         // 비밀번호 레이블과 비밀번호 필드 생성 및 배치
         JLabel passwordLabel = new JLabel("Password:");
@@ -95,19 +95,16 @@ public class LoginUI extends JPanel {
     }
 
     public static String getuserEmail() {
-        String username = usernameField.getText();
-        userEmail = username;
-
-
+        userEmail = emailField.getText();
         return userEmail;
     }
 
     // 로그인 처리를 위한 메소드
     private void handleLogin() throws IOException {
-        String username = usernameField.getText();  // 사용자 입력 이름 가져오기
+        String email = emailField.getText();  // 사용자 입력 이름 가져오기
         String password = new String(passwordField.getPassword());  // 비밀번호 가져오기
         // 사용자 이름과 비밀번호가 유효한지 확인
-        if (FirebaseAuthService.loginUser(username, password)) {
+        if (FirebaseAuthService.runloginUser(email, password)) {
             messageLabel.setText("로그인 성공!");  // 성공 메시지 표시
             // 로그인 성공 시 Window의 콘텐츠를 Framework로 전환
             window.switchToFramework();
