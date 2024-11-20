@@ -16,7 +16,7 @@ public class FirebaseConfig {
             return; // 초기화가 이미 되어 있다면 메소드 종료
         }
         //만약에 파일 경로로 문제가 생긴다면  Admin SDK key의 파일 절대 경로를 넣을 것
-        FileInputStream serviceAccount = new FileInputStream("path/to/Admin-SDK-Key.json");
+        FileInputStream serviceAccount = new FileInputStream("C:\\Users\\문수혁\\Desktop\\shoottheDuck\\src\\main\\resources\\SDI API KEY.json");
 
         FirebaseOptions options = new FirebaseOptions.Builder()
                 .setCredentials(GoogleCredentials.fromStream(serviceAccount))

@@ -643,7 +643,7 @@ public class Game {
         }
 
         // When 200 ducks runaway, the game ends.
-        if(runawayDucks >= 10) {
+        if(runawayDucks >= 100) {
             soundPlayer.stop("backgroundMusic");
             Framework.gameState = Framework.GameState.GAMEOVER;
         }
