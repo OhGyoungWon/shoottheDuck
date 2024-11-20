@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e23e4792-88cd-4c5b-8837-984a947fb4ab" name="변경" comment="예시용 smgducks 완성(추가, 무기 바뀜)" />
+    <list default="true" id="e23e4792-88cd-4c5b-8837-984a947fb4ab" name="변경" comment="예시용 smgducks 완성(추가, 무기 바뀜)">
+      <change beforePath="$PROJECT_DIR$/src/main/java/kr/jbnu/se/std/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kr/jbnu/se/std/Game.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -21,7 +23,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Application.Window.executor": "Run",
-    "git-widget-placeholder": "trying-merge",
+    "git-widget-placeholder": "main",
     "node.js.selected.package.tslint": "(autodetect)"
   }
 }]]></component>

@@ -82,6 +82,10 @@ public abstract class Canvas extends JPanel implements KeyListener, MouseListene
     // Methods of the keyboard listener.
     @Override
     public void keyPressed(KeyEvent e) {
+        requestFocusInWindow();
+        if (this.hasFocus()) {
+            System.out.println("asdfasdf");
+        }
         keyboardState[e.getKeyCode()] = true;
         int keyCode = e.getKeyCode();
 
