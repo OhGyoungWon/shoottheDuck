@@ -18,7 +18,6 @@ public class FirebaseAuthService {
     private static final Logger log = LoggerFactory.getLogger(FirebaseAuthService.class);
     static FirebaseDatabase db = FirebaseDatabase.getInstance();
     static DatabaseReference usersRef = db.getReference("users/userInfo");
-    static DatabaseReference leaderboardRef = db.getReference("users/leaderboard");
 
     private FirebaseAuthService() {
         //...

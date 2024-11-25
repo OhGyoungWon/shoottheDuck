@@ -90,9 +90,7 @@ public class SignUpUI extends JPanel {
         });
 
         // 돌아가기 버튼에 대한 액션 리스너 추가
-        backButton.addActionListener(e ->{
-            window.switchToLogin();
-        });
+        backButton.addActionListener(e -> window.switchToLogin());
     }
 
     // 회원가입 처리를 위한 메소드

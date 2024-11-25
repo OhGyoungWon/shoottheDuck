@@ -11,7 +11,7 @@ import java.awt.image.BufferedImage;
 
 public class Superduck {
     private int max;
-    private final int hp;  //getHp만들어서 hp using하기 superduck.getHp()했는데 안되면 변수 만들어서 넣어서 사용
+    private final int hp;
 
     /**
      * Indicate which is next duck line.
@@ -21,7 +21,6 @@ public class Superduck {
     private final float speed;
     private int score;
     private final BufferedImage superduckImg;
-    private Graphics2D g2d;
 
     /**
      * Creates new duck.
@@ -45,17 +44,16 @@ public class Superduck {
      */
     public void Update()
     {
-        x += speed;
+        x += (int) speed;
     }
     /**
      * Draw the duck to the screen.
      * @param g2d Graphics2D
      */
     public void Draw(Graphics2D g2d) {
-        this.g2d = g2d;
-// Superduck 이미지 그리기
+        // Superduck 이미지 그리기
         g2d.drawImage(superduckImg, x, (int) (Framework.frameHeight*0.60),null);
-// 체력바 그리기
+        // 체력바 그리기
         max = Game.getlvdata().bosshp;
         g2d.setColor(Color.RED); // 체력 바 배경 색상
         g2d.fillRect(x - 20, (int)((Framework.frameHeight)*0.60)-21, 120, 10); // 이미지 위에 배경 그리기
@@ -67,20 +65,12 @@ public class Superduck {
         return hp;
     }
 
-    public Graphics2D getG2d() {
-        return g2d;
-    }
-
-    public void setG2d(Graphics2D g2d) {
-        this.g2d = g2d;
-    }
-
     public int getScore() {
         return score;
     }
 
-    public void setScore(int score) {
-        this.score = score;
+    public int getX(){
+        return x;
     }
 
     public int getY() {

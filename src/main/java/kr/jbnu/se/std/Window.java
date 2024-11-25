@@ -61,11 +61,6 @@ public class Window extends JFrame {
     public static void main(String[] args) throws IOException {
         // Use the event dispatch thread to build the UI for thread-safety.
         FirebaseConfig.initialize();
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new Window();
-            }
-        });
+        SwingUtilities.invokeLater(Window::new);
     }
 }
