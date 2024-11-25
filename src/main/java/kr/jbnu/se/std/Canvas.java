@@ -141,9 +141,9 @@ public abstract class Canvas extends JPanel implements KeyListener, MouseListene
             }
         }
         if (keyCode == KeyEvent.VK_R){
-            if(Game.rubberduckskills > 0){
-                Game.rubberduckskills--;
-                Game.nuclearswitch = true;
+            if(Game.getRubberducksKills() > 0){
+                Game.setRubberduckKills(Game.getRubberducksKills() - 1);
+                Game.setNuclearswitch(true);
             }
         }
 
