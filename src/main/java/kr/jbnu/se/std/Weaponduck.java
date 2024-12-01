@@ -24,8 +24,8 @@ public class Weaponduck {
     public void Draw(Graphics2D g2d){
         g2d.drawImage(weadckImg, x, y, null);}
 
-    public static class Smgduck extends Weaponduck{
-        public Smgduck(int x, int y, float speed, int score, int hp, BufferedImage weadckImg) {
+    public static class WeaponBox extends Weaponduck{
+        public WeaponBox(int x, int y, float speed, int score, int hp, BufferedImage weadckImg) {
             super(x, y, speed, score, hp, weadckImg);
         }
     }
