@@ -10,13 +10,12 @@ import java.awt.image.BufferedImage;
  */
 
 public class Superduck {
-    public static int max = Game.getlvdata().bosshp;
     public int hp;
 
     /**
      * Indicate which is next duck line.
      */
-    public static int nextDuckLines = 0;
+
     public int x;
     public int y;
     private final float speed;
