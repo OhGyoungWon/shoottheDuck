@@ -127,10 +127,6 @@ public class Game {
      * 리더보드 출력
      */
 
-    private static Leaderboard leaderboard = new Leaderboard();
-    private BufferedImage leaderboardImg;
-    private BufferedImage savedscoreImg;
-
     public static Weapon currentweapon;
 
     public static Levels lvdata;
@@ -345,7 +341,7 @@ public class Game {
      */
     public void UpdateGame(long gameTime, Point mousePosition)
     {
-        String currentEmail = LoginUI.getuserEmail();
+        String currentEmail = LoginUI.getUserEmail();
 
         System.out.println("Current weapon: " + currentweapon.getName());
         System.out.println("Damage: " + currentweapon.getDamage());
@@ -383,7 +379,8 @@ public class Game {
         }
         if(killedDucks % 20 == 0 && killedDucks != 0 && superducks.isEmpty()){
             superducks.add(new Superduck(Duck.duckLines[Duck.nextDuckLines][0] + random.nextInt(200),
-                    (int) (Framework.frameHeight*0.6), lvdata.speed/3, lvdata.bosssc, superduckImg));
+                                            (int) (Framework.frameHeight*0.6),
+                                            superduckImg));
         }
 
         //Weapon ducks 소환

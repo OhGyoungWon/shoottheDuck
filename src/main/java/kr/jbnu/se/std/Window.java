@@ -39,6 +39,7 @@ public class Window extends JFrame {
 
         this.setVisible(true);
     }
+
     public void switchToFramework() {
         this.setContentPane(new Framework());
         this.revalidate();  // 화면을 다시 그리도록 요청

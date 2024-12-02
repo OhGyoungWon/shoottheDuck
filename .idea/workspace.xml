@@ -5,7 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e23e4792-88cd-4c5b-8837-984a947fb4ab" name="변경" comment="예시용 smgducks 완성(추가, 무기 바뀜)">
-      <change beforePath="$PROJECT_DIR$/src/main/java/kr/jbnu/se/std/Superduck.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kr/jbnu/se/std/Superduck.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/kr/jbnu/se/std/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kr/jbnu/se/std/Game.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -15,26 +15,70 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="trying-merge" />
+        <entry key="$PROJECT_DIR$" value="main" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.Window.executor&quot;: &quot;Run&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;MSH__Refactoring&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;애플리케이션.Window.executor&quot;: &quot;Run&quot;
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;OhGyoungWon&quot;
   }
 }</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/OhGyoungWon/shoottheDuck.git&quot;,
+    &quot;accountId&quot;: &quot;41030b30-f7dc-4881-83db-6e6c99099e2b&quot;
+  }
+}</component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 3
+}</component>
+  <component name="ProjectId" id="2p3nXnwktAX5VnejvOLx6MVBurT" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Window.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SONARLINT_PRECOMMIT_ANALYSIS": "true",
+    "git-widget-placeholder": "dev",
+    "kotlin-language-version-configured": "true",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "reference.settings.project.maven.repository.indices",
+    "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "GitStage.ChangesTree.GroupingKeys": [
+      "directory",
+      "module",
+      "repository"
+    ]
+  }
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\ok993\IdeaProjects\shoottheDuck\src\main\resources" />
     </key>
   </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-b114ca120d71-intellij.indexing.shared.core-IU-242.21829.142" />
+        <option value="bundled-js-predefined-d6986cc7102b-7c0b70fcd90d-JavaScript-IU-242.21829.142" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task id="LOCAL-00001" summary="예시용 smgducks 완성(추가, 무기 바뀜)">
       <option name="closed" value="true" />
@@ -60,13 +104,67 @@
       <option name="project" value="LOCAL" />
       <updated>1729606837946</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="24.11.19 refactoring Login and SignUp">
+      <option name="closed" value="true" />
+      <created>1732003615009</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1732003615009</updated>
+    </task>
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="e23e4792-88cd-4c5b-8837-984a947fb4ab" name="변경" comment="예시용 smgducks 완성(추가, 무기 바뀜)" />
+      <created>1732003677926</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1732003677926</updated>
+      <workItem from="1732003679052" duration="717000" />
+      <workItem from="1732004449233" duration="92000" />
+      <workItem from="1732004576654" duration="5457000" />
+    </task>
+    <task id="LOCAL-00005" summary="24.11.19 refactoring Login and SignUP and FirebaseAuthService and Leaderboard">
+      <option name="closed" value="true" />
+      <created>1732007724815</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1732007724816</updated>
+    </task>
+    <task id="LOCAL-00006" summary="24.11.19 refactoring Login and SignUP and FirebaseAuthService and Leaderboard">
+      <option name="closed" value="true" />
+      <created>1732008172992</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1732008172992</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="커밋스" />
     <MESSAGE value="예시용 smgducks 완성(추가, 무기 바뀜)" />
     <MESSAGE value="리얼 마지막의 마지막의 마지막" />
-    <option name="LAST_COMMIT_MESSAGE" value="리얼 마지막의 마지막의 마지막" />
+    <MESSAGE value="24.11.19 refactoring Login and SignUp" />
+    <MESSAGE value="24.11.19 refactoring Login and SignUP and FirebaseAuthService and Leaderboard" />
+    <option name="LAST_COMMIT_MESSAGE" value="24.11.19 refactoring Login and SignUP and FirebaseAuthService and Leaderboard" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>

@@ -7,7 +7,7 @@ import static kr.jbnu.se.std.FirebaseAuthService.hashPassword;
 
 public class SignUpUI extends JPanel {
 
-    private final JTextField newUsernameField;   // 새로운 사용자 이름 입력 필드
+    private final JTextField newEmailField;   // 새로운 사용자 이름 입력 필드
     private final JPasswordField newPasswordField;  // 새로운 비밀번호 입력 필드
     private final JTextField newNicknameField;
     private final JLabel messageLabel;   // 회원가입 결과 메시지 레이블
@@ -37,17 +37,17 @@ public class SignUpUI extends JPanel {
         gbc.gridwidth = 2;
         add(newNicknameField, gbc);
 
-        JLabel usernameLabel = new JLabel("New Email:");
+        JLabel emailLabel = new JLabel("New Email:");
         gbc.gridx = 0;
         gbc.gridy = 1;
         gbc.gridwidth = 1;
-        add(usernameLabel, gbc);
+        add(emailLabel, gbc);
 
-        newUsernameField = new JTextField(20);
+        newEmailField = new JTextField(20);
         gbc.gridx = 1;
         gbc.gridy = 1;
         gbc.gridwidth = 2;
-        add(newUsernameField, gbc);
+        add(newEmailField, gbc);
 
         // 비밀번호 레이블과 비밀번호 필드 생성 및 배치
         JLabel passwordLabel = new JLabel("New Password:");
@@ -97,15 +97,13 @@ public class SignUpUI extends JPanel {
 
     // 회원가입 처리를 위한 메소드
     private void handleRegistration() {
-        String newUsername = newUsernameField.getText();  // 사용자 입력 이름 가져오기
-        String newPassword = new String(newPasswordField.getPassword());
+        String newEmail = newEmailField.getText();  // 사용자 입력 이름 가져오기
         String newNickname = newNicknameField.getText();
-        String hashedPassword = hashPassword(newPassword);
+        String hashedPassword = hashPassword(new String(newPasswordField.getPassword()));
 
-        if (!newUsername.isEmpty() && !newPassword.isEmpty()) {
+        if (!newEmail.isEmpty() && !hashedPassword.isEmpty()) {
             messageLabel.setText("회원가입 성공!");  // 성공 메시지 표시
-            FirebaseAuthService.registerUser(newUsername, newPassword);
-            FirebaseAuthService.setUser(newUsername, hashedPassword, newNickname);
+            FirebaseAuthService.runRegisterUser(newEmail, hashedPassword, newNickname);
 
             // 회원가입 성공 후 LoginUI로 돌아가기
             window.switchToLogin();
