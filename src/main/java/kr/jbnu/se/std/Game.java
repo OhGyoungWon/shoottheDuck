@@ -466,16 +466,18 @@ public class Game {
 
     private void CheckSuperDuckShoot(Point mousePosition, String currentEmail) {
         for (int i = 0; i < superducks.size(); i++) {
-            if (new Rectangle(superducks.get(i).x, superducks.get(i).y,
-                    superduckImg.getWidth(), superduckImg.getHeight()).contains(mousePosition)) {
-                if (!superducks.isEmpty() && new Rectangle(superducks.get(i).x, superducks.get(i).y,
-                        superduckImg.getWidth(), superduckImg.getHeight()).contains(mousePosition)) {
-                    superducks.get(i).hp -= currentweapon.getDamage() + adiatt;
+            int hp = superducks.get(i).getHp();
+            int x = superducks.get(i).getX();
+            int y = superducks.get(i).getY();
+            if (new Rectangle(x, y, superduckImg.getWidth(), superduckImg.getHeight()).contains(mousePosition)) {
+                if (!superducks.isEmpty() && new Rectangle(x, y, superduckImg.getWidth(), superduckImg.getHeight()).contains(mousePosition)) {
+                    hp -= currentweapon.getDamage() + adiatt;
+                    superducks.get(i).setHp(hp);
                     damageTexts.add(new DamageText(mousePosition.x, mousePosition.y, currentweapon.getDamage() + adiatt));
-                    if (superducks.get(i).hp <= 0) {
+                    if (hp <= 0) {
                         killedDucks++;
-                        score += superducks.get(i).score;
-                        money += superducks.get(i).score;
+                        score += superducks.get(i).getScore();
+                        money += superducks.get(i).getScore();
                         inGameData.saveScore(currentEmail, score);
 
                         // Remove the duck from the array list.
@@ -592,7 +594,7 @@ public class Game {
             superducks.get(i).Update();
 
             // Checks if the duck leaves the screen and remove it if it does.
-            if(superducks.get(i).x < 0 - superduckImg.getWidth())
+            if(superducks.get(i).getX() < 0 - superduckImg.getWidth())
             {
                 superducks.remove(i);
                 runawayDucks = 999;
@@ -773,13 +775,17 @@ public class Game {
 
         // superducks 리스트의 모든 객체 체력을 999 감소
         for (int i = 0; i < superducks.size(); i++) {
-            Superduck superduck = superducks.get(i);
-            superduck.hp -= 999;
+            int hp = superducks.get(i).getHp();
+            int x = superducks.get(i).getX();
+            int y = superducks.get(i).getY();
+
+            hp -= 999;
+            superducks.get(i).setHp(hp);
 
             // DamageText 추가
-            damageTexts.add(new DamageText(superduck.x, superduck.y, 999));
+            damageTexts.add(new DamageText(x, y, 999));
 
-            if (superduck.hp <= 0) {
+            if (hp <= 0) {
                 superducks.remove(i);
                 i--;
             }
