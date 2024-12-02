@@ -7,11 +7,15 @@ import org.slf4j.LoggerFactory;
 import java.util.HashMap;
 import java.util.Map;
 
-public class InGameData {
+public final class InGameData {
 
     private static final FirebaseDatabase db = FirebaseDatabase.getInstance();
     private static final Logger log = LoggerFactory.getLogger(InGameData.class);
     private static final DatabaseReference usersRef = db.getReference("users/");
+
+    private InGameData(){
+        //not called
+    }
 
     // 점수를 저장하는 메서드 ('.' → ',')
     public static void saveScore(String email, int score) {
