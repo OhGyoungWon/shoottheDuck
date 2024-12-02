@@ -17,6 +17,8 @@ public abstract class Weapon {
         this.maxammo = maxammo;
     }
 
+    public abstract void playSound(SoundPlayer sound);
+
     public boolean canshoot(){
         return currentammo > 0;
     }
@@ -48,6 +50,9 @@ public abstract class Weapon {
         public String getName() {
             return "Revolver";
         }
+        public void playSound(SoundPlayer sound) {
+            sound.play("gunshot");
+        }
     }
 
     public static class SMG extends Weapon {
@@ -58,6 +63,9 @@ public abstract class Weapon {
         @Override
         public String getName() {
             return "SMG";
+        }
+        public void playSound(SoundPlayer sound) {
+            sound.play("smg");
         }
     }
 
@@ -70,6 +78,9 @@ public abstract class Weapon {
         public String getName() {
             return "Rifle";
         }
+        public void playSound(SoundPlayer sound) {
+            sound.play("rifle");
+        }
     }
 
     public static class Sniper extends Weapon {
@@ -80,6 +91,9 @@ public abstract class Weapon {
         @Override
         public String getName() {
             return "Sniper";
+        }
+        public void playSound(SoundPlayer sound) {
+            sound.play("sniper");
         }
 
     }

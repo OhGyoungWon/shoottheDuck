@@ -29,7 +29,7 @@ public abstract class Canvas extends JPanel implements KeyListener, MouseListene
 
 
 
-    protected Canvas()
+    public Canvas()
     {
         // We use double buffer to draw on the screen.
         this.setDoubleBuffered(true);
@@ -80,6 +80,11 @@ public abstract class Canvas extends JPanel implements KeyListener, MouseListene
     // Methods of the keyboard listener.
     @Override
     public void keyPressed(KeyEvent e) {
+        requestFocusInWindow();
+        if (this.hasFocus()) {
+            System.out.println("asdfasdf");
+        }
+        keyboardState[e.getKeyCode()] = true;
         int keyCode = e.getKeyCode();
 
         switch (keyCode) {
@@ -128,6 +133,10 @@ public abstract class Canvas extends JPanel implements KeyListener, MouseListene
     @Override
     public void keyTyped(KeyEvent e) { }
 
+    public void keyReleasedFramework(KeyEvent e) {
+            int keyCode = e.getKeyCode();
+
+    }
     // Mouse
     /**
      * Is mouse button "button" down?
