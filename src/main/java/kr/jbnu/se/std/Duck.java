@@ -10,14 +10,11 @@ import java.awt.image.BufferedImage;
  */
 
 public class Duck implements Damageable {
-    
-    /**
-     * How much time must pass in order to create a new duck?
-     */
+
     /**
      * Last time when the duck was created.
      */
-    public static long lastDuckTime = 0;
+    public static long lastDuckTime;
     
     /**
      * kr.jbnu.se.std.Duck lines.
@@ -68,12 +65,9 @@ public class Duck implements Damageable {
      * 
      * @param x Starting x coordinate.
      * @param y Starting y coordinate.
-     * @param speed The speed of this duck.
-     * @param score How many points this duck is worth?
      * @param duckImg Image of the duck.
-     * @param hp Duck's hp
      */
-    public Duck(int x, int y, float speed, int score, int hp, BufferedImage duckImg)
+    public Duck(int x, int y, BufferedImage duckImg)
     {
         this.x = x;
         this.y = y;
@@ -93,7 +87,7 @@ public class Duck implements Damageable {
      */
     public void Update()
     {
-        x += speed;
+        x += (int) speed;
     }
     
     /**

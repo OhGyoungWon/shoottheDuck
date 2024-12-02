@@ -7,6 +7,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -342,93 +343,120 @@ public class Game {
      * @param gameTime gameTime of the game.
      * @param mousePosition current mouse position.
      */
-    public void UpdateGame(long gameTime, Point mousePosition)
-    {
+    public void UpdateGame(long gameTime, Point mousePosition) {
         String currentEmail = LoginUI.getUserEmail();
 
+        if (handleShopInteraction(mousePosition)) return;
+
+        if (isReloading) handleReloading();
+
+        if (nuclearSwitch) {
+            reduceHealthOfAllObjects();
+            nuclearSwitch = false;
+        }
+
+        spawnEntities();
+
+        UpdateAllDucks();
+
+        handleShooting(mousePosition, currentEmail);
+
+        ShowDamageTexts();
+
+        updateCurrentWeapon();
+
+        checkGameOver();
+    }
+
+    // Handles shop interactions
+    private boolean handleShopInteraction(Point mousePosition) {
         if (shop.isShopOpen()) {
             if (Canvas.mouseButtonState(MouseEvent.BUTTON1)) {
                 shop.handleClick(mousePosition);  // 상점 클릭 처리
             }
-            return;
+            return true;
         }
-        if (isReloading) {
-            handleReloading();
-        }
-        if(nuclearSwitch){
-            reduceHealthOfAllObjects();
-            nuclearSwitch = false;
-        }
-        // Creates a new duck, if it's the time, and add it to the array list.
+        return false;
+    }
+
+    // Spawns all necessary entities
+    private void spawnEntities() {
         SpawnDucks();
-
         SpawnSuperDuck();
+        spawnWeaponDucks();
+    }
 
-        //Weapon ducks 소환
-        if(killedDucks == 30 && smgDuck.isEmpty()){
+    // Spawns weapon ducks based on killed ducks
+    private void spawnWeaponDucks() {
+        if (killedDucks == 30 && smgDuck.isEmpty()) {
             SpawnWeapon(smgDuck, smgImg);
         }
-        if(killedDucks == 50 && rifDuck.isEmpty()){
+        if (killedDucks == 50 && rifDuck.isEmpty()) {
             SpawnWeapon(rifDuck, rifImg);
         }
-        if(killedDucks == 70 && sniperDuck.isEmpty()){
+        if (killedDucks == 70 && sniperDuck.isEmpty()) {
             SpawnWeapon(sniperDuck, snipImg);
         }
+    }
 
-        // Update all the ducks.
-        UpdateAllDucks();
-
-        // Does player shoot?
-        if(Canvas.mouseButtonState(MouseEvent.BUTTON1) && !isReloading)
-        {
-            // Checks if it can shoot again.
-            if(System.nanoTime() - lastTimeShoot >= timeBetweenShots)
-            {
-
-                if(currentAmmo > 0) {
-                    shoots++;
-                    currentAmmo--;
-                    // 총 사운드 재생
-
-                    // 총 모션 재생
-                    PlayAllMotion();
-
-                    // We go over all the ducks, and we look if any of them was shot.
-                    CheckAllShoot(mousePosition, currentEmail);
-                }
-                else if(currentAmmo == 0){
-                    isReloading = true;
-                    reloadStartTime = System.nanoTime();  // 장전 시작 시간 기록;
-                }
-
-                lastTimeShoot = System.nanoTime();
+    // Handles shooting logic
+    private void handleShooting(Point mousePosition, String currentEmail) {
+        if (Canvas.mouseButtonState(MouseEvent.BUTTON1) && !isReloading && System.nanoTime() - lastTimeShoot >= timeBetweenShots) {
+            if (currentAmmo > 0) {
+                performShooting(mousePosition, currentEmail);
+            } else {
+                initiateReloading();
             }
+            lastTimeShoot = System.nanoTime();
         }
+    }
 
-        ShowDamageTexts();
 
-        if (currentweapon.getName().equals("Pistol")) {
-            pistol.update();
-        }
-        else if (currentweapon.getName().equals("Revolver")) {
-            revolver.update();
-        }
-        else if (currentweapon.getName().equals("SMG")) {
-            submachine.update();
-        }
-        else if (currentweapon.getName().equals("Rifle")) {
-            rifle.update();
-        }
-        else if (currentweapon.getName().equals("Sniper")) {
-            sniper.update();
-        }
+    // Performs the actual shooting actions
+    private void performShooting(Point mousePosition, String currentEmail) {
+        shoots++;
+        currentAmmo--;
+        PlayAllMotion();  // 총 모션 재생
+        CheckAllShoot(mousePosition, currentEmail);  // 체크 모든 쏘기
+    }
 
-        // When 200 ducks runaway, the game ends.
-        if(runawayDucks >= 20) {
+    // Initiates the reloading process
+    private void initiateReloading() {
+        isReloading = true;
+        reloadStartTime = System.nanoTime();  // 장전 시작 시간 기록
+    }
+
+    // Updates the current weapon
+    private void updateCurrentWeapon() {
+        switch (currentweapon.getName()) {
+            case "Pistol":
+                pistol.update();
+                break;
+            case "Revolver":
+                revolver.update();
+                break;
+            case "SMG":
+                submachine.update();
+                break;
+            case "Rifle":
+                rifle.update();
+                break;
+            case "Sniper":
+                sniper.update();
+                break;
+            default:
+                break;
+        }
+    }
+
+    // Checks if the game is over
+    private void checkGameOver() {
+        if (runawayDucks >= 20) {
             soundPlayer.stop(bgm);
             Framework.gameState = Framework.GameState.GAMEOVER;
         }
     }
+
 
     private void handleReloading() {
         if (System.nanoTime() - reloadStartTime >= reloadDuration) {  // 1.5초 장전 시간
@@ -537,7 +565,7 @@ public class Game {
         {
             // Here we create new duck and add it to the array list.
             ducks.add(new Duck(Duck.duckLines[Duck.nextDuckLines][0] + random.nextInt(200),
-                    Duck.duckLines[Duck.nextDuckLines][1], lvData.speed, lvData.ducksc, lvData.duckhp, duckImg));
+                    Duck.duckLines[Duck.nextDuckLines][1], duckImg));
 
             // Here we increase nextDuckLines so that next duck will be created in next line.
             Duck.nextDuckLines++;
@@ -549,7 +577,7 @@ public class Game {
     }
 
     private void SpawnSuperDuck() {
-        if(killedDucks % 3 == 0 && killedDucks != 0 && superDuck.isEmpty()){
+        if(killedDucks % 20 == 0 && killedDucks != 0 && superDuck.isEmpty()){
             superDuck.add(new Superduck(Duck.duckLines[Duck.nextDuckLines][0] + random.nextInt(200),
                     (int) (Framework.frameHeight*0.6), superDuckImg));
         }
@@ -622,13 +650,11 @@ public class Game {
     }
 
     private void ShowDamageTexts() {
-        for (int i = 0; i < damageTexts.size(); i++) {
-            if (!damageTexts.get(i).update()) {
-                damageTexts.remove(i);
-                i--;
-            }
-        }
+
+        // Safely remove the element
+        damageTexts.removeIf(damageText -> !damageText.update());
     }
+
 
     /**
      * Draw the game to the screen.
@@ -728,24 +754,21 @@ public class Game {
         g2d.drawString("kr.jbnu.se.std The game is OVER", Framework.frameWidth / 2 - 150, (int)(Framework.frameHeight * 0.70));
     }
 
-    public int getScore(){
-        return score;
-    }
     public static Levels getLvData(){
         if(gameLevel == 1){
-            return new Levels.lev1();
+            return new Levels.Lev1();
         }
         else if(gameLevel == 2){
-            return new Levels.lev2();
+            return new Levels.Lev2();
         }
         else if(gameLevel == 3){
-            return new Levels.lev3();
+            return new Levels.Lev3();
         }
         else if(gameLevel == 4){
-            return new Levels.lev4();
+            return new Levels.Lev4();
         }
         else{
-            return new Levels.lev5();
+            return new Levels.Lev5();
         }
     }
     public static void reduceHealthOfAllObjects() {
@@ -757,18 +780,20 @@ public class Game {
     }
 
     private static <T extends Damageable> void reduceHealth(ArrayList<T> objects) {
-        for (int i = 0; i < objects.size(); i++) {
-            T obj = objects.get(i);
+        Iterator<T> iterator = objects.iterator();
+
+        while (iterator.hasNext()) {
+            T obj = iterator.next();
             obj.reduceHp(999);
 
             damageTexts.add(new DamageText(obj.getX(), obj.getY(), 999));
 
             if (obj.getHp() <= 0) {
-                objects.remove(i);
-                i--; // Adjust index after removal
+                iterator.remove(); // Safely remove the object from the list
             }
         }
     }
+
 
     public static void changeWeapon(Weapon weapon) {
         Game.setCurrentWeapon(weapon);

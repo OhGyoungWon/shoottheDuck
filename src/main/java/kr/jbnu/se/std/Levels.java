@@ -22,27 +22,27 @@ public class Levels {
         this.bosssc = ducksc*5;
         this.sumdly = sumdly;
     }
-    public static class lev1 extends Levels {
-        public lev1() {
+    public static class Lev1 extends Levels {
+        public Lev1() {
             super(-2, 2, 20, 30, 1_000_000_000); // 원하면 수치 조정해도 됨
         }
     }
-    public static class lev2 extends Levels{
-        public lev2() {
+    public static class Lev2 extends Levels{
+        public Lev2() {
             super(-3, 4, 60, 45, 800_000_000);
         }
     }
-    public static class lev3 extends Levels {
-        public lev3() {
+    public static class Lev3 extends Levels {
+        public Lev3() {
             super(-4, 6, 100, 60, 600_000_000);
         }
     }
-    public static class lev4 extends Levels {
-        public lev4() {
+    public static class Lev4 extends Levels {
+        public Lev4() {
             super(-5, 8, 120, 75, 400_000_000); }
     }
-    public static class lev5 extends Levels {
-        public lev5() {super(-5, 12, 200, 120, 300_000_000); }
+    public static class Lev5 extends Levels {
+        public Lev5() {super(-5, 12, 200, 120, 300_000_000); }
     }
 }
 

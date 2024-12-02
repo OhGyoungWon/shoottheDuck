@@ -33,13 +33,13 @@ public class Framework extends Canvas {
      * Time of one second in nanoseconds.
      * 1 second = 1 000 000 000 nanoseconds
      */
-    public static final long secInNanosec = 1000000000L;
+    public static final long SEC_IN_NANOSECOND = 1000000000L;
     
     /**
      * Time of one millisecond in nanoseconds.
      * 1 millisecond = 1 000 000 nanoseconds
      */
-    public static final long milisecInNanosec = 1000000L;
+    public static final long MILISEC_IN_NANOSEC = 1000000L;
     
     /**
      * FPS - Frames per second
@@ -49,7 +49,11 @@ public class Framework extends Canvas {
     /**
      * Pause between updates. It is in nanoseconds.
      */
-    private final long GAME_UPDATE_PERIOD = secInNanosec / GAME_FPS;
+    private final long GAME_UPDATE_PERIOD = SEC_IN_NANOSECOND / GAME_FPS;
+    private static boolean userPressedEscape = false;
+
+    public boolean isUserPressedEscape(){ return userPressedEscape; }
+    public static void setUserPressedEscape(boolean isEscape) { Framework.userPressedEscape = isEscape; }
 
     /**
      * Possible states of the game
@@ -68,14 +72,14 @@ public class Framework extends Canvas {
     private long lastTime;
     
     // The actual game
-    private Game game;
+    private transient Game game;
     
     
     /**
      * Image for menu.
      */
-    private BufferedImage shootTheDuckMenuImg;
-    private BufferedImage leaderboardImg;
+    private transient BufferedImage shootTheDuckMenuImg;
+    private transient BufferedImage leaderboardImg;
     
     public Framework ()
     {
@@ -128,85 +132,92 @@ public class Framework extends Canvas {
     /**
      * In specific intervals of time (GAME_UPDATE_PERIOD) the game/logic is updated and then the game is drawn on the screen.
      */
-    private void GameLoop()
-    {
-        // This two variables are used in VISUALIZING state of the game. We used them to wait some time so that we get correct frame/window resolution.
+    private boolean isRunning = true; // Flag to control the loop
+
+    private void GameLoop() {
+        // Variables for visualizing state
         long visualizingTime = 0, lastVisualizingTime = System.nanoTime();
-        
-        // This variables are used for calculating the time that defines for how long we should put threat to sleep to meet the GAME_FPS.
+
+        // Variables for frame timing
         long beginTime, timeTaken, timeLeft;
 
-        while(true)
-        {
+        while (isRunning) { // Loop runs as long as isRunning is true
             beginTime = System.nanoTime();
 
-            switch (gameState)
-            {
+            switch (gameState) {
                 case PLAYING:
                     gameTime += System.nanoTime() - lastTime;
-
                     game.UpdateGame(gameTime, mousePosition());
-
                     lastTime = System.nanoTime();
                     break;
-                case GAMEOVER:
-                    //...
-                    break;
-                case MAIN_MENU:
-                    //...
-                    break;
-                case OPTIONS:
-                    //...
-                    break;
-                case GAME_CONTENT_LOADING:
-                    //...
-                    break;
-                case STARTING:
-                    // Sets variables and objects.
-                    Initialize();
-                    // Load files - images, sounds, ...
-                    LoadContent();
 
-                    // When all things that are called above finished, we change game status to main menu.
+                case GAMEOVER:
+                    checkForExitCondition(); // Check if we should stop
+                    break;
+
+                case MAIN_MENU:
+                    // Menu logic (e.g., waiting for user input)
+                    break;
+
+                case OPTIONS:
+                    // Options menu logic
+                    break;
+
+                case GAME_CONTENT_LOADING:
+                    // Loading content logic
+                    break;
+
+                case STARTING:
+                    Initialize();
+                    LoadContent();
                     gameState = GameState.MAIN_MENU;
                     break;
+
                 case VISUALIZING:
-                    // On Ubuntu OS (when I tested on my old computer) this.getWidth() method doesn't return the correct value immediately (eg. for frame that should be 800px width, returns 0 than 790 and at last 798px).
-                    // So we wait one second for the window/frame to be set to its correct size. Just in case we
-                    // also insert 'this.getWidth() > 1' condition in case when the window/frame size wasn't set in time,
-                    // so that we although get approximately size.
-                    if(this.getWidth() > 1 && visualizingTime > secInNanosec)
-                    {
+                    if (this.getWidth() > 1 && visualizingTime > SEC_IN_NANOSECOND) {
                         frameWidth = this.getWidth();
                         frameHeight = this.getHeight();
-
-                        // When we get size of frame we change status.
                         gameState = GameState.STARTING;
-                    }
-                    else
-                    {
+                    } else {
                         visualizingTime += System.nanoTime() - lastVisualizingTime;
                         lastVisualizingTime = System.nanoTime();
                     }
                     break;
+
+                case DESTROYED:
+                    stopGame(); // Exit the loop when the game is destroyed
+                    break;
             }
 
-            // Repaint the screen.
-            repaint();
+            repaint(); // Repaint the screen
 
-            // Here we calculate the time that defines for how long we should put threat to sleep to meet the GAME_FPS.
+            // Calculate sleep time
             timeTaken = System.nanoTime() - beginTime;
-            timeLeft = (GAME_UPDATE_PERIOD - timeTaken) / milisecInNanosec; // In milliseconds
-            // If the time is less than 10 milliseconds, then we will put thread to sleep for 10 millisecond so that some other thread can do some work.
-            if (timeLeft < 10)
-                timeLeft = 10; //set a minimum
+            timeLeft = (GAME_UPDATE_PERIOD - timeTaken) / MILISEC_IN_NANOSEC;
+            if (timeLeft < 10) timeLeft = 10;
+
             try {
-                 //Provides the necessary delay and also yields control so that other thread can do work.
-                 Thread.sleep(timeLeft); // 경고: 루프 내' Tread.sleep()' 호출이 바쁜 대기 중일 수 있음
-            } catch (InterruptedException ex) { }
+                Thread.sleep(timeLeft);
+            } catch (InterruptedException ex) {
+                // Handle thread interruption
+            }
         }
     }
-    
+
+    // Method to stop the game loop
+    private void stopGame() {
+        isRunning = false;
+    }
+
+    // Check for exit conditions in the GAMEOVER state
+    private void checkForExitCondition() {
+        if (gameState == GameState.GAMEOVER && userPressedEscape) {
+            stopGame();
+        }
+    }
+
+
+
     /**
      * Draw the game to the screen. It is called through repaint() method in GameLoop() method.
      */
@@ -217,22 +228,24 @@ public class Framework extends Canvas {
         {
             case PLAYING:
                 game.Draw(g2d, mousePosition());
-            break;
+                break;
             case GAMEOVER:
                 game.DrawGameOver(g2d, mousePosition());
-            break;
+                break;
             case MAIN_MENU:
                 g2d.drawImage(shootTheDuckMenuImg, 0, 0, frameWidth, frameHeight, null);
                 g2d.drawImage(leaderboardImg, 0, 70, frameWidth, frameHeight, null);
                 Leaderboard.drawLeaderboard(g2d, Framework.frameWidth, Framework.frameHeight);
-            break;
+                break;
             case OPTIONS:
                 //...
-            break;
+                break;
             case GAME_CONTENT_LOADING:
                 g2d.setColor(Color.white);
                 g2d.drawString("GAME is LOADING", frameWidth / 2 - 50, frameHeight / 2);
-            break;
+                break;
+            default:
+                break;
         }
     }
     
@@ -291,6 +304,7 @@ public class Framework extends Canvas {
      * 
      * @param e KeyEvent
      */
+    @Override
     public void keyReleasedFramework(KeyEvent e)
     {
         switch (gameState)
@@ -300,12 +314,14 @@ public class Framework extends Canvas {
                     System.exit(0);
                 else if(e.getKeyCode() == KeyEvent.VK_SPACE || e.getKeyCode() == KeyEvent.VK_ENTER)
                     restartGame();
-            break;
+                break;
             case PLAYING:
             case MAIN_MENU:
                 if(e.getKeyCode() == KeyEvent.VK_ESCAPE)
                     System.exit(0);
-            break;
+                break;
+            default:
+                break;
         }
     }
     
@@ -322,7 +338,9 @@ public class Framework extends Canvas {
             case MAIN_MENU:
                 if(e.getButton() == MouseEvent.BUTTON1)
                     newGame();
-            break;
+                break;
+            default:
+                break;
         }
     }
 }

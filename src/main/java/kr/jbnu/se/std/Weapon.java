@@ -10,7 +10,7 @@ public abstract class Weapon {
     protected int maxammo;
     public int currentammo;
 
-    public Weapon(BufferedImage gunImage, int damage, long fireDelay, int maxammo) {
+    protected Weapon(BufferedImage gunImage, int damage, long fireDelay, int maxammo) {
         this.gunImage = gunImage;
         this.damage = damage;
         this.fireDelay = fireDelay;
