@@ -209,7 +209,6 @@ public class Shop {
     private void Purchase(String itemName) {
         purchaseMessage = itemName + "을(를) 구매했습니다!";
         messageDisplayTime = System.nanoTime();
-        closeShop();  // 상점 닫기
     }
     private void Lessmoney(){
         purchaseMessage = "포인트가 부족합니다!";
