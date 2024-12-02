@@ -18,7 +18,6 @@ public class FirebaseAuthService {
     private static final Logger log = LoggerFactory.getLogger(FirebaseAuthService.class);
     static FirebaseDatabase db = FirebaseDatabase.getInstance();
     static DatabaseReference usersRef = db.getReference("users/userInfo");
-    static DatabaseReference leaderboardRef = db.getReference("users/leaderboard");
 
     private FirebaseAuthService() {
         //...
@@ -87,7 +86,7 @@ public class FirebaseAuthService {
             }
         });
 
-        return future.get();  // 비동기 작업이 완료될 때까지 대기하고 결과 반환
+        return future.get();
     }
 
     // 비밀번호 해싱 함수

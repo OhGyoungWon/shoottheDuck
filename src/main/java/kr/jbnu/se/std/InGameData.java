@@ -7,31 +7,17 @@ import org.slf4j.LoggerFactory;
 import java.util.HashMap;
 import java.util.Map;
 
-public class inGameData {
+public class InGameData {
 
     private static final FirebaseDatabase db = FirebaseDatabase.getInstance();
-    private static final Logger log = LoggerFactory.getLogger(inGameData.class);
+    private static final Logger log = LoggerFactory.getLogger(InGameData.class);
     private static final DatabaseReference usersRef = db.getReference("users/");
-
-    public inGameData(){
-        //...
-    }
-
-    public void saveMoney(String email, int money) {
-        //...
-    }
-
-    public void saveKills(String email, int kills){
-        //...
-    }
-
-    public void saveRunawayDucks(String email, int run){
-        //...
-    }
+    private static int score;
 
     // 점수를 저장하는 메서드 ('.' → ',')
-    public static void saveScore(String email, int score) {
+    public static void saveScore(String email, int scoreData) {
         String sanitizedEmail = email.replace(".", ",");
+        score = scoreData;
 
         // Firebase에서 사용자 데이터를 가져옴
         usersRef.addListenerForSingleValueEvent(new ValueEventListener() {

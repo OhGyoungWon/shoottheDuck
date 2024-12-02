@@ -1,7 +1,7 @@
 package kr.jbnu.se.std;
 
-import javax.swing.JFrame;
-import javax.swing.SwingUtilities;
+import javax.swing.*;
+import java.awt.*;
 import java.io.IOException;
 
 /**
@@ -21,7 +21,7 @@ public class Window extends JFrame {
             // Disables decorations for this frame.
             this.setUndecorated(true);
             // Puts the frame to full screen.
-            this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+            this.setExtendedState(Frame.MAXIMIZED_BOTH);
         } else { // Windowed mode
             // Size of the frame.
             this.setSize(1280, 720);
@@ -32,7 +32,7 @@ public class Window extends JFrame {
         }
 
         // Exit the application when user close frame.
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         // Add the Framework panel (game loop)
         this.setContentPane(new LoginUI(this));
@@ -61,11 +61,6 @@ public class Window extends JFrame {
     public static void main(String[] args) throws IOException {
         // Use the event dispatch thread to build the UI for thread-safety.
         FirebaseConfig.initialize();
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new Window();
-            }
-        });
+        SwingUtilities.invokeLater(Window::new);
     }
 }

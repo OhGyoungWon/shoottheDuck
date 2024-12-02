@@ -54,7 +54,7 @@ public class Framework extends Canvas {
     /**
      * Possible states of the game
      */
-    public static enum GameState{STARTING, VISUALIZING, GAME_CONTENT_LOADING, MAIN_MENU, OPTIONS, PLAYING, GAMEOVER, DESTROYED}
+    public enum GameState{STARTING, VISUALIZING, GAME_CONTENT_LOADING, MAIN_MENU, OPTIONS, PLAYING, GAMEOVER, DESTROYED}
     /**
      * Current state of the game
      */
@@ -84,12 +84,8 @@ public class Framework extends Canvas {
         gameState = GameState.VISUALIZING;
         
         //We start game in new thread.
-        Thread gameThread = new Thread() {
-            @Override
-            public void run(){
-                GameLoop();
-            }
-        };
+        Thread gameThread;
+        gameThread = new Thread(this::GameLoop);
         gameThread.start();
     }
     
@@ -100,7 +96,7 @@ public class Framework extends Canvas {
      */
     private void Initialize()
     {
-
+        //...
     }
     
     /**
@@ -112,6 +108,7 @@ public class Framework extends Canvas {
         try
         {
             URL shootTheDuckMenuImgUrl = this.getClass().getResource("/images/menu.jpg");
+            assert shootTheDuckMenuImgUrl != null;
             shootTheDuckMenuImg = ImageIO.read(shootTheDuckMenuImgUrl);
         }
         catch (IOException ex) {
@@ -120,6 +117,7 @@ public class Framework extends Canvas {
         try
         {
             URL leaderboardImgUrl = this.getClass().getResource("/images/leaderboard.png");
+            assert leaderboardImgUrl != null;
             leaderboardImg = ImageIO.read(leaderboardImgUrl);
         }
         catch (IOException ex) {
@@ -137,32 +135,32 @@ public class Framework extends Canvas {
         
         // This variables are used for calculating the time that defines for how long we should put threat to sleep to meet the GAME_FPS.
         long beginTime, timeTaken, timeLeft;
-        
+
         while(true)
         {
             beginTime = System.nanoTime();
-            
+
             switch (gameState)
             {
                 case PLAYING:
                     gameTime += System.nanoTime() - lastTime;
-                    
+
                     game.UpdateGame(gameTime, mousePosition());
-                    
+
                     lastTime = System.nanoTime();
-                break;
+                    break;
                 case GAMEOVER:
                     //...
-                break;
+                    break;
                 case MAIN_MENU:
                     //...
-                break;
+                    break;
                 case OPTIONS:
                     //...
-                break;
+                    break;
                 case GAME_CONTENT_LOADING:
                     //...
-                break;
+                    break;
                 case STARTING:
                     // Sets variables and objects.
                     Initialize();
@@ -171,9 +169,9 @@ public class Framework extends Canvas {
 
                     // When all things that are called above finished, we change game status to main menu.
                     gameState = GameState.MAIN_MENU;
-                break;
+                    break;
                 case VISUALIZING:
-                    // On Ubuntu OS (when I tested on my old computer) this.getWidth() method doesn't return the correct value immediately (eg. for frame that should be 800px width, returns 0 than 790 and at last 798px). 
+                    // On Ubuntu OS (when I tested on my old computer) this.getWidth() method doesn't return the correct value immediately (eg. for frame that should be 800px width, returns 0 than 790 and at last 798px).
                     // So we wait one second for the window/frame to be set to its correct size. Just in case we
                     // also insert 'this.getWidth() > 1' condition in case when the window/frame size wasn't set in time,
                     // so that we although get approximately size.
@@ -190,21 +188,21 @@ public class Framework extends Canvas {
                         visualizingTime += System.nanoTime() - lastVisualizingTime;
                         lastVisualizingTime = System.nanoTime();
                     }
-                break;
+                    break;
             }
-            
+
             // Repaint the screen.
             repaint();
-            
+
             // Here we calculate the time that defines for how long we should put threat to sleep to meet the GAME_FPS.
             timeTaken = System.nanoTime() - beginTime;
             timeLeft = (GAME_UPDATE_PERIOD - timeTaken) / milisecInNanosec; // In milliseconds
             // If the time is less than 10 milliseconds, then we will put thread to sleep for 10 millisecond so that some other thread can do some work.
-            if (timeLeft < 10) 
+            if (timeLeft < 10)
                 timeLeft = 10; //set a minimum
             try {
                  //Provides the necessary delay and also yields control so that other thread can do work.
-                 Thread.sleep(timeLeft);
+                 Thread.sleep(timeLeft); // 경고: 루프 내' Tread.sleep()' 호출이 바쁜 대기 중일 수 있음
             } catch (InterruptedException ex) { }
         }
     }
@@ -293,7 +291,6 @@ public class Framework extends Canvas {
      * 
      * @param e KeyEvent
      */
-    @Override
     public void keyReleasedFramework(KeyEvent e)
     {
         switch (gameState)
