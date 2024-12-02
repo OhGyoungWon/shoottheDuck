@@ -39,7 +39,7 @@ public class Shop {
         shopItems.add(new ShopItem("총알", 300, bulletImage, "오리를 위한 깜짝선물    장전시간 감소"));
         shopItems.add(new ShopItem("콜라", 500, colaImage, "제로콜라는 아니네요       체력 회복"));
         shopItems.add(new ShopItem("와인", 1000, wineImage, "문ㅇㅇ씨의 최애 음료수     사격 속도 증가"));
-        shopItems.add(new ShopItem("러버덕", 2000, rubberDuckImage, "적의 우두머리를 본딴 형상.       특수 스킬 획득"));
+        shopItems.add(new ShopItem("러버덕", 2000, rubberDuckImage, "적의 우두머리를 본딴 형상.       R키로 특수 스킬"));
 
         setupItemBounds(glovesImage, bulletImage, colaImage, wineImage, rubberDuckImage);
     }
@@ -118,8 +118,8 @@ public class Shop {
         if (glovesBounds.contains(mousePosition)) {
             // 장갑 아이템 클릭 처리 로직 추가
             if(Game.getMoney() > 200){
-                Game.setMoney(Game.getMoney() - 200);
-                Game.setAdiatt(Game.getAdiatt() - 3);
+                Game.reduceMoney(200);
+                Game.setAdiatt(Game.getAdiatt() + 3);
                 Purchase("장갑");
             }
             else{
@@ -132,8 +132,8 @@ public class Shop {
         if (bulletBounds.contains(mousePosition)) {//여기 로직 구현해야돼 장전을 구현해야 이걸 할수가 있어
             // 총알 아이템 클릭 처리 로직 추가
             if(Game.getMoney() > 300){
-                Game.setMoney(Game.getMoney() - 300);
-                if(Game.getReloadDuration() <=300_000_000){
+                Game.reduceMoney(300);
+                if(Game.getReloadDuration() <= 300_000_000){
                     Game.setReloadDuration(300_000_000);
                 }
                 else{
@@ -151,12 +151,12 @@ public class Shop {
         if (colaBounds.contains(mousePosition)) {
             // 콜라 아이템 클릭 처리 로직 추가
             if(Game.getMoney() > 500){
-                Game.setMoney(Game.getMoney() - 500);
+                Game.reduceMoney(500);
                 if(Game.getRunawayDucks() < 20){
-                    Game.setRunawayDucks(0);
+                    Game.reduceRunawayDucks(Game.getRunawayDucks());
                 }
                 else{
-                    Game.setRunawayDucks(Game.getRunawayDucks() - 20);
+                    Game.reduceRunawayDucks(Game.getRunawayDucks() - 20);
                 }
                 Purchase("콜라");
             }
@@ -170,7 +170,7 @@ public class Shop {
         if (wineBounds.contains(mousePosition)) {
             // 와인 아이템 클릭 처리 로직 추가
             if(Game.getMoney() > 1000){
-                Game.setMoney(Game.getMoney() - 1000);
+                Game.reduceMoney(1000);
                 Game.setRedspd(Game.getRedspd() + 200_000_000);
 
                 Purchase("와인");
@@ -185,8 +185,8 @@ public class Shop {
         if (rubberDuckBounds.contains(mousePosition)) {
             // 러버덕 아이템 클릭 처리 로직 추가
             if(Game.getMoney() > 2000){
-                Game.setMoney(Game.getMoney() - 2000);
-                Game.setRubberduckKills(Game.getRubberducksKills() + 1);
+                Game.reduceMoney(2000);
+                Game.setRubberduckSkill(Game.getRubberduckSkill() + 1);
                 Purchase("러버덕");
             }
             else{

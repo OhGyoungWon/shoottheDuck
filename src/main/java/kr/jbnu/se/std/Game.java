@@ -127,17 +127,17 @@ public class Game {
      * 리더보드 출력
      */
 
-    public static Weapon currentweapon;
+    private static Weapon currentweapon;
 
-    public static Levels lvdata;
-    public static int gamelevel;
-    public static int money;
+    private static Levels lvdata;
+    private static int gamelevel;
+    private static int money;
 
-    public static int adiatt;
-    public static int atspdpls;
-    public static int redspd;
+    private static int adiatt;
+    private static int atspdpls;
+    private static int redspd;
 
-    public static int rubberduckskills;
+    private static int rubberduckskills;
     public static boolean nuclearswitch;
 
     public static boolean isReloading = false;  // 장전 중인지 여부
@@ -453,7 +453,7 @@ public class Game {
                     killedDucks++;
                     score += ducks.get(i).score;
                     money += ducks.get(i).score;
-                    inGameData.saveScore(currentEmail, score);
+                    InGameData.saveScore(currentEmail, score);
                     // Remove the duck from the array list.
                     ducks.remove(i);
 
@@ -478,7 +478,7 @@ public class Game {
                         killedDucks++;
                         score += superducks.get(i).getScore();
                         money += superducks.get(i).getScore();
-                        inGameData.saveScore(currentEmail, score);
+                        InGameData.saveScore(currentEmail, score);
 
                         // Remove the duck from the array list.
                         superducks.remove(i);
@@ -505,7 +505,7 @@ public class Game {
                         killedDucks++;
                         score += gun.get(i).score;
                         money += gun.get(i).score;
-                        inGameData.saveScore(currentEmail, score);
+                        InGameData.saveScore(currentEmail, score);
 
                         // Remove the duck from the array list.
                         gun.remove(i);
@@ -755,9 +755,7 @@ public class Game {
             return new Levels.lev5();
         }
     }
-    public static ArrayList<Weapon> getWeapons(){
-        return weapons;
-    }
+
     public void reduceHealthOfAllObjects() {
         // ducks 리스트의 모든 객체 체력을 999 감소
         for (int i = 0; i < ducks.size(); i++) {
@@ -833,4 +831,37 @@ public class Game {
             }
         }
     }
+
+    public static void changeWeapon(Weapon weapon) {
+        Game.setCurrentweapon(weapon);
+        Game.setTimeBetweenShots(weapon);
+        Game.setMaxAmmo(weapon);
+        Game.setCurrentAmmo(weapon);
+        Game.setIsReloading();
+    }
+
+    public static ArrayList<Weapon> getWeapons(){ return weapons; }
+    public static void setCurrentweapon(Weapon weapon){ currentweapon = weapon; }
+    public static void setTimeBetweenShots(Weapon weapon){ timeBetweenShots = weapon.fireDelay; }
+    public static void setMaxAmmo(Weapon weapon){ maxAmmo = weapon.maxammo; }
+    public static void setCurrentAmmo(Weapon weapon){ currentAmmo = weapon.currentammo; }
+    public static void setIsReloading(){ isReloading = false; }
+
+    public static int getRubberduckSkill(){ return rubberduckskills; }
+    public static void setRubberduckSkill(int n){ rubberduckskills = n; }
+
+    public static int getMoney(){ return money; }
+    public static void reduceMoney(int n){ money -= n;}
+
+    public static int getRunawayDucks(){ return runawayDucks; }
+    public static void reduceRunawayDucks(int n){ runawayDucks -= n; }
+
+    public static int getAdiatt(){ return adiatt; }
+    public static void setAdiatt(int n){ adiatt = n; }
+
+    public static long getReloadDuration(){ return reloadDuration; }
+    public static void setReloadDuration(long n){ reloadDuration = n; }
+
+    public static int getRedspd(){ return redspd; }
+    public static void setRedspd(int n){ redspd = n; }
 }

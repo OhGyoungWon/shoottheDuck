@@ -19,10 +19,6 @@ public abstract class Weapon {
 
     public abstract void playSound(SoundPlayer sound);
 
-    public boolean canshoot(){
-        return currentammo > 0;
-    }
-
     public int getDamage() {
         return damage;
     }
