@@ -63,8 +63,6 @@ public class Game {
     private int shoots;
     /**
      * 레벨 정수형으로 선언
-      */
-    private int level;
     /**
      * 레벨 검증 변수, 레벨 업데이트 조건 만족 시 코드 중복실행 방지용
      */
@@ -194,7 +192,6 @@ public class Game {
         score = 0;
         money = 0;
         shoots = 0;
-        level = 1;
         nuclearswitch = false;
         reloadDuration = 1_500_000_000L;
         isReloading = false;
@@ -331,7 +328,6 @@ public class Game {
         adiatt = 0;
         redspd = 0;
 
-        level = 1;
         lastTimeShoot = 0;
     }
 
@@ -702,7 +698,7 @@ public class Game {
         g2d.drawString("SHOOTS: " + shoots, 299, 21);
         g2d.drawString("SCORE: " + score, 440, 21);
         g2d.drawString("MONEY: " + money, 560, 21);
-        g2d.drawString("LEVEL: " + level, 680, 21);
+        g2d.drawString("LEVEL: " + gamelevel, 680, 21);
         g2d.drawString("WEAPON: " + currentweapon.getName(), 840, 21);
         g2d.drawString("BULLETS: " + currentAmmo, 840, 42);
         shop.drawPurchaseMessage(g2d);
