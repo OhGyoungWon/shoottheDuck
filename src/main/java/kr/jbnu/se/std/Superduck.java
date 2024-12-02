@@ -11,16 +11,16 @@ import java.awt.image.BufferedImage;
 
 public class Superduck {
     private int max;
-    private final int hp;  //getHp만들어서 hp using하기 superduck.getHp()했는데 안되면 변수 만들어서 넣어서 사용
+    private int hp;  //getHp만들어서 hp using하기 superduck.getHp()했는데 안되면 변수 만들어서 넣어서 사용
 
     /**
      * Indicate which is next duck line.
      */
     private int x;  // getX랑 setX 클래스 만들어서 x 외부에서 사용하기. 나머지도 변수들도 동일
-    private final int y;
-    private final float speed;
+    private int y;
+    private float speed;
     private int score;
-    private final BufferedImage superduckImg;
+    private BufferedImage superduckImg;
     private Graphics2D g2d;
 
     /**
@@ -31,6 +31,16 @@ public class Superduck {
      * @param superduckImg Image of the duck.
      */
     public Superduck(int x, int y, BufferedImage superduckImg) {
+        this.x = x;
+        this.y = y;
+        hp = Game.getlvdata().bosshp;
+        this.speed = Game.getlvdata().speed/3;
+        this.score = Game.getlvdata().bosssc;
+        this.superduckImg = superduckImg;
+        max = Game.getlvdata().bosshp;
+    }
+
+    public Superduck(int x, int y, float v, int bosssc, BufferedImage superduckImg) {
         this.x = x;
         this.y = y;
         hp = Game.getlvdata().bosshp;
@@ -67,6 +77,10 @@ public class Superduck {
         return hp;
     }
 
+    public void setHp(int hp){
+        this.hp = hp;
+    }
+
     public Graphics2D getG2d() {
         return g2d;
     }
@@ -81,6 +95,10 @@ public class Superduck {
 
     public void setScore(int score) {
         this.score = score;
+    }
+
+    public int getX() {
+        return x;
     }
 
     public int getY() {
