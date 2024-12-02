@@ -3,7 +3,8 @@ package kr.jbnu.se.std;
 import java.awt.*;
 
 public class DamageText {
-    private int x, y;
+    private int x;
+    private int y;
     private int damage;
     private long startTime;
     private static final long DISPLAY_TIME = 1_000_000_000L; // 1초 동안 표시
