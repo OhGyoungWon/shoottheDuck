@@ -119,7 +119,7 @@ public class Shop {
             // 장갑 아이템 클릭 처리 로직 추가
             if(Game.getMoney() > 200){
                 Game.reduceMoney(200);
-                Game.setAdiatt(Game.getAdiatt() + 3);
+                Game.setExDamage(Game.getExDamage() + 3);
                 Purchase("장갑");
             }
             else{
@@ -171,7 +171,7 @@ public class Shop {
             // 와인 아이템 클릭 처리 로직 추가
             if(Game.getMoney() > 1000){
                 Game.reduceMoney(1000);
-                Game.setRedspd(Game.getRedspd() + 200_000_000);
+                Game.setReduceSpeed(Game.getReduceSpeed() + 200_000_000);
 
                 Purchase("와인");
             }
@@ -186,7 +186,7 @@ public class Shop {
             // 러버덕 아이템 클릭 처리 로직 추가
             if(Game.getMoney() > 2000){
                 Game.reduceMoney(2000);
-                Game.setRubberduckSkill(Game.getRubberduckSkill() + 1);
+                Game.setRubberDucksKill(Game.getRubberDucksKill() + 1);
                 Purchase("러버덕");
             }
             else{

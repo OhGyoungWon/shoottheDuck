@@ -21,7 +21,6 @@ public class Superduck implements Damageable {
     private float speed;
     private int score;
     private BufferedImage superduckImg;
-    private Graphics2D g2d;
 
     /**
      * Creates new duck.
@@ -33,11 +32,11 @@ public class Superduck implements Damageable {
     public Superduck(int x, int y, BufferedImage superduckImg) {
         this.x = x;
         this.y = y;
-        hp = Game.getlvdata().bosshp;
-        this.speed = Game.getlvdata().speed/3;
-        this.score = Game.getlvdata().bosssc;
+        hp = Game.getLvData().bosshp;
+        this.speed = Game.getLvData().speed/3;
+        this.score = Game.getLvData().bosssc;
         this.superduckImg = superduckImg;
-        max = Game.getlvdata().bosshp;
+        max = Game.getLvData().bosshp;
     }
 
     /**
@@ -52,11 +51,11 @@ public class Superduck implements Damageable {
      * @param g2d Graphics2D
      */
     public void Draw(Graphics2D g2d) {
-        this.g2d = g2d;
-// Superduck 이미지 그리기
+
+        // Superduck 이미지 그리기
         g2d.drawImage(superduckImg, x, (int) (Framework.frameHeight*0.60),null);
-// 체력바 그리기
-        max = Game.getlvdata().bosshp;
+        // 체력바 그리기
+        max = Game.getLvData().bosshp;
         g2d.setColor(Color.RED); // 체력 바 배경 색상
         g2d.fillRect(x - 20, (int)((Framework.frameHeight)*0.60)-21, 120, 10); // 이미지 위에 배경 그리기
         g2d.setColor(Color.GREEN); // 현재 체력 색상

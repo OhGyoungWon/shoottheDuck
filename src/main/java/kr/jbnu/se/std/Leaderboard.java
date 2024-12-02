@@ -67,7 +67,7 @@ public class Leaderboard {
 
         g.setColor(Color.BLACK);
 
-        int y = (int) (panelHeight * (360.0 / 720));
+        int y = (int) (panelHeight * (340.0 / 720));
 
         // 상위 10명의 리더보드 점수 출력
         for (int i = 0; i < Math.min(3, leaderboardList.size()); i++) {

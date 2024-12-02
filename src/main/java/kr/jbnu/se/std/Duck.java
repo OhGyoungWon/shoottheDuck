@@ -25,7 +25,7 @@ public class Duck implements Damageable {
      * Speed of the duck?
      * How many points is a duck worth?
      */
-    public static int[][] duckLines = {
+    protected static final int[][] duckLines = {
             {Framework.frameWidth, (int)(Framework.frameHeight * 0.60)},
             {Framework.frameWidth, (int)(Framework.frameHeight * 0.65)},
             {Framework.frameWidth, (int)(Framework.frameHeight * 0.70)},
@@ -78,11 +78,11 @@ public class Duck implements Damageable {
         this.x = x;
         this.y = y;
 
-        this.hp = Game.getlvdata().duckhp;
+        this.hp = Game.getLvData().duckhp;
 
-        this.speed = Game.getlvdata().speed;
+        this.speed = Game.getLvData().speed;
         
-        this.score = Game.getlvdata().ducksc;
+        this.score = Game.getLvData().ducksc;
         
         this.duckImg = duckImg;        
     }

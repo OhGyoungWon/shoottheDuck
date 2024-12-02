@@ -12,7 +12,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.List;
 import javax.swing.*;
 
 /**
@@ -31,7 +31,7 @@ public abstract class Canvas extends JPanel implements KeyListener, MouseListene
 
 
 
-    public Canvas()
+    protected Canvas()
     {
         // We use double buffer to draw on the screen.
         this.setDoubleBuffered(true);
@@ -39,7 +39,7 @@ public abstract class Canvas extends JPanel implements KeyListener, MouseListene
         this.setBackground(Color.black);
         SwingUtilities.invokeLater(this::requestFocusInWindow);
 
-        // If you will draw your own mouse cursor or if you just want that mouse cursor disapear,
+        // If you draw your own mouse cursor or if you just want that mouse cursor disappear,
         // insert "true" into if condition and mouse cursor will be removed.
         if(true)
         {
@@ -84,9 +84,7 @@ public abstract class Canvas extends JPanel implements KeyListener, MouseListene
     public void keyPressed(KeyEvent e) {
         ArrayList<Weapon> weapons = Game.getWeapons();
         requestFocusInWindow();
-        if (this.hasFocus()) {//테스트코드임 끝나면 지워
-            System.out.println("asdfasdf");
-        }
+
         keyboardState[e.getKeyCode()] = true;
         int keyCode = e.getKeyCode();
 
@@ -115,8 +113,8 @@ public abstract class Canvas extends JPanel implements KeyListener, MouseListene
                 }
                 break;
             case KeyEvent.VK_R:
-                if (Game.getRubberduckSkill() > 0) {
-                    Game.setRubberduckSkill(Game.getRubberduckSkill()-1);
+                if (Game.getRubberDucksKill() > 0) {
+                    Game.setRubberDucksKill(Game.getRubberDucksKill()-1);
                     Game.reduceHealthOfAllObjects();
                 }
                 break;
@@ -137,8 +135,7 @@ public abstract class Canvas extends JPanel implements KeyListener, MouseListene
     public void keyTyped(KeyEvent e) { }
 
     public void keyReleasedFramework(KeyEvent e) {
-            int keyCode = e.getKeyCode();
-
+        //...
     }
     // Mouse
     /**
@@ -173,9 +170,9 @@ public abstract class Canvas extends JPanel implements KeyListener, MouseListene
                 break;
         }
     }
-    public boolean checkWeapon(String weaponname, ArrayList<Weapon> weapon){
+    public boolean checkWeapon(String weaponName, List<Weapon> weapon){
         for(Weapon changingweapon: weapon){
-            if(changingweapon.getName().equals(weaponname)) return true;
+            if(changingweapon.getName().equals(weaponName)) return true;
         }
         return false;
     }

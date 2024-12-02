@@ -16,8 +16,8 @@ public class Weaponduck implements Damageable {
     public Weaponduck(int x, int y, float speed, int score, int hp, BufferedImage weadckImg){
         this.x = x;
         this.y = y;
-        this.speed = Game.getlvdata().speed/2;
-        this.hp = Game.getlvdata().bosshp/4;
+        this.speed = Game.getLvData().speed/2;
+        this.hp = Game.getLvData().bosshp/4;
         this.weadckImg = weadckImg;
     }
     public void Update(){x += speed;}
