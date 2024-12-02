@@ -9,7 +9,7 @@ import java.awt.image.BufferedImage;
  * @author www.gametutorial.net
  */
 
-public class Superduck {
+public class SuperDuck {
     private int max;
     private final int hp;
 
@@ -19,23 +19,23 @@ public class Superduck {
     private int x;  // getX랑 setX 클래스 만들어서 x 외부에서 사용하기. 나머지도 변수들도 동일
     private final int y;
     private final float speed;
-    private int score;
-    private final BufferedImage superduckImg;
+    private final int score;
+    private final BufferedImage superDuckImg;
 
     /**
      * Creates new duck.
      *
      * @param x Starting x coordinate.
      * @param y Starting y coordinate.
-     * @param superduckImg Image of the duck.
+     * @param superDuckImg Image of the duck.
      */
-    public Superduck(int x, int y, BufferedImage superduckImg) {
+    public SuperDuck(int x, int y, BufferedImage superDuckImg) {
         this.x = x;
         this.y = y;
         hp = Game.getlvdata().bosshp;
         this.speed = Game.getlvdata().speed/3;
         this.score = Game.getlvdata().bosssc;
-        this.superduckImg = superduckImg;
+        this.superDuckImg = superDuckImg;
         max = Game.getlvdata().bosshp;
     }
 
@@ -51,8 +51,8 @@ public class Superduck {
      * @param g2d Graphics2D
      */
     public void Draw(Graphics2D g2d) {
-        // Superduck 이미지 그리기
-        g2d.drawImage(superduckImg, x, (int) (Framework.frameHeight*0.60),null);
+        // SuperDuck 이미지 그리기
+        g2d.drawImage(superDuckImg, x, (int) (Framework.frameHeight*0.60),null);
         // 체력바 그리기
         max = Game.getlvdata().bosshp;
         g2d.setColor(Color.RED); // 체력 바 배경 색상

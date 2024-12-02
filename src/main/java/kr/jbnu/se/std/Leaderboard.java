@@ -25,7 +25,7 @@ public class Leaderboard {
     private static final List<Map.Entry<String, Integer>> leaderboardList = new ArrayList<>();
 
     private Leaderboard() {
-        leaderboardRef = db.getReference("users/leaderboard");
+        //...
     }
 
     // 1. 모든 이메일(key)과 스코어(value)를 리스트에 저장하는 메서드

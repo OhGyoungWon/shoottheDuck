@@ -1,7 +1,7 @@
 package kr.jbnu.se.std;
 
-import javax.swing.JFrame;
-import javax.swing.SwingUtilities;
+import javax.swing.*;
+import java.awt.*;
 import java.io.IOException;
 
 /**
@@ -21,7 +21,7 @@ public class Window extends JFrame {
             // Disables decorations for this frame.
             this.setUndecorated(true);
             // Puts the frame to full screen.
-            this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+            this.setExtendedState(Frame.MAXIMIZED_BOTH);
         } else { // Windowed mode
             // Size of the frame.
             this.setSize(1280, 720);
@@ -32,7 +32,7 @@ public class Window extends JFrame {
         }
 
         // Exit the application when user close frame.
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         // Add the Framework panel (game loop)
         this.setContentPane(new LoginUI(this));
@@ -40,7 +40,7 @@ public class Window extends JFrame {
         this.setVisible(true);
     }
 
-    public void switchToFramework() {
+    public static void switchToFramework() {
         this.setContentPane(new Framework());
         this.revalidate();  // 화면을 다시 그리도록 요청
         this.repaint();  // 변경 사항 반영

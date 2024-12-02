@@ -23,6 +23,18 @@ public class User {
         this.password = password;
     }
 
+    public void setCurrentScore(int currentScore) {
+        this.currentScore = currentScore;
+    }
+
+    public void setTopScore(int topScore) {
+        this.topScore = topScore;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
     public String getPassword() {
         return password;
     }
@@ -31,23 +43,11 @@ public class User {
         return currentScore;
     }
 
-    public void setCurrentScore(int currentScore) {
-        this.currentScore = currentScore;
-    }
-
     public int getTopScore() {
         return topScore;
     }
 
-    public void setTopScore(int topScore) {
-        this.topScore = topScore;
-    }
-
     public String getNickname() {
         return nickname;
-    }
-
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
     }
 }
