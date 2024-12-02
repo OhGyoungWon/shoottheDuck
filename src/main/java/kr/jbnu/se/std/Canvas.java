@@ -13,7 +13,7 @@ import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Arrays;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 /**
  * Create a JPanel on which we draw and listen for keyboard and mouse events.
@@ -37,7 +37,7 @@ public abstract class Canvas extends JPanel implements KeyListener, MouseListene
         this.setDoubleBuffered(true);
         this.setFocusable(true);
         this.setBackground(Color.black);
-        this.requestFocusInWindow();
+        SwingUtilities.invokeLater(this::requestFocusInWindow);
 
         // If you will draw your own mouse cursor or if you just want that mouse cursor disapear,
         // insert "true" into if condition and mouse cursor will be removed.
@@ -117,7 +117,7 @@ public abstract class Canvas extends JPanel implements KeyListener, MouseListene
             case KeyEvent.VK_R:
                 if (Game.getRubberduckSkill() > 0) {
                     Game.setRubberduckSkill(Game.getRubberduckSkill()-1);
-
+                    //여기에 999스킬 발동을 넣어야 함
                 }
                 break;
             default:
