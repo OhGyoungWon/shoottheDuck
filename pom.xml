@@ -28,18 +28,11 @@
     </build>
 
     <dependencies>
-        <!-- Firebase Admin SDK -->
+        <!-- Firebase Admin SDK (optional: if needed for additional admin tasks) -->
         <dependency>
             <groupId>com.google.firebase</groupId>
             <artifactId>firebase-admin</artifactId>
             <version>9.3.0</version>
-        </dependency>
-
-        <!-- Firebase Authentication SDK -->
-        <dependency>
-            <groupId>com.google.firebase</groupId>
-            <artifactId>firebase-auth</artifactId>
-            <version>21.0.1</version>
         </dependency>
 
         <!-- Gson for JSON Parsing -->
