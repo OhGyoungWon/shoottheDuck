@@ -29,6 +29,9 @@ public class Game {
      * Font that we will use to write statistic to the screen.
      */
     private Font font;
+
+    private String bgm = "backgroundMusic";
+    private String boxurl = "/images/gunbox.png";
     
     /**
      * Array list of the ducks.
@@ -160,7 +163,7 @@ public class Game {
                 // Load game files (images, sounds, ...)
                 LoadContent();
 
-                soundPlayer.play("backgroundMusic");
+                soundPlayer.play(bgm);
 
                 Framework.gameState = Framework.GameState.PLAYING;
             }
@@ -278,18 +281,18 @@ public class Game {
             soundPlayer.loadSound("sniper", sniperSoundUrl);
 
             URL backgroundMusicUrl = this.getClass().getResource("/sounds/Fluffing a Duck.wav");
-            soundPlayer.loadSound("backgroundMusic", backgroundMusicUrl);
+            soundPlayer.loadSound(bgm, backgroundMusicUrl);
 
-            URL revImgUrl = this.getClass().getResource("/images/gunbox.png");
+            URL revImgUrl = this.getClass().getResource(boxurl);
             revImg = ImageIO.read(revImgUrl);
 
-            URL smgImgUrl = this.getClass().getResource("/images/gunbox.png");
+            URL smgImgUrl = this.getClass().getResource(boxurl);
             smgImg = ImageIO.read(smgImgUrl);
 
-            URL rifImgUrl = this.getClass().getResource("/images/gunbox.png");
+            URL rifImgUrl = this.getClass().getResource(boxurl);
             rifImg = ImageIO.read(rifImgUrl);
 
-            URL snipImgUrl = this.getClass().getResource("/images/gunbox.png");
+            URL snipImgUrl = this.getClass().getResource(boxurl);
             snipImg = ImageIO.read(snipImgUrl);
 
         }
@@ -422,7 +425,7 @@ public class Game {
 
         // When 200 ducks runaway, the game ends.
         if(runawayDucks >= 20) {
-            soundPlayer.stop("backgroundMusic");
+            soundPlayer.stop(bgm);
             Framework.gameState = Framework.GameState.GAMEOVER;
         }
     }
@@ -558,7 +561,7 @@ public class Game {
     private void SpawnSuperDuck() {
         if(killedDucks % 20 == 0 && killedDucks != 0 && superducks.isEmpty()){
             superducks.add(new Superduck(Duck.duckLines[Duck.nextDuckLines][0] + random.nextInt(200),
-                    (int) (Framework.frameHeight*0.6), lvdata.speed/3, lvdata.bosssc, superduckImg));
+                    (int) (Framework.frameHeight*0.6), superduckImg));
         }
     }
 
@@ -759,77 +762,23 @@ public class Game {
         return weapons;
     }
     public void reduceHealthOfAllObjects() {
-        // ducks 리스트의 모든 객체 체력을 999 감소
-        for (int i = 0; i < ducks.size(); i++) {
-            Duck duck = ducks.get(i);
-            duck.hp -= 999;
+        reduceHealth(ducks);
+        reduceHealth(superducks);
+        reduceHealth(smgduck);
+        reduceHealth(rifduck);
+        reduceHealth(sniperduck);
+    }
 
-            // DamageText 추가
-            damageTexts.add(new DamageText(duck.x, duck.y, 999));
+    private <T extends Damageable> void reduceHealth(ArrayList<T> objects) {
+        for (int i = 0; i < objects.size(); i++) {
+            T obj = objects.get(i);
+            obj.reduceHp(999);
 
-            if (duck.hp <= 0) {
-                ducks.remove(i);
-                i--; // 리스트에서 객체를 제거한 후 인덱스 조정
-            }
-        }
+            damageTexts.add(new DamageText(obj.getX(), obj.getY(), 999));
 
-        // superducks 리스트의 모든 객체 체력을 999 감소
-        for (int i = 0; i < superducks.size(); i++) {
-            int hp = superducks.get(i).getHp();
-            int x = superducks.get(i).getX();
-            int y = superducks.get(i).getY();
-
-            hp -= 999;
-            superducks.get(i).setHp(hp);
-
-            // DamageText 추가
-            damageTexts.add(new DamageText(x, y, 999));
-
-            if (hp <= 0) {
-                superducks.remove(i);
-                i--;
-            }
-        }
-
-        // smgduck 리스트의 모든 객체 체력을 999 감소
-        for (int i = 0; i < smgduck.size(); i++) {
-            Weaponduck.WeaponBox smg = smgduck.get(i);
-            smg.hp -= 999;
-
-            // DamageText 추가
-            damageTexts.add(new DamageText(smg.x, smg.y, 999));
-
-            if (smg.hp <= 0) {
-                smgduck.remove(i);
-                i--;
-            }
-        }
-
-        // rifduck 리스트의 모든 객체 체력을 999 감소
-        for (int i = 0; i < rifduck.size(); i++) {
-            Weaponduck.WeaponBox rif = rifduck.get(i);
-            rif.hp -= 999;
-
-            // DamageText 추가
-            damageTexts.add(new DamageText(rif.x, rif.y, 999));
-
-            if (rif.hp <= 0) {
-                rifduck.remove(i);
-                i--;
-            }
-        }
-
-        // sniperduck 리스트의 모든 객체 체력을 999 감소
-        for (int i = 0; i < sniperduck.size(); i++) {
-            Weaponduck.WeaponBox sni = sniperduck.get(i);
-            sni.hp -= 999;
-
-            // DamageText 추가
-            damageTexts.add(new DamageText(sni.x, sni.y, 999));
-
-            if (sni.hp <= 0) {
-                sniperduck.remove(i);
-                i--;
+            if (obj.getHp() <= 0) {
+                objects.remove(i);
+                i--; // Adjust index after removal
             }
         }
     }

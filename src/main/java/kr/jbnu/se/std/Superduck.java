@@ -9,7 +9,7 @@ import java.awt.image.BufferedImage;
  * @author www.gametutorial.net
  */
 
-public class Superduck {
+public class Superduck implements Damageable {
     private int max;
     private int hp;  //getHp만들어서 hp using하기 superduck.getHp()했는데 안되면 변수 만들어서 넣어서 사용
 
@@ -30,17 +30,8 @@ public class Superduck {
      * @param y Starting y coordinate.
      * @param superduckImg Image of the duck.
      */
-    public Superduck(int x, int y, BufferedImage superduckImg) {
-        this.x = x;
-        this.y = y;
-        hp = Game.getlvdata().bosshp;
-        this.speed = Game.getlvdata().speed/3;
-        this.score = Game.getlvdata().bosssc;
-        this.superduckImg = superduckImg;
-        max = Game.getlvdata().bosshp;
-    }
 
-    public Superduck(int x, int y, float v, int bosssc, BufferedImage superduckImg) {
+    public Superduck(int x, int y, BufferedImage superduckImg) {
         this.x = x;
         this.y = y;
         hp = Game.getlvdata().bosshp;
@@ -77,31 +68,26 @@ public class Superduck {
         return hp;
     }
 
-    public void setHp(int hp){
-        this.hp = hp;
+    @Override
+    public void reduceHp(int amount) {
+        hp -= amount;
     }
 
-    public Graphics2D getG2d() {
-        return g2d;
-    }
-
-    public void setG2d(Graphics2D g2d) {
-        this.g2d = g2d;
-    }
-
-    public int getScore() {
-        return score;
-    }
-
-    public void setScore(int score) {
-        this.score = score;
-    }
-
+    @Override
     public int getX() {
         return x;
     }
 
+    @Override
     public int getY() {
         return y;
+    }
+
+    public void setHp(int hp){
+        this.hp = hp;
+    }
+
+    public int getScore() {
+        return score;
     }
 }

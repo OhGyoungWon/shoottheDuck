@@ -9,7 +9,7 @@ import java.awt.image.BufferedImage;
  * @author www.gametutorial.net
  */
 
-public class Duck {
+public class Duck implements Damageable {
     
     /**
      * How much time must pass in order to create a new duck?
@@ -103,5 +103,25 @@ public class Duck {
     public void Draw(Graphics2D g2d)
     {
         g2d.drawImage(duckImg, x, y, null);
+    }
+
+    @Override
+    public int getHp() {
+        return hp;
+    }
+
+    @Override
+    public void reduceHp(int amount) {
+        this.hp -= amount;
+    }
+
+    @Override
+    public int getX() {
+        return x;
+    }
+
+    @Override
+    public int getY() {
+        return y;
     }
 }
