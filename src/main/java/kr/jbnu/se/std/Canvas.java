@@ -103,7 +103,7 @@ public abstract class Canvas extends JPanel implements KeyListener, MouseListene
             case KeyEvent.VK_R:
                 if (Game.getRubberducksKills() > 0) {
                     Game.setRubberduckKills(Game.getRubberducksKills() - 1);
-                    Game.setNuclearswitch(true);
+                    Game.setNuclearswitch(true); // 수정좀요
                 }
                 break;
             default:
