@@ -36,11 +36,11 @@ public class Game {
     /**
      * Array list of the ducks.
      */
-    private ArrayList<Duck> ducks;
-    private ArrayList<Superduck> superducks;
-    private ArrayList<Weaponduck.WeaponBox> smgduck;
-    private ArrayList<Weaponduck.WeaponBox> rifduck;
-    private ArrayList<Weaponduck.WeaponBox> sniperduck;
+    private static ArrayList<Duck> ducks;
+    private static ArrayList<Superduck> superducks;
+    private static ArrayList<Weaponduck.WeaponBox> smgduck;
+    private static ArrayList<Weaponduck.WeaponBox> rifduck;
+    private static ArrayList<Weaponduck.WeaponBox> sniperduck;
 
     /**
      * How many ducks leave the screen alive?
@@ -149,7 +149,7 @@ public class Game {
     private long reloadStartTime;  // 장전 시작 시간
     public static long reloadDuration;  // 장전 시간 1.5초
 
-    private ArrayList<DamageText> damageTexts;
+    private static ArrayList<DamageText> damageTexts;
 
     public Game()
     {
@@ -748,7 +748,7 @@ public class Game {
             return new Levels.lev5();
         }
     }
-    public void reduceHealthOfAllObjects() {
+    public static void reduceHealthOfAllObjects() {
         reduceHealth(ducks);
         reduceHealth(superducks);
         reduceHealth(smgduck);
@@ -756,7 +756,7 @@ public class Game {
         reduceHealth(sniperduck);
     }
 
-    private <T extends Damageable> void reduceHealth(ArrayList<T> objects) {
+    private static <T extends Damageable> void reduceHealth(ArrayList<T> objects) {
         for (int i = 0; i < objects.size(); i++) {
             T obj = objects.get(i);
             obj.reduceHp(999);

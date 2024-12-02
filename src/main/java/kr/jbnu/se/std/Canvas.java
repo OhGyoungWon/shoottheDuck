@@ -117,7 +117,7 @@ public abstract class Canvas extends JPanel implements KeyListener, MouseListene
             case KeyEvent.VK_R:
                 if (Game.getRubberduckSkill() > 0) {
                     Game.setRubberduckSkill(Game.getRubberduckSkill()-1);
-                    //여기에 999스킬 발동을 넣어야 함
+                    Game.reduceHealthOfAllObjects();
                 }
                 break;
             default:
