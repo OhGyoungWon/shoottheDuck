@@ -6,11 +6,11 @@ import java.util.Random;
 
 public class Weaponduck implements Damageable {
     Random random;
-    public int x;
-    public int y;
+    private int x;
+    private int y;
     private float speed;
-    public int score;
-    public int hp;
+    private int score;
+    private int hp;
     public BufferedImage weadckImg;
 
     public Weaponduck(int x, int y, float speed, int score, int hp, BufferedImage weadckImg){
@@ -42,6 +42,10 @@ public class Weaponduck implements Damageable {
     @Override
     public int getY() {
         return y;
+    }
+
+    public int getScore() {
+        return score;
     }
 
     public static class WeaponBox extends Weaponduck{

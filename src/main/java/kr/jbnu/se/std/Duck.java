@@ -40,11 +40,11 @@ public class Duck implements Damageable {
     /**
      * X coordinate of the duck.
      */
-    public int x;
+    private int x;
     /**
      * Y coordinate of the duck.
      */
-    public int y;
+    private int y;
     
     /**
      * How fast the duck should move? And to which direction?
@@ -54,8 +54,8 @@ public class Duck implements Damageable {
     /**
      * How many points this duck is worth?
      */
-    public int score;
-    public int hp;
+    private int score;
+    private int hp;
 
     /**
      * kr.jbnu.se.std.Duck image.
@@ -123,5 +123,9 @@ public class Duck implements Damageable {
     @Override
     public int getY() {
         return y;
+    }
+
+    public int getScore() {
+        return score;
     }
 }
