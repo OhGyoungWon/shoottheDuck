@@ -148,6 +148,7 @@ public class Game {
     public static long reloadDuration;  // 장전 시간 1.5초
 
     private static ArrayList<DamageText> damageTexts;
+    private static ArrayList<DisplayText> displayTexts;
 
     public Game()
     {
@@ -212,6 +213,7 @@ public class Game {
             timeBetweenShots = 50_000_000;
         }
         damageTexts = new ArrayList<>();
+        displayTexts = new ArrayList<>();
 
         maxAmmo = currentweapon.maxammo;
         currentAmmo = maxAmmo;
@@ -311,6 +313,7 @@ public class Game {
         rifduck.clear();
         sniperduck.clear();
         damageTexts.clear();
+        displayTexts.clear();
         weapons.clear();
         currentweapon = new Weapon.Revolver(revImg);
         weapons.add(new Weapon.Revolver(revImg));
@@ -402,6 +405,7 @@ public class Game {
         }
 
         ShowDamageTexts();
+        ShowDisplayTexts();
 
         if (currentweapon.getName().equals("Pistol")) {
             pistol.update();
@@ -478,7 +482,7 @@ public class Game {
                     superducks.remove(i);
                     shop.openShop();
                     gamelevel++;
-
+                    displayTexts.add(new DisplayText(Framework.frameWidth*0.4, Framework.frameHeight*0.3, "Level up to " + gamelevel));
                     // We found the duck that player shoot so we can leave the for loop.
                     break;
                 }
@@ -548,6 +552,7 @@ public class Game {
         if(killedDucks % 20 == 0 && killedDucks != 0 && superducks.isEmpty()){
             superducks.add(new Superduck(Duck.duckLines[Duck.nextDuckLines][0] + random.nextInt(200),
                     (int) (Framework.frameHeight*0.6), superduckImg));
+            displayTexts.add(new DisplayText(Framework.frameWidth*0.4, Framework.frameHeight*0.3, "B  O  S  S"));
         }
     }
 
@@ -625,6 +630,14 @@ public class Game {
             }
         }
     }
+    private void ShowDisplayTexts() {
+        for(int i = 0; i < displayTexts.size(); i++) {
+            if(!displayTexts.get(i).update()) {
+                displayTexts.remove(i);
+                i--;
+            }
+        }
+    }
 
     /**
      * Draw the game to the screen.
@@ -668,6 +681,9 @@ public class Game {
 
         for (DamageText damageText : damageTexts) {
             damageText.draw(g2d);
+        }
+        for(DisplayText displayText: displayTexts) {
+            displayText.draw(g2d);
         }
 
         g2d.drawImage(grassImg, 0, Framework.frameHeight - grassImg.getHeight(), Framework.frameWidth, grassImg.getHeight(), null);
