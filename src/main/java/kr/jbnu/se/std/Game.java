@@ -1,6 +1,7 @@
 package kr.jbnu.se.std;
 
 
+import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
@@ -10,7 +11,6 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.imageio.ImageIO;
 
 /**
  * Actual game.
@@ -45,7 +45,7 @@ public class Game {
     /**
      * How many ducks leave the screen alive?
      */
-    public static int runawayDucks;
+    private static int runawayDucks;
     
    /**
      * How many ducks the player killed?
@@ -85,7 +85,7 @@ public class Game {
     /**
      * The time which must elapse between shots.
      */
-    public static long timeBetweenShots;
+    private static long timeBetweenShots;
 
     /**
      * kr.jbnu.se.std.Game background image.
@@ -139,13 +139,13 @@ public class Game {
     private static int redspd;
 
     private static int rubberduckskills;
-    public static boolean nuclearswitch;
+    private static boolean nuclearswitch;
 
-    public static boolean isReloading = false;  // 장전 중인지 여부
-    public static int currentAmmo;  // 현재 남은 탄약 수
-    public static int maxAmmo;  // 탄창 크기
+    private static boolean isReloading = false;  // 장전 중인지 여부
+    private static int currentAmmo;  // 현재 남은 탄약 수
+    private static int maxAmmo;  // 탄창 크기
     private long reloadStartTime;  // 장전 시작 시간
-    public static long reloadDuration;  // 장전 시간 1.5초
+    private static long reloadDuration;  // 장전 시간 1.5초
 
     private static ArrayList<DamageText> damageTexts;
     private static ArrayList<DisplayText> displayTexts;

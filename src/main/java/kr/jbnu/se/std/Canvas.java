@@ -1,19 +1,13 @@
 package kr.jbnu.se.std;
 
-import java.awt.Color;
-import java.awt.Cursor;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Point;
-import java.awt.Toolkit;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-import java.util.Arrays;
-import javax.swing.*;
 
 /**
  * Create a JPanel on which we draw and listen for keyboard and mouse events.
@@ -84,9 +78,6 @@ public abstract class Canvas extends JPanel implements KeyListener, MouseListene
     public void keyPressed(KeyEvent e) {
         ArrayList<Weapon> weapons = Game.getWeapons();
         requestFocusInWindow();
-        if (this.hasFocus()) {//테스트코드임 끝나면 지워
-            System.out.println("asdfasdf");
-        }
         keyboardState[e.getKeyCode()] = true;
         int keyCode = e.getKeyCode();
 
