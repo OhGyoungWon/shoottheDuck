@@ -40,7 +40,7 @@ public class Window extends JFrame {
         this.setVisible(true);
     }
 
-    public static void switchToFramework() {
+    public void switchToFramework() {
         this.setContentPane(new Framework());
         this.revalidate();  // 화면을 다시 그리도록 요청
         this.repaint();  // 변경 사항 반영

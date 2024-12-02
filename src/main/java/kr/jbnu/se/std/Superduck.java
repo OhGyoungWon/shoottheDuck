@@ -28,7 +28,6 @@ public class Superduck implements Damageable {
      *
      * @param x Starting x coordinate.
      * @param y Starting y coordinate.
-     * @param superDuckImg Image of the duck.
      */
 
     public Superduck(int x, int y, BufferedImage superduckImg) {

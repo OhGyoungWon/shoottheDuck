@@ -11,7 +11,9 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
-import javax.swing.JPanel;
+import java.util.ArrayList;
+import java.util.Arrays;
+import javax.swing.*;
 
 /**
  * Create a JPanel on which we draw and listen for keyboard and mouse events.
@@ -35,7 +37,7 @@ public abstract class Canvas extends JPanel implements KeyListener, MouseListene
         this.setDoubleBuffered(true);
         this.setFocusable(true);
         this.setBackground(Color.black);
-        this.requestFocusInWindow();
+        SwingUtilities.invokeLater(this::requestFocusInWindow);
 
         // If you will draw your own mouse cursor or if you just want that mouse cursor disapear,
         // insert "true" into if condition and mouse cursor will be removed.
@@ -76,12 +78,13 @@ public abstract class Canvas extends JPanel implements KeyListener, MouseListene
     {
         return keyboardState[key];
     }
-    
+
     // Methods of the keyboard listener.
     @Override
     public void keyPressed(KeyEvent e) {
+        ArrayList<Weapon> weapons = Game.getWeapons();
         requestFocusInWindow();
-        if (this.hasFocus()) {
+        if (this.hasFocus()) {//테스트코드임 끝나면 지워
             System.out.println("asdfasdf");
         }
         keyboardState[e.getKeyCode()] = true;
@@ -89,21 +92,32 @@ public abstract class Canvas extends JPanel implements KeyListener, MouseListene
 
         switch (keyCode) {
             case KeyEvent.VK_1:
-                selectWeapon(Weapon.Revolver.class);
+                Game.changeWeapon(weapons.get(0));
                 break;
             case KeyEvent.VK_2:
-                selectWeapon(Weapon.SMG.class);
+                if(weapons.size() >= 2) {
+                    Game.changeWeapon(weapons.get(1));
+                }
                 break;
             case KeyEvent.VK_3:
-                selectWeapon(Weapon.Rifle.class);
+                if(weapons.size() >= 3) {
+                    Game.changeWeapon(weapons.get(2));
+                }
                 break;
             case KeyEvent.VK_4:
-                selectWeapon(Weapon.Sniper.class);
+                if(weapons.size() >= 4) {
+                    Game.changeWeapon(weapons.get(3));
+                }
+                break;
+            case KeyEvent.VK_5:
+                if(weapons.size() >= 5) {
+                    Game.changeWeapon(weapons.get(4));
+                }
                 break;
             case KeyEvent.VK_R:
-                if (Game.getRubberducksKills() > 0) {
-                    Game.setRubberduckKills(Game.getRubberducksKills() - 1);
-                    Game.setNuclearswitch(true); // 수정좀요
+                if (Game.getRubberduckSkill() > 0) {
+                    Game.setRubberduckSkill(Game.getRubberduckSkill()-1);
+                    Game.reduceHealthOfAllObjects();
                 }
                 break;
             default:
@@ -111,18 +125,7 @@ public abstract class Canvas extends JPanel implements KeyListener, MouseListene
         }
     }
 
-    private void selectWeapon(Class<? extends Weapon> weaponClass) {
-        for (Weapon weapon : Game.getWeapons()) {
-            if (weaponClass.isInstance(weapon)) {
-                Game.setCurrentweapon(weapon);
-                Game.setTimeBetweenShots(weapon.getFireDelay());
-                Game.setMaxAmmo(weapon.maxammo);
-                Game.setCurrentAmmo(Game.getMaxAmmo());
-                Game.setIsReloading(false);
-                break;
-            }
-        }
-    }
+
 
 
     @Override
@@ -169,6 +172,12 @@ public abstract class Canvas extends JPanel implements KeyListener, MouseListene
             default:
                 break;
         }
+    }
+    public boolean checkWeapon(String weaponname, ArrayList<Weapon> weapon){
+        for(Weapon changingweapon: weapon){
+            if(changingweapon.getName().equals(weaponname)) return true;
+        }
+        return false;
     }
 
     // Methods of the mouse listener.

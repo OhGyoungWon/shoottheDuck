@@ -28,18 +28,11 @@
     </build>
 
     <dependencies>
-        <!-- Firebase Admin SDK (optional: if needed for additional admin tasks) -->
+        <!-- Firebase Admin SDK -->
         <dependency>
             <groupId>com.google.firebase</groupId>
             <artifactId>firebase-admin</artifactId>
             <version>9.3.0</version>
-        </dependency>
-
-        <!-- Gson for JSON Parsing -->
-        <dependency>
-            <groupId>com.google.code.gson</groupId>
-            <artifactId>gson</artifactId>
-            <version>2.8.6</version>
         </dependency>
 
         <dependency>
