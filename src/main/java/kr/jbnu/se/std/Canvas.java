@@ -22,15 +22,13 @@ import javax.swing.JPanel;
 public abstract class Canvas extends JPanel implements KeyListener, MouseListener {
     
     // Keyboard states - Here are stored states for keyboard keys - is it down or not.
-    private static boolean[] keyboardState = new boolean[525];
+    private static final boolean[] keyboardState = new boolean[525];
     
     // Mouse states - Here are stored states for mouse keys - is it down or not.
-    private static boolean[] mouseState = new boolean[3];
+    private static final boolean[] mouseState = new boolean[3];
 
-    //리더 보드 객체 정의- 배경 이미지 그리고 리더보드 점수 표시
-    private Leaderboard leaderboard;
-        
-    
+
+
     public Canvas()
     {
         // We use double buffer to draw on the screen.
@@ -89,70 +87,44 @@ public abstract class Canvas extends JPanel implements KeyListener, MouseListene
         keyboardState[e.getKeyCode()] = true;
         int keyCode = e.getKeyCode();
 
-        // 1번 키: Revolver
-        if (keyCode == KeyEvent.VK_1) {
-            for (Weapon weapon : Game.getWeapons()) {
-                if (weapon instanceof Weapon.Revolver) {
-                    Game.currentweapon = weapon;
-                    Game.timeBetweenShots = Game.currentweapon.getFireDelay();
-                    Game.maxAmmo = Game.currentweapon.maxammo;
-                    Game.currentAmmo = Game.maxAmmo;
-                    Game.isReloading = false;
-                    break;
+        switch (keyCode) {
+            case KeyEvent.VK_1:
+                selectWeapon(Weapon.Revolver.class);
+                break;
+            case KeyEvent.VK_2:
+                selectWeapon(Weapon.SMG.class);
+                break;
+            case KeyEvent.VK_3:
+                selectWeapon(Weapon.Rifle.class);
+                break;
+            case KeyEvent.VK_4:
+                selectWeapon(Weapon.Sniper.class);
+                break;
+            case KeyEvent.VK_R:
+                if (Game.getRubberducksKills() > 0) {
+                    Game.setRubberduckKills(Game.getRubberducksKills() - 1);
+                    Game.setNuclearswitch(true); // 수정좀요
                 }
-            }
+                break;
+            default:
+                break;
         }
-
-        // 2번 키: SMG
-        if (keyCode == KeyEvent.VK_2) {
-            for (Weapon weapon : Game.getWeapons()) {
-                if (weapon instanceof Weapon.SMG) {
-                    Game.currentweapon = weapon;
-                    Game.timeBetweenShots = Game.currentweapon.getFireDelay();
-                    Game.maxAmmo = Game.currentweapon.maxammo;
-                    Game.currentAmmo = Game.maxAmmo;
-                    Game.isReloading = false;
-                    break;
-                }
-            }
-        }
-
-        // 3번 키: Rifle
-        if (keyCode == KeyEvent.VK_3) {
-            for (Weapon weapon : Game.getWeapons()) {
-                if (weapon instanceof Weapon.Rifle) {
-                    Game.currentweapon = weapon;
-                    Game.timeBetweenShots = Game.currentweapon.getFireDelay();
-                    Game.maxAmmo = Game.currentweapon.maxammo;
-                    Game.currentAmmo = Game.maxAmmo;
-                    Game.isReloading = false;
-                    break;
-                }
-            }
-        }
-
-        // 4번 키: Odin
-        if (keyCode == KeyEvent.VK_4) {
-            for (Weapon weapon : Game.getWeapons()) {
-                if (weapon instanceof Weapon.Sniper) {
-                    Game.currentweapon = weapon;
-                    Game.timeBetweenShots = Game.currentweapon.getFireDelay();
-                    Game.maxAmmo = Game.currentweapon.maxammo;
-                    Game.currentAmmo = Game.maxAmmo;
-                    Game.isReloading = false;
-                    break;
-                }
-            }
-        }
-        if (keyCode == KeyEvent.VK_R){
-            if(Game.rubberduckskills > 0){
-                Game.rubberduckskills--;
-                Game.nuclearswitch = true;
-            }
-        }
-
     }
-    
+
+    private void selectWeapon(Class<? extends Weapon> weaponClass) {
+        for (Weapon weapon : Game.getWeapons()) {
+            if (weaponClass.isInstance(weapon)) {
+                Game.setCurrentweapon(weapon);
+                Game.setTimeBetweenShots(weapon.getFireDelay());
+                Game.setMaxAmmo(weapon.maxammo);
+                Game.setCurrentAmmo(Game.getMaxAmmo());
+                Game.setIsReloading(false);
+                break;
+            }
+        }
+    }
+
+
     @Override
     public void keyReleased(KeyEvent e) {
         keyboardState[e.getKeyCode()] = false;
@@ -182,14 +154,23 @@ public abstract class Canvas extends JPanel implements KeyListener, MouseListene
     // Sets mouse key status.
     private void mouseKeyStatus(MouseEvent e, boolean status)
     {
-        if(e.getButton() == MouseEvent.BUTTON1)
-            mouseState[0] = status;
-        else if(e.getButton() == MouseEvent.BUTTON2)
-            mouseState[1] = status;
-        else if(e.getButton() == MouseEvent.BUTTON3)
-            mouseState[2] = status;
+        int getButton = e.getButton();
+
+        switch (getButton){
+            case MouseEvent.BUTTON1:
+                mouseState[0] = status;
+                break;
+            case MouseEvent.BUTTON2:
+                mouseState[1] = status;
+                break;
+            case MouseEvent.BUTTON3:
+                mouseState[2] = status;
+                break;
+            default:
+                break;
+        }
     }
-    
+
     // Methods of the mouse listener.
     @Override
     public void mousePressed(MouseEvent e)

@@ -28,7 +28,7 @@ public class Superduck {
      *
      * @param x Starting x coordinate.
      * @param y Starting y coordinate.
-     * @param superduckImg Image of the duck.
+     * @param superDuckImg Image of the duck.
      */
     public Superduck(int x, int y, BufferedImage superduckImg) {
         this.x = x;
