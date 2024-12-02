@@ -9,7 +9,7 @@ import java.awt.image.BufferedImage;
  * @author www.gametutorial.net
  */
 
-public class Duck {
+public class Duck implements Damageable {
     
     /**
      * How much time must pass in order to create a new duck?
@@ -40,11 +40,11 @@ public class Duck {
     /**
      * X coordinate of the duck.
      */
-    public int x;
+    private int x;
     /**
      * Y coordinate of the duck.
      */
-    public int y;
+    private int y;
     
     /**
      * How fast the duck should move? And to which direction?
@@ -54,8 +54,8 @@ public class Duck {
     /**
      * How many points this duck is worth?
      */
-    public int score;
-    public int hp;
+    private int score;
+    private int hp;
 
     /**
      * kr.jbnu.se.std.Duck image.
@@ -103,5 +103,29 @@ public class Duck {
     public void Draw(Graphics2D g2d)
     {
         g2d.drawImage(duckImg, x, y, null);
+    }
+
+    @Override
+    public int getHp() {
+        return hp;
+    }
+
+    @Override
+    public void reduceHp(int amount) {
+        this.hp -= amount;
+    }
+
+    @Override
+    public int getX() {
+        return x;
+    }
+
+    @Override
+    public int getY() {
+        return y;
+    }
+
+    public int getScore() {
+        return score;
     }
 }
