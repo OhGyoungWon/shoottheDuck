@@ -220,7 +220,7 @@ public class Game {
         maxAmmo = currentweapon.maxammo;
         currentAmmo = maxAmmo;
 
-        rubberduckskills = 0;
+        rubberduckskills = 5;
         wineskills = 5;
 
     }
@@ -796,6 +796,7 @@ public class Game {
         }
     }
     public static void reduceHealthOfAllObjects() {
+        displayTexts.add(new DisplayText(Framework.frameWidth*0.4, Framework.frameHeight*0.3, "NUCLEAR FIRED"));
         reduceHealth(ducks);
         reduceHealth(superDuck);
         reduceHealth(smgDuck);
