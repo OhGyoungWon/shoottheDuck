@@ -84,11 +84,11 @@ public class Game {
     /**
      * Last time of the shoot.
      */
-    private long lastTimeShoot;    
+    private long lastTimeShoot;
     /**
      * The time which must elapse between shots.
      */
-    public static long timeBetweenShots;
+    private static long timeBetweenShots;
 
     /**
      * kr.jbnu.se.std.Game background image.
@@ -142,13 +142,13 @@ public class Game {
     private static int reduceSpeed;
 
     private static int rubberDucksKills;
-    public static boolean nuclearSwitch;
+    private static boolean nuclearSwitch;
 
-    public static boolean isReloading = false;  // 장전 중인지 여부
-    public static int currentAmmo;  // 현재 남은 탄약 수
-    public static int maxAmmo;  // 탄창 크기
+    private static boolean isReloading = false;  // 장전 중인지 여부
+    private static int currentAmmo;  // 현재 남은 탄약 수
+    private static int maxAmmo;  // 탄창 크기
     private long reloadStartTime;  // 장전 시작 시간
-    public static long reloadDuration;  // 장전 시간 1.5초
+    private static long reloadDuration;  // 장전 시간 1.5초
 
     private static ArrayList<DamageText> damageTexts;
 
@@ -352,7 +352,6 @@ public class Game {
 
         if (nuclearSwitch) {
             reduceHealthOfAllObjects();
-            nuclearSwitch = false;
         }
 
         spawnEntities();
