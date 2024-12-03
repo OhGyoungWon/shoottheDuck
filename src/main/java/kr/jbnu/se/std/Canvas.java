@@ -106,7 +106,7 @@ public abstract class Canvas extends JPanel implements KeyListener, MouseListene
                 }
             break;
             case KeyEvent.VK_R:
-                if (Game.getRubberDucksKill() > 0) {
+                if (Game.getRubberDucksKill() >= 1) {
                     Game.setRubberDucksKill(Game.getRubberDucksKill()-1);
                     Game.reduceHealthOfAllObjects();
                 }
@@ -122,12 +122,15 @@ public abstract class Canvas extends JPanel implements KeyListener, MouseListene
                 break;
             case KeyEvent.VK_SPACE:
                 if(Framework.gameState == Framework.GameState.PLAYING){
-                    //일시정지
+                    //일시정지 구현할 자리
+                }
+                if(Framework.gameState == Framework.GameState.OPTIONS){
+                    //일시정지에서 다시 게임 시작
                 }
             break;
             case KeyEvent.VK_ENTER:
                 if(Framework.gameState == Framework.GameState.GAMEOVER){
-                    //재시작
+                    //재시작 구현할 자리
                 }
             break;
             default:

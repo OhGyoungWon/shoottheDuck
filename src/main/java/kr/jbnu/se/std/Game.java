@@ -738,20 +738,21 @@ public class Game {
 
         g2d.drawImage(backGrassImg, 0, Framework.frameHeight/32 * 10, Framework.frameWidth, backGrassImg.getHeight(), null);
 
-        for (int i = 0; i < deadDucks.size(); i++) {
-            DeadDuck deadDuck = deadDucks.get(i);
+        synchronized (deadDucks) {
+            Iterator<DeadDuck> iterator = deadDucks.iterator();
 
-            deadDuck.update();  // 투명도 업데이트
+            while (iterator.hasNext()) {
+                DeadDuck deadDuck = iterator.next();
+                deadDuck.update();  // 투명도 업데이트
 
-            // 만료되지 않은 오리만 그리기
-            if (!deadDuck.isExpired()) {
-                deadDuck.draw(g2d);
-            } else {
-                // 만료된 오리는 리스트에서 제거
-                deadDucks.remove(i);
-                i--;
+                if (!deadDuck.isExpired()) {
+                    deadDuck.draw(g2d);
+                } else {
+                    iterator.remove(); // 안전하게 제거
+                }
             }
         }
+
 
         if (isReloading) {
             g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);  // 부드러운 텍스트
@@ -868,27 +869,27 @@ public class Game {
     }
 
     private static <T extends Damageable> void reduceHealth(ArrayList<T> objects) {
-        Iterator<T> iterator = objects.iterator();
+        synchronized (objects) {
+            Iterator<T> iterator = objects.iterator();
 
-        while (iterator.hasNext()) {
-            T obj = iterator.next();
-            obj.reduceHp(999);
+            while (iterator.hasNext()) {
+                T obj = iterator.next();
+                obj.reduceHp(999);
+                damageTexts.add(new DamageText(obj.getX(), obj.getY(), 999));
 
-            damageTexts.add(new DamageText(obj.getX(), obj.getY(), 999));
-
-            if (obj.getHp() <= 0) {
-                deadDucks.add(new DeadDuck(
-                        objects.get(i).getX(),
-                        objects.get(i).getY(),
-                        getRubberDuckImage(), // 죽은 오리 이미지
-                        500_000_000L // 0.5초 동안 표시
-                ));
-                objects.remove(i); // 밑에거가 새로생김 이거 뭐임
-                i--; // Adjust index after removal
-                iterator.remove(); // Safely remove the object from the list
+                if (obj.getHp() <= 0) {
+                    deadDucks.add(new DeadDuck(
+                            obj.getX(),
+                            obj.getY(),
+                            getRubberDuckImage(), // 죽은 오리 이미지
+                            500_000_000L // 0.5초 동안 표시
+                    ));
+                    iterator.remove(); // 안전하게 객체 제거
+                }
             }
         }
     }
+
 
 
     public static void changeWeapon(Weapon weapon) {
@@ -907,7 +908,7 @@ public class Game {
     public static void setIsReloading(){ isReloading = false; }
 
     public static int getRubberDucksKill(){ return rubberduckskills; }
-    public static void setRubberDucksKill(int n){ rubberduckskills += n; }
+    public static void setRubberDucksKill(int n){ rubberduckskills = n; }
 
     public static int getWineskills(){ return wineskills; }
     public static void setWineskills(int n){ wineskills = n; }
@@ -926,10 +927,8 @@ public class Game {
 
     public static int getReduceSpeed(){ return reduceSpeed; }
     public static void setReduceSpeed(int n){ reduceSpeed = n; }
-    public static int getRedspd(){ return redspd; }
-    public static void setRedspd(int n){ redspd = n; }
 
-    public static int getLevel(){ return gamelevel; }
+    public static int getLevel(){ return gameLevel; }
     public static BufferedImage getRubberDuckImage() {
         return rubberduckImg;
     }
