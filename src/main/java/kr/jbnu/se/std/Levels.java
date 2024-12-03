@@ -11,9 +11,6 @@ public class Levels {
     public int ducksc;//오리 점수
     public int bosssc;//보스 점수
     public int sumdly;//소환 속도 조절
-    public BufferedImage background;
-    public BufferedImage duck;
-    public BufferedImage boss;
     public Levels(float speed, int duckhp, int bosshp, int ducksc, int sumdly) {
         this.speed = speed;
         this.duckhp = duckhp;

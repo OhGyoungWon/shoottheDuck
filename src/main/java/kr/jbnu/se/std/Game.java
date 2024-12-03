@@ -139,6 +139,7 @@ public class Game {
     private static int redspd;
 
     private static int rubberduckskills;
+    private static int wineskills;
     private static boolean nuclearswitch;
 
     private static boolean isReloading = false;  // 장전 중인지 여부
@@ -217,6 +218,9 @@ public class Game {
 
         maxAmmo = currentweapon.maxammo;
         currentAmmo = maxAmmo;
+
+        rubberduckskills = 0;
+        wineskills = 5;
 
     }
 
@@ -332,6 +336,8 @@ public class Game {
         redspd = 0;
 
         lastTimeShoot = 0;
+        rubberduckskills = 0;
+        wineskills = 0;
     }
 
     
@@ -424,7 +430,7 @@ public class Game {
         }
 
         // When 200 ducks runaway, the game ends.
-        if(runawayDucks >= 20) {
+        if(runawayDucks >= 5) {
             soundPlayer.stop(bgm);
             Framework.gameState = Framework.GameState.GAMEOVER;
         }
@@ -767,6 +773,21 @@ public class Game {
         reduceHealth(rifduck);
         reduceHealth(sniperduck);
     }
+    public static void slowAllObjects(){
+        displayTexts.add(new DisplayText(Framework.frameWidth*0.4, Framework.frameHeight*0.45, "WINE SKILL ACTIVATED"));
+        slowDownObject(ducks);
+        slowDownObject(superducks);
+        slowDownObject(smgduck);
+        slowDownObject(rifduck);
+        slowDownObject(sniperduck);
+    }
+
+    public static <T extends Damageable> void slowDownObject(ArrayList<T> objects){
+        for (int i = 0; i < objects.size(); i++) {
+            T obj = objects.get(i);
+            obj.setSpeed(-1);
+        }
+    }
 
     private static <T extends Damageable> void reduceHealth(ArrayList<T> objects) {
         for (int i = 0; i < objects.size(); i++) {
@@ -799,6 +820,9 @@ public class Game {
 
     public static int getRubberduckSkill(){ return rubberduckskills; }
     public static void setRubberduckSkill(int n){ rubberduckskills = n; }
+
+    public static int getWineskills(){ return wineskills; }
+    public static void setWineskills(int n){ wineskills = n; }
 
     public static int getMoney(){ return money; }
     public static void reduceMoney(int n){ money -= n;}

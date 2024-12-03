@@ -171,8 +171,7 @@ public class Shop {
             // 와인 아이템 클릭 처리 로직 추가
             if(Game.getMoney() > 1000){
                 Game.reduceMoney(1000);
-                Game.setRedspd(Game.getRedspd() + 200_000_000);
-
+                Game.setWineskills(Game.getWineskills() + 1);
                 Purchase("와인");
             }
             else{

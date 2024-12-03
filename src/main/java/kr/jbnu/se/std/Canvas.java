@@ -11,15 +11,15 @@ import java.util.ArrayList;
 
 /**
  * Create a JPanel on which we draw and listen for keyboard and mouse events.
- * 
+ *
  * @author www.gametutorial.net
  */
 
 public abstract class Canvas extends JPanel implements KeyListener, MouseListener {
-    
+
     // Keyboard states - Here are stored states for keyboard keys - is it down or not.
     private static final boolean[] keyboardState = new boolean[525];
-    
+
     // Mouse states - Here are stored states for mouse keys - is it down or not.
     private static final boolean[] mouseState = new boolean[3];
 
@@ -47,24 +47,24 @@ public abstract class Canvas extends JPanel implements KeyListener, MouseListene
         // Adds the mouse listener to JPanel to receive mouse events from this component.
         this.addMouseListener(this);
     }
-    
-    
+
+
     // This method is overridden in kr.jbnu.se.std.Framework.java and is used for drawing to the screen.
     public abstract void Draw(Graphics2D g2d);
-    
+
     @Override
     public void paintComponent(Graphics g)
     {
-        Graphics2D g2d = (Graphics2D)g;        
-        super.paintComponent(g2d);        
+        Graphics2D g2d = (Graphics2D)g;
+        super.paintComponent(g2d);
         Draw(g2d);
     }
-       
-    
+
+
     // Keyboard
     /**
      * Is keyboard key "key" down?
-     * 
+     *
      * @param key Number of key for which you want to check the state.
      * @return true if the key is down, false if the key is not down.
      */
@@ -84,33 +84,52 @@ public abstract class Canvas extends JPanel implements KeyListener, MouseListene
         switch (keyCode) {
             case KeyEvent.VK_1:
                 Game.changeWeapon(weapons.get(0));
-                break;
+            break;
             case KeyEvent.VK_2:
                 if(weapons.size() >= 2) {
                     Game.changeWeapon(weapons.get(1));
                 }
-                break;
+            break;
             case KeyEvent.VK_3:
                 if(weapons.size() >= 3) {
                     Game.changeWeapon(weapons.get(2));
                 }
-                break;
+            break;
             case KeyEvent.VK_4:
                 if(weapons.size() >= 4) {
                     Game.changeWeapon(weapons.get(3));
                 }
-                break;
+            break;
             case KeyEvent.VK_5:
                 if(weapons.size() >= 5) {
                     Game.changeWeapon(weapons.get(4));
                 }
-                break;
+            break;
             case KeyEvent.VK_R:
                 if (Game.getRubberduckSkill() > 0) {
                     Game.setRubberduckSkill(Game.getRubberduckSkill()-1);
                     Game.reduceHealthOfAllObjects();
                 }
+            break;
+            case KeyEvent.VK_T:
+                if (Game.getWineskills() > 0){
+                    Game.setWineskills(Game.getWineskills() - 1);
+                    Game.slowAllObjects();
+                }
+            break;
+            case KeyEvent.VK_ESCAPE:
+                System.exit(0);
                 break;
+            case KeyEvent.VK_SPACE:
+                if(Framework.gameState == Framework.GameState.PLAYING){
+                    //일시정지
+                }
+            break;
+            case KeyEvent.VK_ENTER:
+                if(Framework.gameState == Framework.GameState.GAMEOVER){
+                    //재시작
+                }
+            break;
             default:
                 break;
         }
@@ -123,7 +142,7 @@ public abstract class Canvas extends JPanel implements KeyListener, MouseListene
     public void keyReleased(KeyEvent e) {
         keyboardState[e.getKeyCode()] = false;
     }
-    
+
     @Override
     public void keyTyped(KeyEvent e) { }
 
@@ -136,7 +155,7 @@ public abstract class Canvas extends JPanel implements KeyListener, MouseListene
      * Is mouse button "button" down?
      * Parameter "button" can be "MouseEvent.BUTTON1" - Indicates mouse button #1
      * or "MouseEvent.BUTTON2" - Indicates mouse button #2 ...
-     * 
+     *
      * @param button Number of mouse button for which you want to check the state.
      * @return true if the button is down, false if the button is not down.
      */
@@ -144,7 +163,7 @@ public abstract class Canvas extends JPanel implements KeyListener, MouseListene
     {
         return mouseState[button - 1];
     }
-    
+
     // Sets mouse key status.
     private void mouseKeyStatus(MouseEvent e, boolean status)
     {
@@ -177,20 +196,20 @@ public abstract class Canvas extends JPanel implements KeyListener, MouseListene
     {
         mouseKeyStatus(e, true);
     }
-    
+
     @Override
     public void mouseReleased(MouseEvent e)
     {
         mouseKeyStatus(e, false);
     }
-    
+
     @Override
     public void mouseClicked(MouseEvent e) { }
-    
+
     @Override
     public void mouseEntered(MouseEvent e) { }
-    
+
     @Override
     public void mouseExited(MouseEvent e) { }
-    
+
 }

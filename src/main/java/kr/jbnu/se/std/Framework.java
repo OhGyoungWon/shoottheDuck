@@ -7,6 +7,7 @@ import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -61,12 +62,12 @@ public class Framework extends Canvas {
     /**
      * Elapsed game time in nanoseconds.
      */
-    private long gameTime;
+    private static long gameTime;
     // It is used for calculating elapsed time.
-    private long lastTime;
+    private static long lastTime;
     
     // The actual game
-    private Game game;
+    private static Game game;
     
     
     /**
@@ -249,7 +250,7 @@ public class Framework extends Canvas {
     /**
      *  Restart game - reset game time and call RestartGame() method of game object so that reset some variables.
      */
-    private void restartGame()
+    private static void restartGame()
     {
         // We set gameTime to zero and lastTime to current time for later calculations.
         gameTime = 0;
@@ -300,6 +301,8 @@ public class Framework extends Canvas {
                     restartGame();
             break;
             case PLAYING:
+                //
+            break;
             case MAIN_MENU:
                 if(e.getKeyCode() == KeyEvent.VK_ESCAPE)
                     System.exit(0);

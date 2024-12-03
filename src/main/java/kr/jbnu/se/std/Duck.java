@@ -128,4 +128,9 @@ public class Duck implements Damageable {
     public int getScore() {
         return score;
     }
+
+    @Override
+    public void setSpeed(int newspeed){
+        this.speed = newspeed;
+    }
 }

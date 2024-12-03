@@ -48,6 +48,11 @@ public class Weaponduck implements Damageable {
         return score;
     }
 
+    @Override
+    public void setSpeed(int newspeed){
+        this.speed = newspeed;
+    }
+
     public static class WeaponBox extends Weaponduck{
         public WeaponBox(int x, int y, float speed, int score, int hp, BufferedImage weadckImg) {
             super(x, y, speed, score, hp, weadckImg);
