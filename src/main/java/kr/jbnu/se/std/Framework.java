@@ -217,7 +217,18 @@ public class Framework extends Canvas {
         {
             case PLAYING:
                 game.Draw(g2d, mousePosition());
-            break;
+                if(Game.getLevel()%5 == 1){
+                    applyTintFilter(g2d, new Color(0, 0, 0, 0)); //낮
+                } else if (Game.getLevel()%5 == 2){
+                    applyTintFilter(g2d, new Color(255, 100, 50, 50)); //노을
+                } else if (Game.getLevel()%5 == 3){
+                    applyTintFilter(g2d, new Color(0, 0, 50, 75)); //밤
+                } else if (Game.getLevel()%5 == 4){
+                    applyTintFilter(g2d, new Color(255, 200, 150, 50)); //여명
+                } else if (Game.getLevel()%5 == 0){
+                    applyTintFilter(g2d, new Color(150, 200, 255, 40)); //아침
+                }
+                break;
             case GAMEOVER:
                 game.DrawGameOver(g2d, mousePosition());
             break;
@@ -234,6 +245,11 @@ public class Framework extends Canvas {
                 g2d.drawString("GAME is LOADING", frameWidth / 2 - 50, frameHeight / 2);
             break;
         }
+    }
+
+    private void applyTintFilter(Graphics2D g2d, Color color) {
+        g2d.setColor(color);
+        g2d.fillRect(0, 0, frameWidth, frameHeight);
     }
     
     /**

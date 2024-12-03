@@ -41,6 +41,8 @@ public class Game {
     private static ArrayList<Weaponduck.WeaponBox> smgduck;
     private static ArrayList<Weaponduck.WeaponBox> rifduck;
     private static ArrayList<Weaponduck.WeaponBox> sniperduck;
+    private static ArrayList<DeadDuck> deadDucks = new ArrayList<>();
+
 
     /**
      * How many ducks leave the screen alive?
@@ -62,9 +64,6 @@ public class Game {
      */
     private int shoots;
     /**
-     * 레벨 정수형으로 선언
-      */
-    private int level;
     /**
      * 레벨 검증 변수, 레벨 업데이트 조건 만족 시 코드 중복실행 방지용
      */
@@ -105,6 +104,9 @@ public class Game {
      */
     private BufferedImage duckImg;
     private BufferedImage superduckImg;
+    private BufferedImage deadsuperduckImg;
+    private BufferedImage deadduckImg;
+    private static BufferedImage rubberduckImg;
 
     /**
      * Shotgun sight image.
@@ -194,7 +196,6 @@ public class Game {
         score = 0;
         money = 0;
         shoots = 0;
-        level = 1;
         nuclearswitch = false;
         reloadDuration = 1_500_000_000L;
         isReloading = false;
@@ -242,6 +243,15 @@ public class Game {
 
             URL superduckImgUrl = this.getClass().getResource("/images/superduck.png");
             superduckImg = ImageIO.read(superduckImgUrl);
+
+            URL deadsuperduckImgUrl = this.getClass().getResource("/images/deadsuperduck.png");
+            deadsuperduckImg = ImageIO.read(deadsuperduckImgUrl);
+
+            URL deadduckImgUrl = this.getClass().getResource("/images/deadduck.png");
+            deadduckImg = ImageIO.read(deadduckImgUrl);
+
+            URL rubberduckImgUrl = this.getClass().getResource("/images/rubberduck.png");
+            rubberduckImg = ImageIO.read(rubberduckImgUrl);
 
             URL sightImgUrl = this.getClass().getResource("/images/sight.png");
             sightImg = ImageIO.read(sightImgUrl);
@@ -331,7 +341,6 @@ public class Game {
         adiatt = 0;
         redspd = 0;
 
-        level = 1;
         lastTimeShoot = 0;
     }
 
@@ -453,15 +462,21 @@ public class Game {
                     ducks.get(i).reduceHp(currentweapon.getDamage() + adiatt);
                     damageTexts.add(new DamageText(mousePosition.x, mousePosition.y, currentweapon.getDamage() + adiatt));
                     if (ducks.get(i).getHp() <= 0) {
-                    killedDucks++;
-                    score += ducks.get(i).getScore();
-                    money += ducks.get(i).getScore();
-                    InGameData.saveScore(currentEmail, score);
-                    // Remove the duck from the array list.
-                    ducks.remove(i);
+                        killedDucks++;
+                        score += ducks.get(i).getScore();
+                        money += ducks.get(i).getScore();
+                        InGameData.saveScore(currentEmail, score);
+                        deadDucks.add(new DeadDuck(
+                                ducks.get(i).getX(),
+                                ducks.get(i).getY(),
+                                deadduckImg, // 죽은 오리 이미지
+                                500_000_000L // 0.5초 동안 표시
+                        ));
+                        // Remove the duck from the array list.
+                        ducks.remove(i);
 
-                    // We found the duck that player shoot so we can leave the for loop.
-                    break;
+                        // We found the duck that player shoot so we can leave the for loop.
+                        break;
                 }
             }
         }
@@ -477,6 +492,12 @@ public class Game {
                     score += superducks.get(i).getScore();
                     money += superducks.get(i).getScore();
                     InGameData.saveScore(currentEmail, score);
+                    deadDucks.add(new DeadDuck(
+                            superducks.get(i).getX(),
+                            superducks.get(i).getY(),
+                            deadsuperduckImg, // 죽은 오리 이미지
+                            500_000_000L // 0.5초 동안 표시
+                    ));
 
                     // Remove the duck from the array list.
                     superducks.remove(i);
@@ -656,6 +677,21 @@ public class Game {
             sniperduck.get(i).Draw(g2d);
         }
 
+        for (int i = 0; i < deadDucks.size(); i++) {
+            DeadDuck deadDuck = deadDucks.get(i);
+
+            deadDuck.update();  // 투명도 업데이트
+
+            // 만료되지 않은 오리만 그리기
+            if (!deadDuck.isExpired()) {
+                deadDuck.draw(g2d);
+            } else {
+                // 만료된 오리는 리스트에서 제거
+                deadDucks.remove(i);
+                i--;
+            }
+        }
+
         g2d.drawImage(backgrassImg, 0, Framework.frameHeight/32 * 10, Framework.frameWidth, backgrassImg.getHeight(), null);
 
         if (isReloading) {
@@ -702,7 +738,7 @@ public class Game {
         g2d.drawString("SHOOTS: " + shoots, 299, 21);
         g2d.drawString("SCORE: " + score, 440, 21);
         g2d.drawString("MONEY: " + money, 560, 21);
-        g2d.drawString("LEVEL: " + level, 680, 21);
+        g2d.drawString("LEVEL: " + gamelevel, 680, 21);
         g2d.drawString("WEAPON: " + currentweapon.getName(), 840, 21);
         g2d.drawString("BULLETS: " + currentAmmo, 840, 42);
         shop.drawPurchaseMessage(g2d);
@@ -764,6 +800,12 @@ public class Game {
             damageTexts.add(new DamageText(obj.getX(), obj.getY(), 999));
 
             if (obj.getHp() <= 0) {
+                deadDucks.add(new DeadDuck(
+                        objects.get(i).getX(),
+                        objects.get(i).getY(),
+                        getRubberDuckImage(), // 죽은 오리 이미지
+                        500_000_000L // 0.5초 동안 표시
+                ));
                 objects.remove(i);
                 i--; // Adjust index after removal
             }
@@ -802,4 +844,9 @@ public class Game {
 
     public static int getRedspd(){ return redspd; }
     public static void setRedspd(int n){ redspd = n; }
+
+    public static int getLevel(){ return gamelevel; }
+    public static BufferedImage getRubberDuckImage() {
+        return rubberduckImg;
+    }
 }
