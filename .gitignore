@@ -9,3 +9,6 @@
 /src/main/resources/stduck-252fa-firebase-adminsdk-896br-6be874495d.json
 /target/classes/kr/jbnu/se/std/FirebaseConfig.class
 /target/classes/stduck-252fa-firebase-adminsdk-896br-6be874495d.json
+.idea/
+target/
+src/main/resources/SDI KEY.json
