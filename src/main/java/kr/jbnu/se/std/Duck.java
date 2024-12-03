@@ -14,7 +14,7 @@ public class Duck implements Damageable {
     /**
      * Last time when the duck was created.
      */
-    public static long lastDuckTime;
+    public static long lastDuckTime = 0;
     
     /**
      * kr.jbnu.se.std.Duck lines.

@@ -371,6 +371,10 @@ public class Game {
         updateCurrentWeapon();
 
         checkGameOver();
+
+        ShowDamageTexts();
+
+        ShowDisplayTexts();
     }
 
     // Handles shop interactions
@@ -431,8 +435,8 @@ public class Game {
         reloadStartTime = System.nanoTime();  // 장전 시작 시간 기록
     }
 
-    ShowDamageTexts();
-    ShowDisplayTexts();
+
+
 
     // Updates the current weapon
     private void updateCurrentWeapon() {
@@ -845,8 +849,8 @@ public class Game {
     public static void setCurrentAmmo(Weapon weapon){ currentAmmo = weapon.currentammo; }
     public static void setIsReloading(){ isReloading = false; }
 
-    public static int getRubberDucksKill(){ return rubberDucksKills; }
-    public static void setRubberDucksKill(int n){ rubberDucksKills += n; }
+    public static int getRubberDucksKill(){ return rubberduckskills; }
+    public static void setRubberDucksKill(int n){ rubberduckskills += n; }
 
     public static int getWineskills(){ return wineskills; }
     public static void setWineskills(int n){ wineskills = n; }
