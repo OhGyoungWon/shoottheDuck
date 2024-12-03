@@ -39,7 +39,7 @@ public class Shop {
         shopItems.add(new ShopItem("장갑", 200, glovesImage, "사실 고무장갑이랍니다     피해량 증가"));
         shopItems.add(new ShopItem("총알", 300, bulletImage, "오리를 위한 깜짝선물    장전시간 감소"));
         shopItems.add(new ShopItem("콜라", 500, colaImage, "제로콜라는 아니네요       체력 회복"));
-        shopItems.add(new ShopItem("와인", 1000, wineImage, "문ㅇㅇ씨의 최애 음료수     사격 속도 증가"));
+        shopItems.add(new ShopItem("와인", 1000, wineImage, "문ㅇㅇ씨의 최애 음료수     T키로 오리 속도 감소"));
         shopItems.add(new ShopItem("러버덕", 2000, rubberDuckImage, "적의 우두머리를 본딴 형상.       R키로 특수 스킬"));
 
         setupItemBounds(glovesImage, bulletImage, colaImage, wineImage, rubberDuckImage);

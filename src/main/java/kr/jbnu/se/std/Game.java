@@ -800,10 +800,12 @@ public class Game {
         g2d.drawString("KILLS: " + killedDucks, 160, 21);
         g2d.drawString("SHOOTS: " + shoots, 299, 21);
         g2d.drawString("SCORE: " + score, 440, 21);
-        g2d.drawString("MONEY: " + money, 560, 21);
-        g2d.drawString("LEVEL: " + gameLevel, 680, 21);
-        g2d.drawString("WEAPON: " + currentweapon.getName(), 840, 21);
-        g2d.drawString("BULLETS: " + currentAmmo, 840, 42);
+        g2d.drawString("MONEY: " + money, 580, 21);
+        g2d.drawString("LEVEL: " + gameLevel, 720, 21);
+        g2d.drawString("WEAPON: " + currentweapon.getName(), 860, 21);
+        g2d.drawString("BULLETS: " + currentAmmo, 860, 42);
+        g2d.drawString("Nuclear Charge : " + rubberduckskills, 1100, 20);
+        g2d.drawString("Wine Charge : " + wineskills, 1100, 42);
         shop.drawPurchaseMessage(g2d);
     }
     
