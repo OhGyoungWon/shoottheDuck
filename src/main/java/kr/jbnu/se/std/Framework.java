@@ -1,8 +1,7 @@
 package kr.jbnu.se.std;
 
-import java.awt.Color;
-import java.awt.Graphics2D;
-import java.awt.Point;
+import javax.imageio.ImageIO;
+import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
@@ -10,7 +9,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.imageio.ImageIO;
 
 /**
  * kr.jbnu.se.std.Framework that controls the game (kr.jbnu.se.std.Game.java) that created it, update it and draw it on the screen.
@@ -67,13 +65,13 @@ public class Framework extends Canvas {
     /**
      * Elapsed game time in nanoseconds.
      */
-    private long gameTime;
+    private static long gameTime;
     // It is used for calculating elapsed time.
-    private long lastTime;
+    private static long lastTime;
     
     // The actual game
     private transient Game game;
-    
+
     
     /**
      * Image for menu.
@@ -228,22 +226,22 @@ public class Framework extends Canvas {
         {
             case PLAYING:
                 game.Draw(g2d, mousePosition());
-                break;
+            break;
             case GAMEOVER:
                 game.DrawGameOver(g2d, mousePosition());
-                break;
+            break;
             case MAIN_MENU:
                 g2d.drawImage(shootTheDuckMenuImg, 0, 0, frameWidth, frameHeight, null);
                 g2d.drawImage(leaderboardImg, 0, 70, frameWidth, frameHeight, null);
                 Leaderboard.drawLeaderboard(g2d, Framework.frameWidth, Framework.frameHeight);
-                break;
+            break;
             case OPTIONS:
                 //...
-                break;
+            break;
             case GAME_CONTENT_LOADING:
                 g2d.setColor(Color.white);
                 g2d.drawString("GAME is LOADING", frameWidth / 2 - 50, frameHeight / 2);
-                break;
+            break;
             default:
                 break;
         }
@@ -314,8 +312,10 @@ public class Framework extends Canvas {
                     System.exit(0);
                 else if(e.getKeyCode() == KeyEvent.VK_SPACE || e.getKeyCode() == KeyEvent.VK_ENTER)
                     restartGame();
-                break;
+            break;
             case PLAYING:
+                //
+            break;
             case MAIN_MENU:
                 if(e.getKeyCode() == KeyEvent.VK_ESCAPE)
                     System.exit(0);
@@ -343,4 +343,5 @@ public class Framework extends Canvas {
                 break;
         }
     }
+
 }

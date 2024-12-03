@@ -154,7 +154,7 @@ public class Shop {
                     Game.reduceRunawayDucks(runawayReduction);
                     break;
                 case "와인":
-                    Game.setReduceSpeed(Game.getReduceSpeed() + 200_000_000);
+                    Game.setWineskills(Game.getWineskills() + 1);
                     break;
                 case "러버덕":
                     Game.setRubberDucksKill(Game.getRubberDucksKill() + 1);

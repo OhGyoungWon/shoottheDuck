@@ -5,4 +5,5 @@ public interface Damageable {
     void reduceHp(int amount);
     int getX();
     int getY();
+    void setSpeed(int newspeed);
 }

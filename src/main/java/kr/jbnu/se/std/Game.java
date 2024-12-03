@@ -46,7 +46,7 @@ public class Game {
     /**
      * How many ducks leave the screen alive?
      */
-    public static int runawayDucks;
+    private static int runawayDucks;
     
    /**
      * How many ducks the player killed?
@@ -64,8 +64,6 @@ public class Game {
     private int shoots;
     /**
      * 레벨 정수형으로 선언
-      */
-    private int level;
     /**
      * 레벨 검증 변수, 레벨 업데이트 조건 만족 시 코드 중복실행 방지용
      */
@@ -141,7 +139,8 @@ public class Game {
     private static int ExAttackSpeed;
     private static int reduceSpeed;
 
-    private static int rubberDucksKills;
+    private static int rubberduckskills;
+    private static int wineskills;
     private static boolean nuclearSwitch;
 
     private static boolean isReloading = false;  // 장전 중인지 여부
@@ -151,6 +150,7 @@ public class Game {
     private static long reloadDuration;  // 장전 시간 1.5초
 
     private static ArrayList<DamageText> damageTexts;
+    private static ArrayList<DisplayText> displayTexts;
 
     public Game()
     {
@@ -195,7 +195,6 @@ public class Game {
         score = 0;
         money = 0;
         shoots = 0;
-        level = 1;
         nuclearSwitch = false;
         reloadDuration = 1_500_000_000L;
         isReloading = false;
@@ -216,9 +215,13 @@ public class Game {
             timeBetweenShots = 50_000_000;
         }
         damageTexts = new ArrayList<>();
+        displayTexts = new ArrayList<>();
 
         maxAmmo = currentweapon.maxammo;
         currentAmmo = maxAmmo;
+
+        rubberduckskills = 0;
+        wineskills = 5;
 
     }
 
@@ -315,6 +318,7 @@ public class Game {
         rifDuck.clear();
         sniperDuck.clear();
         damageTexts.clear();
+        displayTexts.clear();
         weapons.clear();
         currentweapon = new Weapon.Revolver(revImg);
         weapons.add(new Weapon.Revolver(revImg));
@@ -332,8 +336,10 @@ public class Game {
         ExDamage = 0;
         reduceSpeed = 0;
 
-        level = 1;
         lastTimeShoot = 0;
+        rubberduckskills = 0;
+        nuclearSwitch = false;
+        wineskills = 0;
     }
 
     
@@ -425,6 +431,9 @@ public class Game {
         reloadStartTime = System.nanoTime();  // 장전 시작 시간 기록
     }
 
+    ShowDamageTexts();
+    ShowDisplayTexts();
+
     // Updates the current weapon
     private void updateCurrentWeapon() {
         switch (currentweapon.getName()) {
@@ -509,7 +518,7 @@ public class Game {
                     superDuck.remove(i);
                     shop.openShop();
                     gameLevel++;
-
+                    displayTexts.add(new DisplayText(Framework.frameWidth*0.4, Framework.frameHeight*0.3, "Level up to " + gameLevel));
                     // We found the duck that player shoot so we can leave the for loop.
                     break;
                 }
@@ -579,6 +588,7 @@ public class Game {
         if(killedDucks % 20 == 0 && killedDucks != 0 && superDuck.isEmpty()){
             superDuck.add(new Superduck(Duck.duckLines[Duck.nextDuckLines][0] + random.nextInt(200),
                     (int) (Framework.frameHeight*0.6), superDuckImg));
+            displayTexts.add(new DisplayText(Framework.frameWidth*0.4, Framework.frameHeight*0.3, "B  O  S  S"));
         }
     }
 
@@ -654,6 +664,14 @@ public class Game {
         damageTexts.removeIf(damageText -> !damageText.update());
     }
 
+    private void ShowDisplayTexts() {
+        for(int i = 0; i < displayTexts.size(); i++) {
+            if(!displayTexts.get(i).update()) {
+                displayTexts.remove(i);
+                i--;
+            }
+        }
+    }
 
     /**
      * Draw the game to the screen.
@@ -698,6 +716,9 @@ public class Game {
         for (DamageText damageText : damageTexts) {
             damageText.draw(g2d);
         }
+        for(DisplayText displayText: displayTexts) {
+            displayText.draw(g2d);
+        }
 
         g2d.drawImage(grassImg, 0, Framework.frameHeight - grassImg.getHeight(), Framework.frameWidth, grassImg.getHeight(), null);
 
@@ -727,7 +748,7 @@ public class Game {
         g2d.drawString("SHOOTS: " + shoots, 299, 21);
         g2d.drawString("SCORE: " + score, 440, 21);
         g2d.drawString("MONEY: " + money, 560, 21);
-        g2d.drawString("LEVEL: " + level, 680, 21);
+        g2d.drawString("LEVEL: " + gameLevel, 680, 21);
         g2d.drawString("WEAPON: " + currentweapon.getName(), 840, 21);
         g2d.drawString("BULLETS: " + currentAmmo, 840, 42);
         shop.drawPurchaseMessage(g2d);
@@ -777,6 +798,21 @@ public class Game {
         reduceHealth(rifDuck);
         reduceHealth(sniperDuck);
     }
+    public static void slowAllObjects(){
+        displayTexts.add(new DisplayText(Framework.frameWidth*0.4, Framework.frameHeight*0.45, "WINE SKILL ACTIVATED"));
+        slowDownObject(ducks);
+        slowDownObject(superDuck);
+        slowDownObject(smgDuck);
+        slowDownObject(rifDuck);
+        slowDownObject(sniperDuck);
+    }
+
+    public static <T extends Damageable> void slowDownObject(ArrayList<T> objects){
+        for (int i = 0; i < objects.size(); i++) {
+            T obj = objects.get(i);
+            obj.setSpeed(-1);
+        }
+    }
 
     private static <T extends Damageable> void reduceHealth(ArrayList<T> objects) {
         Iterator<T> iterator = objects.iterator();
@@ -811,6 +847,9 @@ public class Game {
 
     public static int getRubberDucksKill(){ return rubberDucksKills; }
     public static void setRubberDucksKill(int n){ rubberDucksKills += n; }
+
+    public static int getWineskills(){ return wineskills; }
+    public static void setWineskills(int n){ wineskills = n; }
 
     public static int getMoney(){ return money; }
     public static void reduceMoney(int n){ money -= n;}
