@@ -80,3 +80,5 @@ fabric.properties
 
 # SDK 키파일만 무시
 src/main/resources/SDI KEY.json
+
+.idea/shelf/
