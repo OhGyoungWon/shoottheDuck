@@ -42,7 +42,7 @@ public class Game {
     private static ArrayList<Weaponduck.WeaponBox> smgDuck;
     private static ArrayList<Weaponduck.WeaponBox> rifDuck;
     private static ArrayList<Weaponduck.WeaponBox> sniperDuck;
-
+    private static ArrayList<DeadDuck> deadDucks = new ArrayList<>();
     /**
      * How many ducks leave the screen alive?
      */
@@ -104,6 +104,9 @@ public class Game {
      */
     private BufferedImage duckImg;
     private BufferedImage superDuckImg;
+    private BufferedImage deadsuperduckImg;
+    private BufferedImage deadduckImg;
+    private static BufferedImage rubberduckImg;
 
     /**
      * Shotgun sight image.
@@ -246,6 +249,15 @@ public class Game {
 
             URL superduckImgUrl = this.getClass().getResource("/images/superduck.png");
             superDuckImg = ImageIO.read(superduckImgUrl);
+
+            URL deadsuperduckImgUrl = this.getClass().getResource("/images/deadsuperduck.png");
+            deadsuperduckImg = ImageIO.read(deadsuperduckImgUrl);
+
+            URL deadduckImgUrl = this.getClass().getResource("/images/deadduck.png");
+            deadduckImg = ImageIO.read(deadduckImgUrl);
+
+            URL rubberduckImgUrl = this.getClass().getResource("/images/rubberduck.png");
+            rubberduckImg = ImageIO.read(rubberduckImgUrl);
 
             URL sightImgUrl = this.getClass().getResource("/images/sight.png");
             sightImg = ImageIO.read(sightImgUrl);
@@ -493,15 +505,21 @@ public class Game {
                     ducks.get(i).reduceHp(currentweapon.getDamage() + ExDamage);
                     damageTexts.add(new DamageText(mousePosition.x, mousePosition.y, currentweapon.getDamage() + ExDamage));
                     if (ducks.get(i).getHp() <= 0) {
-                    killedDucks++;
-                    score += ducks.get(i).getScore();
-                    money += ducks.get(i).getScore();
-                    InGameData.saveScore(currentEmail, score);
-                    // Remove the duck from the array list.
-                    ducks.remove(i);
+                        killedDucks++;
+                        score += ducks.get(i).getScore();
+                        money += ducks.get(i).getScore();
+                        InGameData.saveScore(currentEmail, score);
+                        deadDucks.add(new DeadDuck(
+                                ducks.get(i).getX(),
+                                ducks.get(i).getY(),
+                                deadduckImg, // 죽은 오리 이미지
+                                500_000_000L // 0.5초 동안 표시
+                        ));
+                        // Remove the duck from the array list.
+                        ducks.remove(i);
 
-                    // We found the duck that player shoot so we can leave the for loop.
-                    break;
+                        // We found the duck that player shoot so we can leave the for loop.
+                        break;
                 }
             }
         }
@@ -517,6 +535,12 @@ public class Game {
                     score += superDuck.get(i).getScore();
                     money += superDuck.get(i).getScore();
                     InGameData.saveScore(currentEmail, score);
+                    deadDucks.add(new DeadDuck(
+                            superDuck.get(i).getX(),
+                            superDuck.get(i).getY(),
+                            deadsuperduckImg, // 죽은 오리 이미지
+                            500_000_000L // 0.5초 동안 표시
+                    ));
 
                     // Remove the duck from the array list.
                     superDuck.remove(i);
@@ -705,6 +729,21 @@ public class Game {
 
         g2d.drawImage(backGrassImg, 0, Framework.frameHeight/32 * 10, Framework.frameWidth, backGrassImg.getHeight(), null);
 
+        for (int i = 0; i < deadDucks.size(); i++) {
+            DeadDuck deadDuck = deadDucks.get(i);
+
+            deadDuck.update();  // 투명도 업데이트
+
+            // 만료되지 않은 오리만 그리기
+            if (!deadDuck.isExpired()) {
+                deadDuck.draw(g2d);
+            } else {
+                // 만료된 오리는 리스트에서 제거
+                deadDucks.remove(i);
+                i--;
+            }
+        }
+
         if (isReloading) {
             g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);  // 부드러운 텍스트
             g2d.setFont(new Font("Arial", Font.BOLD, 30));  // 폰트 설정
@@ -829,6 +868,14 @@ public class Game {
             damageTexts.add(new DamageText(obj.getX(), obj.getY(), 999));
 
             if (obj.getHp() <= 0) {
+                deadDucks.add(new DeadDuck(
+                        objects.get(i).getX(),
+                        objects.get(i).getY(),
+                        getRubberDuckImage(), // 죽은 오리 이미지
+                        500_000_000L // 0.5초 동안 표시
+                ));
+                objects.remove(i); // 밑에거가 새로생김 이거 뭐임
+                i--; // Adjust index after removal
                 iterator.remove(); // Safely remove the object from the list
             }
         }
@@ -870,4 +917,11 @@ public class Game {
 
     public static int getReduceSpeed(){ return reduceSpeed; }
     public static void setReduceSpeed(int n){ reduceSpeed = n; }
+    public static int getRedspd(){ return redspd; }
+    public static void setRedspd(int n){ redspd = n; }
+
+    public static int getLevel(){ return gamelevel; }
+    public static BufferedImage getRubberDuckImage() {
+        return rubberduckImg;
+    }
 }
