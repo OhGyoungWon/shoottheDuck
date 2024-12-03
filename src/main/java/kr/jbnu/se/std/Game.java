@@ -663,16 +663,25 @@ public class Game {
     }
 
     private void ShowDamageTexts() {
-
-        // Safely remove the element
-        damageTexts.removeIf(damageText -> !damageText.update());
+        synchronized (damageTexts) {
+            Iterator<DamageText> iterator = damageTexts.iterator();
+            while (iterator.hasNext()) {
+                DamageText damageText = iterator.next();
+                if (!damageText.update()) {
+                    iterator.remove(); // 안전하게 요소 제거
+                }
+            }
+        }
     }
 
     private void ShowDisplayTexts() {
-        for(int i = 0; i < displayTexts.size(); i++) {
-            if(!displayTexts.get(i).update()) {
-                displayTexts.remove(i);
-                i--;
+        synchronized (displayTexts) {
+            Iterator<DisplayText> iterator = displayTexts.iterator();
+            while (iterator.hasNext()) {
+                DisplayText displayText = iterator.next();
+                if (!displayText.update()) {
+                    iterator.remove(); // 안전하게 요소 제거
+                }
             }
         }
     }
